@@ -1,24 +1,4 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Pour faire fonctionner le projet localement, il faudra installer et configurer les outils nécéssaires au fonctionnement d'une application rails.
+Vous pouvez suivre ce tutoriel pour les installations : https://gorails.com/setup/ubuntu/18.04
