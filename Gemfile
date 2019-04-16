@@ -85,6 +85,7 @@ end
 gem 'rails_db' # Permet de voir les données de la bdd
 # gem "axlsx_rails" # Permet d'exporter la bdd
 group :production do
+  gem "pg"
   gem 'postmark-rails'
 end
 gem 'dalli'
