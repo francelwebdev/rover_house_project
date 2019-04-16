@@ -1,0 +1,53 @@
+<footer class="py-5" style="background-color: #212121;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2 class="text-white">ROVER HOUSE</h2>
+                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur amet minus voluptatum, dignissimos unde architecto, omnis placeat blanditiis nesciunt, eos sunt eaque eum doloribus voluptatem exercitationem neque cupiditate aliquam. Deleniti.</p>
+            </div>
+            <div class="col-lg-2">
+                <h5 class="text-white font-weight-bold">Liens rapides</h5>
+                <ul class="list-unstyled">
+                    <li class="text-white py-1">À propos de nous</li>
+                    <!-- <li class="text-white py-1">Blog</li> -->
+                    <!-- <li class="text-white py-1">Carrière</li> -->
+                    <li class="text-white py-1">
+                        <%= link_to "Contactez nous", contactez_nous_path, class: "text-decoration-none text-white" %>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5 class="text-white font-weight-bold">Liens utiles</h5>
+                <ul class="list-unstyled">
+                    <li class="text-white my-3">Accès client</li>
+                    <li class="text-white py-1">Mes annonces sur <strong>ROVER HOUSE</strong></li>
+                    <li class="text-white my-3">Nos services pros</li>
+                    <li class="text-white my-3">Mentions Légales</li>
+                    <li class="text-white my-3">Politique de Confidentialité</li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h5 class="text-white font-weight-bold">Contacter nous</h5>
+                <address>
+                    <ul class="list-unstyled">
+                        <li class="my-3 text-white">
+                            Collins Street West, Victoria 8007, Australia
+                        </li>
+                        <li class="my-3 text-white">
+                            +1 246-345-0695
+                        </li>
+                        <li class="my-3 text-white">
+                            <%= mail_to("rover-house@exemple.com") %>
+                        </li>
+                    </ul>   
+                </address>
+            </div>
+            <div class="col-lg-12 my-3">
+                <hr style="border: 0.3px solid grey">
+            </div>           
+            <div class="col-lg-12 text-center">
+                <p class="text-white mb-0">&copy; Copyright 2019 ROVER HOUSE. Tous droits réservés.</p>
+            </div>
+        </div>
+    </div>
+</footer>   

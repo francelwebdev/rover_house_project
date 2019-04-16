@@ -4,7 +4,10 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :roles, as: :radio_buttons, collection: Role.where.not(name: 'admin'), value_method: :name, required: true %>
+    <%= f.input :role, collection: User::ROLES, required: true %>
+
+    <%= f.input :name, placeholder: "Prénom et Nom", input_html: { autocomplete: "name" }, autofocus: true %>
+    
     <%= f.input :email,
                 required: true,
                 autofocus: true ,

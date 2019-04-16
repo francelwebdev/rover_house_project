@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
-    <title>RoverHouse</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= render "shared/head" %>
   </head>
-
-  <body>
+  <body class="<%= controller_name + '/' + action_name  %>">
+    <%= render "shared/flash_notification" %>
+    <%= render "shared/navbar" %>
     <%= yield %>
+    <%= render "shared/subscribe_to_newsletter" %>
+    <%= render "shared/footer" %> 
   </body>
 </html>

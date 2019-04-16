@@ -68,14 +68,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 gem 'dropzonejs-rails'
 gem 'autoprefixer-rails'
-gem 'font-awesome-sass'
-gem 'flatpickr'
 # gem 'administrate'
 gem 'sitemap_generator'
 gem 'local_time'
-gem 'bootstrap_form'
-gem 'bootstrap'
-gem 'jquery-rails'
 group :development do
   gem "awesome_print", require:"ap"
   gem 'bullet'
