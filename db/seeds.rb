@@ -7,14 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# roles = ["Particulier", "Profesionnel", "Admin"]
-# roles.each do |role|
-#     Role.create(name: role.downcase)
-# end
-
-# User.create(name: "Francel AMAMOO", email: "francel.webdev@gmail.com", password:              "123456", password_confirmation: "123456", roles: "admin")
-
-# User.where(email: "you@email.com").first_or_create.update_attributes(nome: "Your Name",
-#     email: "you@email.com",
-#     password:              "password#123",
-#     password_confirmation: "password#123")
+property_types = ["Appartement", "Suite", "Motel", "Hôtel", "Maison", "Villa", "Parcelle", "Domaine"]

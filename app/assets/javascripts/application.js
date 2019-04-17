@@ -11,14 +11,13 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery.min
-//= require popper.js/dist/popper.min
-//= require bootstrap/dist/js/bootstrap.min
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require owl.carousel/dist/owl.carousel.min
+//= require flickity/dist/flickity.pkgd.min
 //= require cocoon
 //= require local-time
 //= require flatpickr/dist/flatpickr.min
-//= require data-confirm-modal
 //= require toastr/build/toastr.min
 //= require main

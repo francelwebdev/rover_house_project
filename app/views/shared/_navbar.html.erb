@@ -1,59 +1,68 @@
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <%= link_to "ROVER HOUSE", root_path, class: "navbar-brand h1 mb-0 font-weight-bold" %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Acheter</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Louer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Aménager</a>
-          </li>
-        </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-        
-        <% if user_signed_in? %>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <%= link_to "Déposer une annonce", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <strong><%= current_user.first_name.capitalize %></strong>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
-            </div>
-          </li>
-        </ul>
-        <% else %>
-        <ul class="list-inline ml-auto mb-0">
-          <li class="list-inline-item">
-            <%= link_to "Espace client", new_user_session_path, class: "btn btn-light btn-block" %>
-          </li>
-          <!-- <li class="list-inline-item">
-            <%#= active_link_to "S'inscrire", new_user_registration_path, class: "btn btn-primary"%>
-          </li> -->
-          <li class="list-inline-item">
-            <%= link_to "Déposer une annonce", new_property_path, class: "btn btn-marron btn-block" %>
-          </li>
-        </ul>
-        <% end %>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <%= link_to "ROVER HOUSE", root_path, class: "navbar-item title is-marginless" %>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <%= link_to "Accueil", root_path, class: "navbar-item"  %>
+        <%= link_to "Acheter", root_path, class: "navbar-item"  %>
+        <%= link_to "Louer", root_path, class: "navbar-item"  %>
+        <%= link_to "Aménage", root_path, class: "navbar-item"  %>
+    <!--   <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div> -->
+    </div>
+    <% if user_signed_in? %>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons is-marginless" >
+          <%= link_to "Déposer une annonce", new_property_path, class: "button is-marron is-marginless" %>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <%= link_to current_user.email, edit_user_registration_path, class: "navbar-link"  %>
+          <div class="navbar-dropdown">
+            <%= link_to 'Modifier mon compte', edit_user_registration_path, :class => 'navbar-item' %>
+            <hr class="navbar-divider">
+            <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}  %>
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
+    <% else %>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <%= link_to "Espace client", new_user_session_path, class: "button is-light" %>
+          <%= link_to "Déposer une annonce", new_property_path, class: "button is-marron" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+</nav>
+
+

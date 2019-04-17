@@ -8,22 +8,22 @@
 // 
 
 @font-face {
-    font-family: 'Lato', sans-serif;
-    // font-family: 'Raleway', sans-serif;
-    // font-family: 'Montserrat', sans-serif;
-    
-    src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
-    // src: url("/fonts/Raleway/Raleway-Regular.ttf") format("ttf");
-    // src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("ttf");
+  font-family: 'Lato', sans-serif;
+// font-family: 'Raleway', sans-serif;
+// font-family: 'Montserrat', sans-serif;
+
+src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
+// src: url("/fonts/Raleway/Raleway-Regular.ttf") format("ttf");
+// src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("ttf");
 
 }
 
 * {
-    // overflow: auto;
+// overflow: auto;
 }
 
 *:not(.fas, .fab) {
-    font-family: 'Lato', sans-serif !important;
+  font-family: 'Lato', sans-serif !important;
 }
 
 // .navbar {
@@ -97,25 +97,35 @@
   background-color: #582900;
 }
 
-.btn-marron {
-    background-color: #795548 !important;
+.button.is-marron {
+  background-color: #795548 !important;
+  border-color: transparent;
+  color: #fff;
+  &:hover {
+    background-color: #5d4037 !important;
     color: white;
-    &:hover {
-            background-color: #5d4037 !important;
-    color: white;
-        }
+  }
 }
 
-.dropdown:hover>.dropdown-menu {
-  display: block;
+body > nav > div > div.navbar-brand > a.navbar-item.title.is-marginless:hover {
+  color: black;
 }
 
-.dropdown>.dropdown-toggle:active {
-  /*Without this, clicking will make it sticky*/
-    pointer-events: none;
+.turbolinks-progress-bar {
+  height: 3px;
+  background-color: #5d4037 !important;
 }
 
-.btn.focus, .btn:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(93,64,55,.25) !important;
+.mon-hero-bgi-home {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), image-url("architecture-building-country-home-1884269.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+.carousel-cell {
+  width: 25%;
+  margin-right: 10px;
 }

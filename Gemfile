@@ -66,7 +66,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 #---- MES GEMS ----#
 #--------------------------#
-gem 'dropzonejs-rails'
 gem 'autoprefixer-rails'
 # gem 'administrate'
 gem 'sitemap_generator'
@@ -79,8 +78,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-byebug'
   gem 'meta_request'
-  gem 'guard'
-  gem 'guard-livereload', '~> 2.5', require: false
 end
 gem 'rails_db' # Permet de voir les données de la bdd
 # gem "axlsx_rails" # Permet d'exporter la bdd
@@ -90,22 +87,18 @@ group :production do
 end
 gem 'dalli'
 gem 'rails-i18n'#, github: 'svenfuchs/rails-i18n', branch: 'master'
-gem 'simple_form'
-gem 'client_side_validations'
-gem 'client_side_validations-simple_form'
+gem "simple_form"
 gem 'mail_form'
 gem "cocoon"
 gem 'devise'
 gem 'devise-i18n'
 gem 'friendly_id'
-gem 'rolify'
 gem 'cancancan'
 gem 'gibbon'
 gem 'pagy'
 # gem 'stripe'
 # gem 'stripe-rails'
 # gem 'activeadmin'
-gem 'mini_magick'
 gem 'name_of_person'
 gem 'meta-tags', '~> 2.11'
 gem 'activestorage-validator'
@@ -162,3 +155,9 @@ gem 'rails_autolink'
 # gem 'strong_migrations'
 # gem "image_processing"
 gem 'inline_svg'
+
+# Shrine Dependencies
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'shrine'
