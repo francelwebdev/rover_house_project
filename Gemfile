@@ -5,8 +5,8 @@ ruby '2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+# Use postgresql as the database for Active Record
+gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -62,7 +62,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
-
 #--------------------------#
 #---- MES GEMS ----#
 #--------------------------#
@@ -82,13 +81,14 @@ end
 gem 'rails_db' # Permet de voir les données de la bdd
 # gem "axlsx_rails" # Permet d'exporter la bdd
 group :production do
-  gem "pg"
+  # Use mysql as the database for Active Record
+  # gem 'mysql2', '>= 0.4.4', '< 0.6.0'
   gem 'postmark-rails'
 end
 gem 'dalli'
 gem 'rails-i18n'#, github: 'svenfuchs/rails-i18n', branch: 'master'
 gem "simple_form"
-gem 'mail_form'
+# gem 'mail_form'
 gem "cocoon"
 gem 'devise'
 gem 'devise-i18n'
@@ -161,3 +161,5 @@ gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
+gem 'elasticsearch-model'#, github: 'elastic/elasticsearch-rails', branch: '5.x'
+gem 'elasticsearch-rails'#, github: 'elastic/elasticsearch-rails', branch: '5.x'

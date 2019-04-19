@@ -20,4 +20,8 @@
 //= require local-time
 //= require flatpickr/dist/flatpickr.min
 //= require toastr/build/toastr.min
+//= require sweetalert2/dist/sweetalert2.all.min
+//= require slick-carousel/slick/slick.min
+//= require @vizuaalog/bulmajs/dist/file
+//= require dropzone/dist/dropzone
 //= require main

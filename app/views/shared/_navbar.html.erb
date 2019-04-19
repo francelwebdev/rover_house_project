@@ -13,7 +13,7 @@
         <%= link_to "Accueil", root_path, class: "navbar-item"  %>
         <%= link_to "Acheter", root_path, class: "navbar-item"  %>
         <%= link_to "Louer", root_path, class: "navbar-item"  %>
-        <%= link_to "Aménage", root_path, class: "navbar-item"  %>
+        <%= link_to "Aménager", root_path, class: "navbar-item"  %>
     <!--   <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More
@@ -38,16 +38,16 @@
     <% if user_signed_in? %>
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons is-marginless" >
-          <%= link_to "Déposer une annonce", new_property_path, class: "button is-marron is-marginless" %>
-        </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <%= link_to current_user.email, edit_user_registration_path, class: "navbar-link"  %>
-          <div class="navbar-dropdown">
+          <div class="navbar-dropdown is-right">
             <%= link_to 'Modifier mon compte', edit_user_registration_path, :class => 'navbar-item' %>
             <hr class="navbar-divider">
-            <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}  %>
+            <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}, id: "deconnexion"  %>
           </div>
+        </div>
+        <div class="buttons is-marginless" >
+          <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron is-marginless" %>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
       <div class="navbar-item">
         <div class="buttons">
           <%= link_to "Espace client", new_user_session_path, class: "button is-light" %>
-          <%= link_to "Déposer une annonce", new_property_path, class: "button is-marron" %>
+          <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron" %>
         </div>
       </div>
     </div>

@@ -6,9 +6,12 @@ class User < ApplicationRecord
  devise :confirmable, :trackable 
 
  ROLES = ["Particulier", "Profesionnel"]
+
+ has_many :properties
  
   has_person_name
 
-  validates :name, :role, presence: true
+  validates :name, :role, presence: true, on: :create
+  validates :first_name, :last_name, presence: true, on: :update
   
 end

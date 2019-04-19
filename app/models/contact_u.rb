@@ -1,15 +1,10 @@
-class ContactU < MailForm::Base
-    attribute :first_name, validate: true
-	attribute :last_name, validate: true
-	attribute :email, validate: true
-	attribute :phone_number, validate: true
-	attribute :message, validate: true
+class ContactU
+    include ActiveModel::Model
+	attr_accessor :first_name, :last_name, :email, :phone_number, :message
 
-	def headers
-		{
-			subject: "Nouveau message dépuis le formulaire de contact ROVER HOUSE.",
-			to: "francel.webdev@gmail.com",
-			from: %("#{first_name.capitalize} #{last_name.upcase}" <#{email}>)
-		}
-	end
+	validates :first_name, presence: true
+	validates :last_name, presence: true
+	validates :email, presence: true
+	validates :phone_number, presence: true
+	validates :message, presence: true
 end

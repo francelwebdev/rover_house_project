@@ -1,0 +1,16 @@
+
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline">
+            <div class="column is-12">
+                <h2 class="title has-text-centered">Choisissez le type d'annonce</h2>
+            </div>
+            <% @ad_types.each do |at|  %>
+            <div class="column is-6 has-text-centered">
+                <%= link_to at.name, new_ad_type_property_path(ad_type_id: at.id), class: "button is-large"  %>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</section>

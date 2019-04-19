@@ -23,5 +23,9 @@
  *= require flickity/dist/flickity.min
  *= require flatpickr/dist/flatpickr.min
  *= require toastr/build/toastr.min
+ *= require sweetalert2/dist/sweetalert2.min
+ *= require slick-carousel/slick/slick
+ *= require slick-carousel/slick/slick-theme
+ *= require dropzone/dist/dropzone
+ *= require main
  */
-@import "main";

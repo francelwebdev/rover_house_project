@@ -14,7 +14,16 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
-    @property = Property.new
+    if params[:ad_type_id].present?
+      @ad_type = AdType.find(params[:ad_type_id])
+    session[:ad_type_id] = @ad_type.id
+    session[:ad_type_name] = @ad_type.name
+    @property = current_user.properties.build
+  else
+    flash[:notice] = "Veuillez choisir un type d'annonce."
+    redirect_to ad_types_path
+    end
+    
   end
 
   # GET /properties/1/edit
@@ -24,17 +33,13 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
-    @property = Property.new(property_params)
-
-    respond_to do |format|
+    @property = current_user.properties.build(property_params)
       if @property.save
-        format.html { redirect_to @property, notice: 'Property was successfully created.' }
-        format.json { render :show, status: :created, location: @property }
+        redirect_to @property, notice: 'Property was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
+        puts @property.errors.to_hash
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /properties/1
@@ -69,6 +74,6 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.fetch(:property, {})
+      params.require(:property).permit(:title, :ad_type_id, :property_type_id, :price, :area, :description, :country_id, :address, {photos: []})
     end
 end
