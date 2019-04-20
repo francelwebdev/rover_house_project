@@ -1,6 +1,23 @@
-<h1>Editing Property</h1>
 
-<%= render 'form', property: @property %>
 
-<%= link_to 'Show', @property %> |
-<%= link_to 'Back', properties_path %>
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline">
+            <div class="column is-8 is-offset-2 has-text-centered content">
+                <!-- <h1>Editing Property</h1> -->
+                <h1 class="title">Modifier l'annonce</h1>
+                <p class="subtitl">Pour modifier cette annonce, veuillez changer les valeurs des champs ci-dessous puis cliquer sur le bouton modifier pour re-soumettre les informations concernant le biens.</p>
+                <p>
+                    <b>Les champs suivi du signe asterisk (*) sont obligatoire.</b>
+                </p>
+            </div>
+            <div class="column is-8 is-offset-2">
+                <%= render 'form', property: @property %>
+            </div>
+            <div class="column is-8 is-offset-2">
+                <%= link_to 'Show', @property %> |
+                <%= link_to 'Back', properties_path %>
+            </div>
+        </div>
+    </div>
+</section>

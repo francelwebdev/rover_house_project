@@ -164,12 +164,12 @@
   <div class="card-content">
     <div class="content">
       <div class="columns is-multiline">
-        <%# 3.times do |i| %>
-        <div class="column is-12">
-          <div class="file has-name is-fullwidth">
+        <%# 3.times do %>
+        <div class="column is-6">
+          <div class="file has-name is-fullwidth is-boxed">
             <label class="file-label">
-              <%= form.file_field :photos, hint: 'No special characters.', class: "file-input drop", multiple: true, name: "property[photos][]" %>
-              <span class="file-cta">
+              <%= form.file_field :photos, class: "file-input help is-danger", multiple: true %>
+              <span class="file-cta">    
                 <span class="file-icon">
                   <i class="fas fa-upload fa-lg"></i>
                 </span>
@@ -177,114 +177,118 @@
                   Photos
                 </span>
               </span>
-              <span class="file-name">
-
+              <span class="file-name is-large">
+                <% if @property.photos.present? %>
+                <% @property.photos.each do |p| %>
+                <p><%= image_tag p.url, size: "100x100" %></p>
+                <% end %>
+                <% end %>
               </span>
             </label>
           </div>
-          <% if @property.errors[:photos].any? %>
-          <p class="help is-danger">
-            <%= @property.errors[:photos].first %>
-          </p>
-          <% end %>
-          <p class="help">3 photos maximum.</p>
+          <%# if @property.errors[:photos].any? %>
+          <!-- <p class="help is-danger"> -->
+            <%#= @property.errors[:photos].first %>
+            <!-- </p> -->
+            <%# end %>
+            <p class="help">3 photos maximum.</p>
+          </div>
+          <%# end %>
         </div>
-        <%# end %>
       </div>
     </div>
   </div>
-</div>
 
-<br>
+  <br>
 
-<div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Informations sur la localisation du biens 
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <div class="column is-4">
-          <div class="field">
-            <%= form.label :country_id, "Pays dans lequel se trouve le biens", class: "label required"  %>
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <%= form.select :country_id, Country.pluck(:name, :id), include_blank: true %>
+  <div class="card">
+    <header class="card-header has-background-white-ter">
+      <p class="card-header-title">
+        Informations sur la localisation du biens 
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <div class="columns is-multiline">
+          <div class="column is-4">
+            <div class="field">
+              <%= form.label :country_id, "Pays dans lequel se trouve le biens", class: "label required"  %>
+              <div class="control is-expanded">
+                <div class="select is-fullwidth">
+                  <%= form.select :country_id, Country.pluck(:name, :id), include_blank: true %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="column is-4">
+          <div class="column is-4">
 
-        </div>
-        <div class="column is-4">
-          <div class="field">
-            <%= form.label :location, "Adresse ou lieu ou se trouve le biens", class: "label"  %>
-            <div class="control">
-              <%= form.text_field :address, placeholder: "L'adresse du biens", class: "input"  %>
+          </div>
+          <div class="column is-4">
+            <div class="field">
+              <%= form.label :location, "Adresse ou lieu ou se trouve le biens", class: "label"  %>
+              <div class="control">
+                <%= form.text_field :address, placeholder: "L'adresse du biens", class: "input"  %>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<br>
+  <br>
 
-<div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Informations de contact
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <div class="column is-4">
-          <div class="field">
-            <%#= form.label :first_name, "Votre prénom", class: "label" %>
-            <div class="control">
-              <%#= form.text_field :first_name, class: "input", placeholder: "Prénom"  %>
+  <div class="card">
+    <header class="card-header has-background-white-ter">
+      <p class="card-header-title">
+        Informations de contact
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <div class="columns is-multiline">
+          <div class="column is-4">
+            <div class="field">
+              <%#= form.label :first_name, "Votre prénom", class: "label" %>
+              <div class="control">
+                <%#= form.text_field :first_name, class: "input", placeholder: "Prénom"  %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="column is-4">
-          <div class="field">
-            <%#= form.label :last_name, "Votre Nom", class: "label"  %>
-            <div class="control">
-              <%#= form.text_field :last_name, class: "input", placeholder: "Nom"  %>
+          <div class="column is-4">
+            <div class="field">
+              <%#= form.label :last_name, "Votre Nom", class: "label"  %>
+              <div class="control">
+                <%#= form.text_field :last_name, class: "input", placeholder: "Nom"  %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="column is-4">
-          <div class="field">
-            <%#= form.label :phone_number, "Votre numero de téléphone", class: "label"   %>
-            <div class="control">
-              <%#= form.text_field :phone_number, class: "input", placeholder: "Numéro de téléphone" %>
+          <div class="column is-4">
+            <div class="field">
+              <%#= form.label :phone_number, "Votre numero de téléphone", class: "label"   %>
+              <div class="control">
+                <%#= form.text_field :phone_number, class: "input", placeholder: "Numéro de téléphone" %>
+              </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<br>
+  <br>
 
-<div class="columns">
-  <div class="column is-12">
-    <div class="box">
-      <% if @property.persisted? %>
-      <%= form.submit "Modifier", class: "button is-marron is-fullwidth" %>
-      <% else %>
-      <%= form.submit "Enregistrer", class: "button is-marron is-fullwidth" %>
-      <% end %>
+  <div class="columns">
+    <div class="column is-12">
+      <div class="box">
+        <% if @property.persisted? %>
+        <%= form.submit "Modifier", class: "button is-marron is-fullwidth" %>
+        <% else %>
+        <%= form.submit "Enregistrer", class: "button is-marron is-fullwidth" %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
-<% end %>
+  <% end %>

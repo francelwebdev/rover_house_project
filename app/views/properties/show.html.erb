@@ -6,13 +6,39 @@
         <div class="columns is-multiline">
             <div class="column is-8">
                 <div class="columns is-multiline">
+                    <div class="column is-8">
+                        <h3 class="title is-4">
+                            <%= @property.title.capitalize %>
+                            <hr>
+                        </h3>
+                        <p>
+                            <i class="fas fa-map-marker fa-lg"></i>&nbsp; 
+                            <%= @property.address.capitalize %>
+                        </p>
+                    </div>
+                    <div class="column is-4">
+                       <% if @property.ad_type.name == "Location" %>
+                        <h3 class="title is-4">
+                            <%= @property.price  %>&nbsp; <sup>f/mois</sup>
+                        </h3>
+                        <% elsif @property.ad_type.name == "Vente" %>
+                         <h3 class="title is-4">
+                            <%= @property.price  %>&nbsp; <sup>f</sup>
+                        </h3>
+                       <% end %>
+                    </div>
                     <div class="column is-12">
                         <div class="owl-carousel owl-theme owl-property-show-page">
-                        <% @property.photos.each do |pt| %>
-                        <div class="item">
-                            <%= image_tag(pt, class: "img")  %>
+                            <% if @property.photos.present? %>
+                            <% @property.photos.each do |pt| %>
+                            <div class="item">
+                                <%= image_tag(pt.url) %>
+                            </div>
+                            <% end %>
+                            <% else %> 
+                            <p>ANNONCE SANS PHOTO</p>
+                            <% end %>
                         </div>
-                        <% end %>
                     </div>
                 </div>
                 <div class="column is-12">
@@ -52,54 +78,53 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="column is-4">
-            <div class="box">
-                <h3 class="title">Contacter</h3>
-                <%= form_with url: root_path, local: true do |f| %>
-                <div class="columns is-multiline">
-                    <div class="column is-12">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.text_field :first_name, class: "input"  %>
+            <div class="column is-4">
+                <div class="box">
+                    <h3 class="title">Contacter</h3>
+                    <%= form_with url: root_path, local: true do |f| %>
+                    <div class="columns is-multiline">
+                        <div class="column is-12">
+                            <div class="field">
+                                <div class="control">
+                                    <%= f.text_field :first_name, class: "input"  %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-12">
+                            <div class="field">
+                                <div class="control">
+                                    <%= f.text_field :last_name, class: "input"  %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-12">
+                            <div class="field">
+                                <div class="control">
+                                    <%= f.phone_field :last_name, class: "input"  %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-12">
+                            <div class="field">
+                                <div class="control">
+                                    <%= f.email_field :last_name, class: "input"  %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-12">
+                            <div class="field">
+                                <div class="control">
+                                    <%= f.text_area :body, class: "textarea"  %>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-12">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.text_field :last_name, class: "input"  %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-12">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.phone_field :last_name, class: "input"  %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-12">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.email_field :last_name, class: "input"  %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-12">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.text_area :body, class: "textarea"  %>
-                            </div>
-                        </div>
-                    </div>
+                    <%= f.submit "Envoyer", class: "button is-marron"  %>
+                    <% end %>
                 </div>
-                <%= f.submit "Envoyer", class: "button is-marron"  %>
-                <% end %>
             </div>
         </div>
     </div>
-</div>
 </section>
 
 
