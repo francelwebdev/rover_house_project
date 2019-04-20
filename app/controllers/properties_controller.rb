@@ -4,8 +4,24 @@ class PropertiesController < ApplicationController
   # GET /properties
   # GET /properties.json
   def index
-    @properties = Property.all
-  end
+    if params.has_key?(:ad_type)
+      if params[:ad_type].present?
+        if params[:ad_type] == "Location"
+          ad_type = AdType.find_by(name: params[:ad_type])
+            @properties = Property.where(ad_type_id: ad_type.id)#.includes(:ad_type, :property_type, :photos)
+          elsif params[:ad_type] == "Vente"
+            ad_type = AdType.find_by(name: params[:ad_type])
+            @properties = Property.where(ad_type_id: ad_type.id)
+          else
+            puts "ERREUR"
+          end
+        else
+          puts "PAS DE VALEUR"
+        end
+      else
+        @properties = Property.all
+      end
+    end
 
   # GET /properties/1
   # GET /properties/1.json
@@ -16,12 +32,12 @@ class PropertiesController < ApplicationController
   def new
     if params[:ad_type_id].present?
       @ad_type = AdType.find(params[:ad_type_id])
-    session[:ad_type_id] = @ad_type.id
-    session[:ad_type_name] = @ad_type.name
-    @property = current_user.properties.build
-  else
-    flash[:notice] = "Veuillez choisir un type d'annonce."
-    redirect_to ad_types_path
+      session[:ad_type_id] = @ad_type.id
+      session[:ad_type_name] = @ad_type.name
+      @property = current_user.properties.build
+    else
+      flash[:notice] = "Veuillez choisir un type d'annonce."
+      redirect_to ad_types_path
     end
     
   end
@@ -34,12 +50,12 @@ class PropertiesController < ApplicationController
   # POST /properties.json
   def create
     @property = current_user.properties.build(property_params)
-      if @property.save
-        redirect_to @property, notice: 'Property was successfully created.'
-      else
-        puts @property.errors.to_hash
-        render :new
-      end
+    if @property.save
+      redirect_to @property, notice: 'Property was successfully created.'
+    else
+      puts @property.errors.to_hash
+      render :new
+    end
   end
 
   # PATCH/PUT /properties/1
@@ -74,6 +90,6 @@ class PropertiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:title, :ad_type_id, :property_type_id, :price, :area, :description, :country_id, :address, {photos: []})
+      params.require(:property).permit(:title, :price, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, {photos: []})
     end
-end
+  end

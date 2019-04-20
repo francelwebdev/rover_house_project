@@ -23,5 +23,6 @@
 //= require sweetalert2/dist/sweetalert2.all.min
 //= require slick-carousel/slick/slick.min
 //= require @vizuaalog/bulmajs/dist/file
+//= require @vizuaalog/bulmajs/dist/tabs
 //= require dropzone/dist/dropzone
 //= require main

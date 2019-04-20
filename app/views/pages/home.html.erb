@@ -1,65 +1,65 @@
-<section class="hero mon-hero-bgi-home is-large">
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title is-1 has-text-white">
-        Bienvenue sur <strong>ROVER HOUSE</strong>
-      </h1>
-      <h2 class="subtitle has-text-white">
-        Trouvez la meilleure maison pour votre famille.
-      </h2>
-      <div class="box">
-        <%= form_with url: search_properties_path, method: :get, local: true do |f| %>
-        <div class="columns is-multiline">
-          <div class="column is-3 is-paddingless">
-            <div class="field">
-              <div class="control">
-                <%= f.text_field :ad_type, class: "input is-medium is-radiusless" %>
+  <section class="hero mon-hero-bgi-home is-large">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 has-text-white">
+          Bienvenue sur <strong>ROVER HOUSE</strong>
+        </h1>
+        <h2 class="subtitle has-text-white">
+          Trouvez la meilleure maison pour votre famille.
+        </h2>
+        <div class="box">
+          <%= form_with url: search_properties_path, method: :get, local: true do |f| %>
+          <div class="columns is-multiline">
+            <div class="column is-3 is-paddingless">
+              <div class="field">
+                <div class="control">
+                  <%= f.text_field :ad_type, class: "input is-medium is-radiusless" %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-3 is-paddingless">
+              <div class="field">
+                <div class="control is-paddingless">
+                  <%= f.text_field :property_type, class: "input is-medium is-radiusless"  %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-3 is-paddingless">
+              <div class="field">
+                <div class="control">
+                  <%= f.text_field :location, class: "input is-medium is-radiusless"  %>
+                </div>
+              </div>
+            </div>
+            <div class="column is-3 is-paddingless">
+              <div class="field">
+                <div class="control">
+                  <%= f.submit "Rechercher", class: "button is-marron is-fullwidth is-medium is-radiusless" %>
+                </div>
               </div>
             </div>
           </div>
-          <div class="column is-3 is-paddingless">
-            <div class="field">
-              <div class="control is-paddingless">
-                <%= f.text_field :property_type, class: "input is-medium is-radiusless"  %>
-              </div>
-            </div>
-          </div>
-          <div class="column is-3 is-paddingless">
-            <div class="field">
-              <div class="control">
-                <%= f.text_field :location, class: "input is-medium is-radiusless"  %>
-              </div>
-            </div>
-          </div>
-          <div class="column is-3 is-paddingless">
-            <div class="field">
-              <div class="control">
-                <%= f.submit "Rechercher", class: "button is-marron is-fullwidth is-medium is-radiusless" %>
-              </div>
-            </div>
-          </div>
+          <% end %>
         </div>
-        <% end %>
-      </div>
-      
-      <!-- <p class="">
-        <a class="has-text-white">Recherche avancer</a>
-      </p> -->
 
-      <!-- <div class="col-lg-2">
-        <%#= f.input :min_area, label: false %>
-      </div>
-      <div class="col-lg-2">
-        <%#= f.input :max_area, label: false %>
-      </div>
-      <div class="col-lg-2">
-        <%#= f.input :min_price, label: false %>
-      </div>
-      <div class="col-lg-2">
-        <%#= f.input :max_price, label: false %>
-      </div> -->
-    </div>
+  <!-- <p class="">
+  <a class="has-text-white">Recherche avancer</a>
+</p> -->
+
+  <!-- <div class="col-lg-2">
+  <%#= f.input :min_area, label: false %>
   </div>
+  <div class="col-lg-2">
+  <%#= f.input :max_area, label: false %>
+  </div>
+  <div class="col-lg-2">
+  <%#= f.input :min_price, label: false %>
+  </div>
+  <div class="col-lg-2">
+  <%#= f.input :max_price, label: false %>
+</div> -->
+</div>
+</div>
 </section>
 
 
@@ -69,290 +69,27 @@
       <div class="column is-12 has-text-centered">
         <h3 class="title">Dernières annonces publiés</h3>
       </div>
-      <div class="column is-12 slick" style="padding-bottom: 10px;">
-
-       <% 12.times do |i| %>
-       <div class="card" style="margin: 0 20px; border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-          </figure>
+      <div class="column is-12">
+        <div class="owl-carousel owl-theme owl-home-page">
+          <% 6.times do |i| %>
+            <div class="item">
+              <div class="card" style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <h2>Lorem ipsum dolor sit amet.</h2>
+                  <a href="#">Voir plus détail</a>
+                  <br>
+                </div>
+              </div>
+            </div>
+            </div>
+          <% end %>
         </div>
-        <div class="card-content">
-          <div class="content">
-            <h2>Lorem ipsum dolor sit amet.</h2>
-            <a href="#">Voir plus détail</a>
-            <br>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
-<!--         <div class="owl-carousel owl-theme">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <a href="#">Voir plus détail</a>
-                <br>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <a href="#">Voir plus détail</a>
-                <br>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <a href="#">Voir plus détail</a>
-                <br>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <a href="#">Voir plus détail</a>
-                <br>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <a href="#">Voir plus détail</a>
-                <br>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <h2>Lorem ipsum dolor sit amet.</h2>
-                <a href="#">Voir plus détail</a>
-                <br>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-<!--         <div class="main-carousel">
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-image">
-                <figure class="image is-4by3">
-                  <%= image_tag "ceiling-lamp-contemporary-curtains-1439712.jpg"  %>
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="content">
-                  <h2>Lorem ipsum dolor sit amet.</h2>
-                  <a href="#">Voir plus détail</a>
-                  <br>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-        </div>
-
       </div>
     </div>
   </div>

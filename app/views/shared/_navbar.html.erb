@@ -10,10 +10,14 @@
     </div>
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <%= link_to "Accueil", root_path, class: "navbar-item"  %>
-        <%= link_to "Acheter", root_path, class: "navbar-item"  %>
-        <%= link_to "Louer", root_path, class: "navbar-item"  %>
-        <%= link_to "Aménager", root_path, class: "navbar-item"  %>
+         <%= link_to "Accueil", root_path, class: "navbar-item"  %>
+         <%#= link_to "Acheter", properties_path, class: "navbar-item"  %>
+        <%#= link_to "Louer", properties_path, class: "navbar-item"  %>
+        <% @ad_types.each do |ad_type| %>
+        <%= link_to ad_type.name, properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+        <% end %>
+        <%= link_to "Aménager", properties_path, class: "navbar-item"  %>
+       
     <!--   <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More

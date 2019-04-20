@@ -6,10 +6,7 @@ class Property < ApplicationRecord
 
     has_many_attached :photos, dependent: :purge
 
-    validates_associated :property_type, :country
-
-    validates :title, :price, :area, :description, presence: true
-    # validates :photos, presence: { message: 'must be abided' }, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..3.megabytes }
+    validates :title, :price, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, presence: true
 
     validate :validation_photos
 
@@ -20,7 +17,7 @@ class Property < ApplicationRecord
             if photos.size > 3
                 errors.add(:photos, "Vous ne pouvez pas ajouter plus de 3 photos.")
             else
-               photos.each do |photo|
+             photos.each do |photo|
                 if !photo.content_type.in?(["image/png", "image/jpg", "image/jpeg"])
                     errors.add(:photos, "doit être au format .png, .jpg ou .jpeg")
                 elsif photo.byte_size > 3.megabytes

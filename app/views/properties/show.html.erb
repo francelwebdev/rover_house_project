@@ -1,3 +1,109 @@
+
+
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-multiline">
+            <div class="column is-8">
+                <div class="columns is-multiline">
+                    <div class="column is-12">
+                        <div class="owl-carousel owl-theme owl-property-show-page">
+                        <% @property.photos.each do |pt| %>
+                        <div class="item">
+                            <%= image_tag(pt, class: "img")  %>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="column is-12">
+                    <div class="tabs-wrapper">
+                        <div class="tabs">
+                            <ul>
+                                <li class="is-active">
+                                    <a>Description</a>
+                                </li>
+                                <li>
+                                    <a>Détail</a>
+                                </li>
+                                <li>
+                                    <a>Localisation</a>
+                                </li>
+                                <li>
+                                    <a>Vidéo</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tabs-content">
+                            <ul>
+                                <li class="is-active">
+                                    <h1>Pictures</h1>
+                                </li>
+                                <li>
+                                    <h1>Music</h1>
+                                </li>
+                                <li>
+                                    <h1>Videos</h1>
+                                </li>
+                                <li>
+                                    <h1>Documents</h1>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-4">
+            <div class="box">
+                <h3 class="title">Contacter</h3>
+                <%= form_with url: root_path, local: true do |f| %>
+                <div class="columns is-multiline">
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="control">
+                                <%= f.text_field :first_name, class: "input"  %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="control">
+                                <%= f.text_field :last_name, class: "input"  %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="control">
+                                <%= f.phone_field :last_name, class: "input"  %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="control">
+                                <%= f.email_field :last_name, class: "input"  %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="control">
+                                <%= f.text_area :body, class: "textarea"  %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%= f.submit "Envoyer", class: "button is-marron"  %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'Edit', edit_property_path(@property) %> |

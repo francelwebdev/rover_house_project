@@ -1,3 +1,30 @@
+
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <% if @properties.present? %>
+      <% @properties.with_attached_photos.each do |property| %>
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <%= image_tag property.photos[0] %>
+            </figure>
+          </div>
+          <div class="card-content">
+          <h4 class="title is-4"><%= property.title %></h4>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
 <p id="notice"><%= notice %></p>
 
 <h1>Properties</h1>
@@ -11,11 +38,11 @@
 
   <tbody>
     <% @properties.each do |property| %>
-      <tr>
-        <td><%= link_to 'Show', property %></td>
-        <td><%= link_to 'Edit', edit_property_path(property) %></td>
-        <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= link_to 'Show', property %></td>
+      <td><%= link_to 'Edit', edit_property_path(property) %></td>
+      <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>

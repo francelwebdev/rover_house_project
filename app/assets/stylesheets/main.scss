@@ -1,11 +1,9 @@
 
-// Les couleur de google
+// Les couleur du logo de google
 // Rouge : #e94335
 // Bleu : #547dbf
 // Vert : #34a651
 // Jaune : #f7b918
-// 
-// 
 
 @font-face {
   font-family: 'Lato', sans-serif;
@@ -19,7 +17,7 @@ src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
 }
 
 * {
-// overflow: auto;
+  font-family: 'Lato', sans-serif;
 }
 
 *:not(.fas, .fab) {
@@ -124,12 +122,31 @@ body > nav > div > div.navbar-brand > a.navbar-item.title.is-marginless:hover {
   background-attachment: fixed;
 }
 
-
 .carousel-cell {
-// width: 25%; /* half-width */
-// height: 160px;
-margin-right: 25px;
+  width: 100%; /* full width */
+  height: 50vh; /* height of carousel */
+  margin-right: 10px;
 }
+
+// Pour gérer les 2 arrow de flickity
+/* no circle */
+.flickity-button {
+  background: transparent !important;
+}
+/* big previous & next buttons */
+.flickity-prev-next-button {
+  width: 100px;
+  height: 100px;
+}
+/* icon color */
+.flickity-button-icon {
+  fill: white;
+}
+/* hide disabled button */
+.flickity-button:disabled {
+  display: none;
+}
+// Pour gérer les 2 arrow de flickity
 
 footer.footer {
   padding-bottom: 3rem !important;
@@ -137,11 +154,34 @@ footer.footer {
 
 nav {
   // box-shadow: 0px 1px #5d4037 !important;
-  box-shadow: 0 0 20px 0 rgba(46,40,64,.5);
-    z-index: 9999;
+  // box-shadow: 0 0 20px 0 rgba(46,40,64,.5);
+  //   z-index: 9999;
+  border-bottom: 1px solid #5d4037;
 }
 
+// Pour indiquer que le champ du formulaire est obligatoire
 label.required:after {
   content:" * ";
   color: red;
 }
+// Pour indiquer que le champ du formulaire est obligatoire
+
+// .img {
+//     position: relative;
+//     float: left;
+//     width:  100px;
+//     height: 100px;
+//     background-position: 50% 50%;
+//     background-repeat:   no-repeat;
+//     background-size:     cover;
+// }
+
+// Pour gérer le tabs de bulma
+.tabs-content li {
+    display: none;
+    list-style: none;
+}
+.tabs-content li.is-active {
+    display: block;
+}
+// Pour gérer le tabs de bulma
