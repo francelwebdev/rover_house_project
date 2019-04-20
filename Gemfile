@@ -78,7 +78,7 @@ group :development do
   gem 'pry-byebug'
   gem 'meta_request'
 end
-gem 'rails_db' # Permet de voir les données de la bdd
+# gem 'rails_db' # Permet de voir les données de la bdd
 # gem "axlsx_rails" # Permet d'exporter la bdd
 group :production do
   # Use mysql as the database for Active Record
@@ -87,8 +87,6 @@ group :production do
 end
 gem 'dalli'
 gem 'rails-i18n'#, github: 'svenfuchs/rails-i18n', branch: 'master'
-gem "simple_form"
-# gem 'mail_form'
 gem "cocoon"
 gem 'devise'
 gem 'devise-i18n'
@@ -120,7 +118,6 @@ gem 'active_link_to'
 gem "pundit"
 # gem "devise_invitable"
 gem 'globalize'
-gem 'trix-rails', require: 'trix'
 gem 'acts-as-taggable-on'
 gem 'acts_as_votable'
 gem 'data-confirm-modal'
@@ -134,8 +131,6 @@ gem 'acts_as_commentable'
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 gem 'counter_culture'
 gem 'public_activity'
-
-gem 'foreman'
 
 gem 'impressionist'
 
@@ -153,7 +148,6 @@ gem 'email_validator'
 
 gem 'rails_autolink'
 # gem 'strong_migrations'
-# gem "image_processing"
 gem 'inline_svg'
 
 # Shrine Dependencies
@@ -161,5 +155,5 @@ gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
-gem 'elasticsearch-model'#, github: 'elastic/elasticsearch-rails', branch: '5.x'
-gem 'elasticsearch-rails'#, github: 'elastic/elasticsearch-rails', branch: '5.x'
+# gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
+# gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
