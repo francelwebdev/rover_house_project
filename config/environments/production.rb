@@ -103,6 +103,7 @@ Rails.application.configure do
   # config.active_storage.service = :cloudinary
 
 # Pour tester l'evoie d'email en production avec le service Mailtrap
+config.action_mailer.default_url_options = { :host => 'rover-house.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
 config.action_mailer.smtp_settings = {
   :user_name => '10d27f2b75506a',
@@ -110,7 +111,6 @@ config.action_mailer.smtp_settings = {
   :address => 'smtp.mailtrap.io',
   :domain => 'smtp.mailtrap.io',
   :port => '2525',
-  :host => 'rover-house.herokuapp.com',
   :authentication => :cram_md5
 }
 
