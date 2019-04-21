@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     devise_for :users
     resources :properties do
       collection do
-        get 'search'
+        get 'search', to: "properties#index"
       end
     end
     resources :contact_us, only: [:create]

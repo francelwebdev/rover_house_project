@@ -8,9 +8,9 @@ class Property < ApplicationRecord
 
     # has_many :photos
 
-    #validates :title, :price, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, presence: true
+    validates :title, :price, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, presence: true
 
-# validates_associated :photos
+# validates_associated :photosp
 
     # validate :validation_photos
 

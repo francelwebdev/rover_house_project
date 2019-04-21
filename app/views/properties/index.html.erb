@@ -1,20 +1,36 @@
 
 
 
+<section class="hero has-background-grey">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-3 has-text-white">
+        Recherche avancé
+      </h1>
+      <h2 class="subtitle has-text-white">
+        Trouvez la meilleure maison pour votre famille.
+      </h2>
+      <div class="box">
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     <div class="columns is-multiline">
       <% if @properties.present? %>
-      <% @properties.with_attached_photos.each do |property| %>
+      <% @properties.each do |property| %>
       <div class="column is-4">
         <div class="card">
           <div class="card-image">
             <figure class="image is-4by3">
-              <%= image_tag property.photos[0] %>
+              <%=  %>
             </figure>
           </div>
           <div class="card-content">
-          <h4 class="title is-4"><%= property.title %></h4>
+            <h4 class="title is-4"><%= property.title %></h4>
           </div>
         </div>
       </div>
@@ -50,3 +66,6 @@
 <br>
 
 <%= link_to 'New Property', new_property_path %>
+
+
+<%#== pagy_bulma_nav(@pagy) %>
