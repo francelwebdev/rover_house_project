@@ -102,8 +102,7 @@ gem 'meta-tags', '~> 2.11'
 gem 'activestorage-validator'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
-gem 'ransack'
-gem 'searchkick'
+
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 # gem 'geocoder', '~> 1.4', '>= 1.4.7'
@@ -156,15 +155,20 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
 
-# Ces gem nécessite que elasticsearch soit installé sur la machine
-# gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
-# gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
 
 # Pour l'upload de fichier.
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 
 # Pour systeme de recherche dans une bdd, utile pour les formulaire de recherche.
 gem "pg_search"
+gem 'search_cop'
+gem 'ransack'
+
+# Ces gem nécessite que elasticsearch soit installé sur la machine
+# gem 'searchkick'
+# gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
+# gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
+# Pour systeme de recherche dans une bdd, utile pour les formulaire de recherche.
 
 gem "htmlcompressor"
 gem "yui-compressor"

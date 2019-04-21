@@ -1,10 +1,17 @@
 class Property < ApplicationRecord
+    include SearchCop
     mount_uploaders :photos, PhotosUploader
 
-    belongs_to :ad_type
-    belongs_to :property_type
-    belongs_to :country
-    belongs_to :user
+    search_scope :search do
+        attributes :title, :description, :price, :area, :property_type_id, :ad_type_id, :country_id, :city_id, :location, :address
+        attributes ad_type: "ad_type.name"
+        attributes property_type: "property_type.name"
+end
+
+belongs_to :ad_type
+belongs_to :property_type
+belongs_to :country
+belongs_to :user
 
     # has_many :photos
 
