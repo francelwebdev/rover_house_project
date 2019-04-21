@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         get 'search', to: "properties#index"
       end
     end
+    get "search", to: "searches#index"
     resources :contact_us, only: [:create]
     get "contactez-nous", to: "contact_us#new"
     get "contact_us", to: redirect("/contactez-nous")
