@@ -110,6 +110,7 @@ config.action_mailer.smtp_settings = {
   :address => 'smtp.mailtrap.io',
   :domain => 'smtp.mailtrap.io',
   :port => '2525',
+  :host => 'rover-house.herokuapp.com',
   :authentication => :cram_md5
 }
 
