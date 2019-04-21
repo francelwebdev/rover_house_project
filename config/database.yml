@@ -78,15 +78,15 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: rover_house_production
-  username: rover_house
-  password: <%= ENV['ROVER_HOUSE_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: rover_house_production
+#   username: rover_house
+#   password: <%= ENV['ROVER_HOUSE_DATABASE_PASSWORD'] %>
 
 # Mon code
 # J'utilise la base de donnée de dev pour tester le prod en dev
-# production:
-#   <<: *default
-#   database: rover_house_development
+production:
+  <<: *default
+  database: rover_house_development
 # Mon code

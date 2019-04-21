@@ -100,8 +100,7 @@ Rails.application.configure do
   # Mon code #
   # ================================================== #
   # Pour utiliser le service Cloudinary
-  config.active_storage.service = :cloudinary
-
+  # config.active_storage.service = :cloudinary
 
 # Pour tester l'evoie d'email en production avec le service Mailtrap
   config.action_mailer.delivery_method = :smtp
