@@ -67,7 +67,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 
 gem 'autoprefixer-rails'
-# gem 'administrate'
+gem 'administrate'
 gem 'sitemap_generator'
 gem 'local_time'
 group :development do

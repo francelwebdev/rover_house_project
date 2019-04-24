@@ -5,8 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
  devise :confirmable, :trackable 
 
- ROLES = ["Particulier", "Profesionnel"]
-
+ belongs_to :role
  has_many :properties
  
   has_person_name

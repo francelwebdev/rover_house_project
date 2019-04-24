@@ -29,3 +29,9 @@ end
 # rooms.each do |room|
 #     Room.create()
 # end
+
+Role.delete_all
+roles = ["Particulier", "Profesionnel"].sort
+roles.each do |role|
+    Role.create(name: role)
+end
