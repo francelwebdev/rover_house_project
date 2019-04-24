@@ -1,13 +1,183 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>" class="">
-  <head>
-<%= render "shared/head" %>
-  </head>
-  <body class="<%= controller_name + '/' + action_name  %>">
-    <%= render "shared/navbar" %>
-    <%= render "shared/flash_notification" %>
-    <%= yield %>
-    <%#= render "shared/subscribe_to_newsletter" %>
-    <%= render "shared/footer" %> 
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RoverHouse</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+</head>
+
+<body class="<%= controller_name + '/' + action_name  %>">
+  <header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <%= link_to "ROVER HOUSE", root_path, class: "navbar-item title is-marginless" %>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <%= link_to "Accueil", root_path, class: "navbar-item"  %>
+            <%#= link_to "Acheter", properties_path, class: "navbar-item"  %>
+            <%#= link_to "Louer", properties_path, class: "navbar-item"  %>
+            <% @ad_types.each do |ad_type| %>
+            <%= link_to ad_type.name, properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+            <% end %>
+            <%= link_to "Aménager", properties_path, class: "navbar-item"  %>
+
+            <!--   <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Jobs
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div> -->
+          </div>
+          <% if user_signed_in? %>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="navbar-item has-dropdown is-hoverable">
+                <%= link_to current_user.email, edit_user_registration_path, class: "navbar-link"  %>
+                <div class="navbar-dropdown is-right">
+                  <%= link_to 'Mon profile', edit_user_registration_path, :class => 'dropdown-item' %>
+                  <%= link_to 'Mon compte', edit_user_registration_path, :class => 'dropdown-item' %>
+                  <hr class="navbar-divider">
+                  <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}, id: "deconnexion"  %>
+                </div>
+              </div>
+              <div class="buttons is-marginless">
+                <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron is-marginless" %>
+              </div>
+            </div>
+          </div>
+          <% else %>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <%= link_to "Espace client", new_user_session_path, class: "button is-light" %>
+                <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron" %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <% if flash[:notice] %>
+  <div class="notification is-success" style="margin-bottom: 0px;">
+    <button class="delete"></button>
+    <p class="has-text-centered">
+      <strong><%= notice %></strong>
+    </p>
+  </div>
+  <% elsif flash[:alert] %>
+  <div class="notification is-danger" style="margin-bottom: 0px;">
+    <button class="delete"></button>
+    <p class="has-text-centered">
+      <strong><%= alert %></strong>
+    </p>
+  </div>
+  <% end %>
+
+  <%= yield %>
+
+  <!-- <div class="columns is-multiline is-marginless" style="background-color: #a1887f ;">
+    <div class="container">
+      <div class="column is-12 has-text-centered">
+        <h4 class="title is-4 has-text-white">Obonnez-vous à la newsletter pour recevoir les dernières offres
+          immobilières.</h4>
+        <%#= form_with url: root_path, method: :post do |f| %>
+
+        <%# end %>
+      </div>
+    </div>
+  </div> -->
+
+  <footer class="footer" style="background-color: #424242;">
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-3 content">
+          <h2 class="title has-text-white is-4">ROVER HOUSE</h2>
+          <p class="has-text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur amet minus
+            voluptatum, dignissimos unde architecto, omnis placeat blanditiis nesciunt, eos sunt eaque eum doloribus
+            voluptatem exercitationem neque cupiditate aliquam. Deleniti.</p>
+        </div>
+        <div class="column is-3">
+          <h5 class="title has-text-white is-4">Liens rapides</h5>
+          <ul class="content">
+            <li class="has-text-white">À propos de nous</li>
+            <!-- <li class="text-white py-1">Blog</li> -->
+            <!-- <li class="text-white py-1">Carrière</li> -->
+            <li class="has-text-white">
+              <%= link_to "Contactez nous", contactez_nous_path, class: "has-text-white" %>
+            </li>
+          </ul>
+        </div>
+        <div class="column is-3">
+          <h5 class="title has-text-white is-4">Liens utiles</h5>
+          <ul class="content">
+            <li class="has-text-white">Accès client</li>
+            <li class="has-text-white">Mes annonces sur <strong class="has-text-white">ROVER HOUSE</strong></li>
+            <li class="has-text-white">Nos services pros</li>
+            <li class="has-text-white">Mentions Légales</li>
+            <li class="has-text-white">Politique de Confidentialité</li>
+          </ul>
+        </div>
+        <div class="column is-3">
+          <h5 class="title has-text-white is-4">Contacter nous</h5>
+          <address>
+            <ul class="content">
+              <li class="my-3 has-text-white">
+                <p>
+                  Collins Street West, Victoria 8007, Australia
+                </p>
+              </li>
+              <li class="my-3 has-text-white">
+                <p>
+                  +1 246-345-0695
+                </p>
+              </li>
+              <li class="my-3 has-text-white">
+                <p class="has-text-white">
+                  <%= mail_to "rover-house@exemple.com" %>
+                </p>
+              </li>
+            </ul>
+          </address>
+        </div>
+        <div class="column is-12">
+          <hr style="border: 0.3px solid grey">
+        </div>
+        <div class="column is-12 has-text-centered">
+          <p class="has-text-white">&copy; Copyright 2019 ROVER HOUSE. Tous droits réservés.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
 </html>

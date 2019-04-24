@@ -1,4 +1,3 @@
-
 // Les couleur du logo de google
 // Rouge : #e94335
 // Bleu : #547dbf
@@ -7,12 +6,12 @@
 
 @font-face {
   font-family: 'Lato', sans-serif;
-// font-family: 'Raleway', sans-serif;
-// font-family: 'Montserrat', sans-serif;
+  // font-family: 'Raleway', sans-serif;
+  // font-family: 'Montserrat', sans-serif;
 
-src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
-// src: url("/fonts/Raleway/Raleway-Regular.ttf") format("ttf");
-// src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("ttf");
+  src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
+  // src: url("/fonts/Raleway/Raleway-Regular.ttf") format("ttf");
+  // src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("ttf");
 
 }
 
@@ -99,13 +98,14 @@ src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
   background-color: #795548 !important;
   border-color: transparent;
   color: #fff;
+
   &:hover {
     background-color: #5d4037 !important;
     color: white;
   }
 }
 
-body > nav > div > div.navbar-brand > a.navbar-item.title.is-marginless:hover {
+body>header>nav>div>div.navbar-brand>a.navbar-item.title.is-marginless:hover {
   color: black;
 }
 
@@ -123,8 +123,10 @@ body > nav > div > div.navbar-brand > a.navbar-item.title.is-marginless:hover {
 }
 
 .carousel-cell {
-  width: 100%; /* full width */
-  height: 50vh; /* height of carousel */
+  width: 100%;
+  /* full width */
+  height: 50vh;
+  /* height of carousel */
   margin-right: 10px;
 }
 
@@ -133,26 +135,30 @@ body > nav > div > div.navbar-brand > a.navbar-item.title.is-marginless:hover {
 .flickity-button {
   background: transparent !important;
 }
+
 /* big previous & next buttons */
 .flickity-prev-next-button {
   width: 100px;
   height: 100px;
 }
+
 /* icon color */
 .flickity-button-icon {
   fill: white;
 }
+
 /* hide disabled button */
 .flickity-button:disabled {
   display: none;
 }
+
 // Pour gérer les 2 arrow de flickity
 
 footer.footer {
   padding-bottom: 3rem !important;
 }
 
-nav {
+header>nav {
   // box-shadow: 0px 1px #5d4037 !important;
   // box-shadow: 0 0 20px 0 rgba(46,40,64,.5);
   //   z-index: 9999;
@@ -161,9 +167,10 @@ nav {
 
 // Pour indiquer que le champ du formulaire est obligatoire
 label.required:after {
-  content:" * ";
+  content: " * ";
   color: red;
 }
+
 // Pour indiquer que le champ du formulaire est obligatoire
 
 // .img {
@@ -178,15 +185,17 @@ label.required:after {
 
 // Pour gérer le tabs de bulma
 .tabs-content li {
-    display: none;
-    list-style: none;
+  display: none;
+  list-style: none;
 }
+
 .tabs-content li.is-active {
-    display: block;
+  display: block;
 }
+
 // Pour gérer le tabs de bulma
 
 
 .button-recherche {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }

@@ -1,79 +1,82 @@
-
-
-
 <section class="section">
     <div class="container">
         <div class="columns is-multiline">
             <div class="column is-8">
                 <div class="columns is-multiline">
-                    <div class="column is-8">
-                        <h3 class="title is-4">
-                            <%= @property.title.capitalize %>
-                            <hr>
-                        </h3>
-                        <p>
-                            <i class="fas fa-map-marker fa-lg"></i>&nbsp; 
-                            <%= @property.address.capitalize %>
-                        </p>
-                    </div>
-                    <div class="column is-4">
-                       <% if @property.ad_type.name == "Location" %>
-                        <h3 class="title is-4">
-                            <%= @property.price  %>&nbsp; <sup>f/mois</sup>
-                        </h3>
-                        <% elsif @property.ad_type.name == "Vente" %>
-                         <h3 class="title is-4">
-                            <%= @property.price  %>&nbsp; <sup>f</sup>
-                        </h3>
-                       <% end %>
+                    <div class="column is-12">
+                        <div class="columns is-multiline">
+                            <div class="column is-12">
+                                <div class="columns is-multiline">
+                                    <div class="column is-8">
+                                        <h4 class="title is-4">
+                                            <%= @property.title.capitalize %>
+                                        </h4>
+                                    </div>
+                                    <div class="column is-4">
+                                        <% if @property.ad_type.name == "Location" %>
+                                        <h3 class="title is-4">
+                                            <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f/mois</sup>
+                                        </h3>
+                                        <% elsif @property.ad_type.name == "Vente" %>
+                                        <h3 class="title is-4">
+                                            <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f</sup>
+                                        </h3>
+                                        <% end %>
+                                    </div>
+                                </div>
+                                <hr class="is-marginless">
+                                <div class="column is-12">
+                                    <p>
+                                        <i class="fas fa-map-marker-alt fa-lg"></i>&nbsp;
+                                        <%= @property.country.name.capitalize %> - <%= @property.address.capitalize %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="column is-12">
                         <div class="owl-carousel owl-theme owl-property-show-page">
                             <% if @property.photos.present? %>
                             <% @property.photos.each do |pt| %>
                             <div class="item">
-                                <%= image_tag(pt.url) %>
+                                <figure class="image">
+                                    <%= image_tag(pt.url) %>
+                                </figure>
                             </div>
                             <% end %>
-                            <% else %> 
+                            <% else %>
                             <p>ANNONCE SANS PHOTO</p>
                             <% end %>
                         </div>
                     </div>
-                </div>
-                <div class="column is-12">
-                    <div class="tabs-wrapper">
-                        <div class="tabs">
-                            <ul>
-                                <li class="is-active">
-                                    <a>Description</a>
-                                </li>
-                                <li>
-                                    <a>Détail</a>
-                                </li>
-                                <li>
-                                    <a>Localisation</a>
-                                </li>
-                                <li>
-                                    <a>Vidéo</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tabs-content">
-                            <ul>
-                                <li class="is-active">
-                                    <h1>Pictures</h1>
-                                </li>
-                                <li>
-                                    <h1>Music</h1>
-                                </li>
-                                <li>
-                                    <h1>Videos</h1>
-                                </li>
-                                <li>
-                                    <h1>Documents</h1>
-                                </li>
-                            </ul>
+                    <div class="column is-12">
+                        <div class="tabs-wrapper">
+                            <div class="tabs">
+                                <ul>
+                                    <li class="is-active">
+                                        <a>Description</a>
+                                    </li>
+                                    <li>
+                                        <a>Détail</a>
+                                    </li>
+                                    <li>
+                                        <a>Localisation</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tabs-content">
+                                <ul>
+                                    <li class="is-active">
+                                        <h1>Pictures</h1>
+                                    </li>
+                                    <li>
+                                        <h1>Music</h1>
+                                    </li>
+                                    <li>
+                                        <h1>Videos</h1>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,9 +130,7 @@
     </div>
 </section>
 
+<!-- <p id="notice"><%#= notice %></p> -->
 
-
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_property_path(@property) %> |
-<%= link_to 'Back', properties_path %>
+<%#= link_to 'Edit', edit_property_path(@property) %> |
+<%#= link_to 'Back', properties_path %>

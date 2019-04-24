@@ -1,6 +1,3 @@
-
-
-
 <section class="hero has-background-grey">
   <div class="hero-body">
     <div class="container">
@@ -11,7 +8,84 @@
         Trouvez la meilleure maison pour votre famille.
       </h2>
       <div class="box">
-
+        <%= form_with url: search_properties_path, method: :get, local: true do |f| %>
+        <div class="columns is-multiline">
+          <div class="column is-3">
+            <div class="field">
+              <%= f.label :ad_type, "Vous souhaitez ?", class: "label has-text-left is-medium"  %>
+              <div class="control is-expanded">
+                <div class="select is-fullwidth is-medium">
+                  <%= f.select :ad_type, {"Louer un biens" => "Location", "Acheter un biens" => "Vente"}.sort, include_blank: true, class: "is-medium" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-3">
+            <div class="field">
+              <%= f.label :property_type, "Quel type de biens ?", class: "label has-text-left is-medium"  %>
+              <div class="control is-expanded">
+                <div class="select is-fullwidth is-medium">
+                  <%= f.select :property_type, @property_types.collect {|pt| [pt.name, pt.name]}, include_blank: true, class: "is-medium" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-4">
+            <div class="field">
+              <%= f.label :location, "Où ?", class: "label has-text-left is-medium"  %>
+              <div class="control">
+                <%= f.text_field :location, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
+              </div>
+            </div>
+          </div>
+          <div class="column is-2">
+            <div class="field">
+              <div class="control">
+                <%= f.submit "Rechercher", class: "button is-marron is-fullwidth is-radiusless button-recherche is-medium" %>
+              </div>
+            </div>
+          </div>
+          <div class="column is-12 is-sr-only avec-et-sans-is-sr-only">
+            <div class="columns is-multiline">
+              <div class="column is-3">
+                <div class="field">
+                  <%= f.label :min_price, "Prix minimum", class: "label has-text-left is-medium"  %>
+                  <div class="control">
+                    <%= f.number_field :min_price, class: "input is-radiusless is-medium"  %>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="field">
+                  <%= f.label :max_price, "Prix maximum", class: "label has-text-left is-medium"  %>
+                  <div class="control">
+                    <%= f.number_field :max_price, class: "input is-radiusless is-medium"  %>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="field">
+                  <%= f.label :min_area, "Surface minimum", class: "label has-text-left is-medium"  %>
+                  <div class="control">
+                    <%= f.text_field :min_area, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="field">
+                  <%= f.label :max_area, "surface maximum", class: "label has-text-left is-medium"  %>
+                  <div class="control">
+                    <%= f.text_field :max_area, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-12">
+            <a class="re-avance">Recherche avancée</a>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -36,36 +110,17 @@
       </div>
       <% end %>
       <% end %>
+
     </div>
   </div>
 </section>
 
-
-<p id="notice"><%= notice %></p>
-
-<h1>Properties</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @properties.each do |property| %>
-    <tr>
-      <td><%= link_to 'Show', property %></td>
-      <td><%= link_to 'Edit', edit_property_path(property) %></td>
-      <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Property', new_property_path %>
-
-
-<%#== pagy_bulma_nav(@pagy) %>
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <%== pagy_bulma_nav(@pagy) %>
+      </div>
+    </div>
+  </div>
+</section>

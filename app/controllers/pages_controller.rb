@@ -2,13 +2,14 @@ class PagesController < ApplicationController
     skip_before_action :authenticate_user!
 
   def home
+    @properties = Property.order(created_at: :desc).limit(6).includes(:country)
   end
 
-  def method_name
+  def about_us
       
   end
 
-  def method_name
+  def faq
       
   end
 end

@@ -65,6 +65,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 #---- MES GEMS ----#
 #--------------------------#
+
 gem 'autoprefixer-rails'
 # gem 'administrate'
 gem 'sitemap_generator'
@@ -81,11 +82,14 @@ end
 # gem 'rails_db' # Permet de voir les données de la bdd
 # gem "axlsx_rails" # Permet d'exporter la bdd
 group :production do
+  gem "passenger"
   # Use mysql as the database for Active Record
   # gem 'mysql2', '>= 0.4.4', '< 0.6.0'
   gem 'postmark-rails'
+  gem 'redis-rails'
+  gem 'redis-rack-cache'
 end
-gem 'dalli'
+# gem 'dalli'
 gem 'rails-i18n'#, github: 'svenfuchs/rails-i18n', branch: 'master'
 gem "cocoon"
 gem 'devise'
@@ -96,7 +100,7 @@ gem 'gibbon'
 gem 'pagy'
 # gem 'stripe'
 # gem 'stripe-rails'
-# gem 'activeadmin'
+gem 'activeadmin'
 gem 'name_of_person'
 gem 'meta-tags', '~> 2.11'
 gem 'activestorage-validator'
@@ -107,7 +111,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 # gem 'geocoder', '~> 1.4', '>= 1.4.7'
 # gem 'gmaps4rails', '~> 2.1', '>= 2.1.2'
-# gem 'newrelic_rpm'
 gem "seedbank"
 # gem 'ahoy_matey'
 # gem 'webpacker', '~> 3.5'
@@ -155,7 +158,6 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
 
-
 # Pour l'upload de fichier.
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 
@@ -172,3 +174,4 @@ gem 'ransack'
 
 gem "htmlcompressor"
 gem "yui-compressor"
+gem 'babel-transpiler'

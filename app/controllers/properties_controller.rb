@@ -2,33 +2,14 @@ class PropertiesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
+  def search
+    @properties = Property.search(ad_type: params[:ad_type], property_type: params[:property_type], address: params[:location])
+  end
+
   # GET /properties
   # GET /properties.json
   def index
-    if ((params.has_key?(:ad_type) and params[:ad_type].present?) and !params.has_key?(:property_type) and !params.has_key?(:location))
-      if params[:ad_type] == "Location"
-        ad_type = AdType.find_by(name: params[:ad_type])
-        @pagy, @properties = pagy(Property.where(ad_type_id: ad_type.id))
-      elsif params[:ad_type] == "Vente"
-        ad_type = AdType.find_by(name: params[:ad_type])
-        @pagy, @properties = pagy(Property.where(ad_type_id: ad_type.id))
-      end      
-    elsif ((params.has_key?(:ad_type) and params[:ad_type].present?) and (params.has_key?(:property_type) and params[:property_type].blank?) and (params.has_key?(:location) and params[:location].blank?))
-      ad_type = AdType.find_by(name: params[:ad_type])
-      @pagy, @properties = pagy(Property.where("ad_type_id = ?", ad_type.id))
-    elsif ((params.has_key?(:ad_type) and params[:ad_type].present?) and (params.has_key?(:property_type) and params[:property_type].present?) and (params.has_key?(:location) and params[:location].blank?))
-      ad_type = AdType.find_by(name: params[:ad_type])
-      property_type = PropertyType.find_by(name: params[:property_type])
-      @pagy, @properties = pagy(Property.where("ad_type_id = ? AND property_type_id = ?", ad_type.id, property_type.id))
-    elsif ((params.has_key?(:ad_type) and params[:ad_type].present?) and (params.has_key?(:property_type) and params[:property_type].present?) and (params.has_key?(:location) and params[:location].present?))
-      ad_type = AdType.find_by(name: params[:ad_type])
-      property_type = PropertyType.find_by(name: params[:property_type])
-      puts "^" * 50
-      @pagy, @properties = pagy(Property.where("ad_type_id = ? AND property_type_id = ? AND location = ?", ad_type.id, property_type.id))
-      puts "^" * 50
-    else
-      @properties = Property.all
-    end
+      @pagy, @properties = pagy(Property.all)
   end
 
   # GET /properties/1
