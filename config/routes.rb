@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
   scope "/(:locale)", locale: /fr/ do
-    # namespace :admin do
-      # get 'pages/home'
-      # resources :properties
-      # resources :users
-      # get 'dashboards/index'
-    # end
     root to: "pages#home"
-    devise_for :users
+    devise_for :users, controllers: {registrations: "registrations"}
     resources :properties do
       collection do
         get 'search', to: "properties#index"

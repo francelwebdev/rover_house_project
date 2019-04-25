@@ -65,7 +65,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 #---- MES GEMS ----#
 #--------------------------#
-
+gem "bootstrap_form"
+gem "rolify"
 gem 'autoprefixer-rails'
 gem 'administrate'
 gem 'sitemap_generator'

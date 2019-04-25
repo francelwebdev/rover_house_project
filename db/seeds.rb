@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 PropertyType.delete_all
-property_types = ["Appartement", "Immeuble", "Terrain", "Suite", "Motel", "Hôtel", "Maison", "Villa", "Parcelle", "Domaine", "Bureau", "Boutique / Local Commercial", "Immeuble"].sort
+property_types = ["Appartement", "Immeuble", "Terrain", "Suite", "Motel", "Hôtel", "Maison", "Villa", "Parcelle", "Domaine", "Bureau", "Boutique", "Immeuble"].sort
 property_types.each do |pt|
 PropertyType.create(name: pt)
 end
@@ -31,7 +31,7 @@ end
 # end
 
 Role.delete_all
-roles = ["Particulier", "Profesionnel"].sort
+roles = ["Propriétaire", "Agence", "Admin"].sort
 roles.each do |role|
     Role.create(name: role)
 end

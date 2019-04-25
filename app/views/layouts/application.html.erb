@@ -27,10 +27,12 @@
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <%= link_to "Accueil", root_path, class: "navbar-item"  %>
-            <%#= link_to "Acheter", properties_path, class: "navbar-item"  %>
-            <%#= link_to "Louer", properties_path, class: "navbar-item"  %>
             <% @ad_types.each do |ad_type| %>
-            <%= link_to ad_type.name, properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+            <% if ad_type.name == "Location" %>
+            <%= link_to "Louer", properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+            <% elsif ad_type.name == "Vente" %>
+            <%= link_to "Acheter", properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+            <% end %>
             <% end %>
             <%= link_to "Aménager", properties_path, class: "navbar-item"  %>
 
@@ -76,7 +78,7 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <%= link_to "Espace client", new_user_session_path, class: "button is-light" %>
+                <%= link_to "Accès client", new_user_session_path, class: "button is-light" %>
                 <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron" %>
               </div>
             </div>
@@ -140,11 +142,28 @@
         <div class="column is-3">
           <h5 class="title has-text-white is-4">Liens utiles</h5>
           <ul class="content">
-            <li class="has-text-white">Accès client</li>
-            <li class="has-text-white">Mes annonces sur <strong class="has-text-white">ROVER HOUSE</strong></li>
-            <li class="has-text-white">Nos services pros</li>
-            <li class="has-text-white">Mentions Légales</li>
-            <li class="has-text-white">Politique de Confidentialité</li>
+            <li class="has-text-white">
+              <%= link_to "Accès client", new_user_session_path, class: "has-text-white" %>
+            </li>
+            <li>
+              <%= link_to root_path, class: "has-text-white" do %>
+              Mes annonces sur <strong>ROVER HOUSE</strong></li>
+            <% end %>
+            <li>
+              <%= link_to root_path, class: "has-text-white" do %>
+              Nos services <strong>Pro</strong>
+            </li>
+            <% end %>
+            <li>
+              <%= link_to root_path, class: "has-text-white" do %>
+              Mentions Légales
+              <% end %>
+            </li>
+            <li>
+              <%= link_to root_path, class: "has-text-white" do %>
+              Politique de Confidentialité
+              <% end %>
+            </li>
           </ul>
         </div>
         <div class="column is-3">

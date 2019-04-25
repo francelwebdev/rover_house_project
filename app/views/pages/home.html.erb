@@ -34,7 +34,7 @@
               <div class="field">
                 <%= f.label :location, "Où ?", class: "label has-text-left is-medium"  %>
                 <div class="control">
-                  <%= f.text_field :location, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
+                  <%= f.text_field :location, placeholder: "Nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
                 </div>
               </div>
             </div>
@@ -128,6 +128,29 @@
             <% end %>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-12">
+          <h3 class="title is-3 has-text-centered">
+            Types de biens
+          </h3>
+        </div>
+        <% @property_types.each do |pt| %>
+        <div class="column is-4">
+          <%= link_to properties_path(property_type: pt.name) do %>
+          <div class="box">
+            <h4 class="title is-4 has-text-centered">
+              <%= pt.name %>
+            </h4>
+          </div>
+          <% end %>
+        </div>
+        <% end %>
       </div>
     </div>
   </section>

@@ -16,47 +16,13 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%#= render "devise/shared/error_messages", resource: resource %>
 
-          <% if resource.errors[:role].any? %>
-          <div class="field">
-            <%= f.label :role_id, class: "label" %>
-            <div class="control is-expanded field_with_errors">
-              <div class="select is-fullwidth">
-                <%= f.select :role_id, Role.all.collect {|r| [r.name, r.id]}, required: true, include_blank: true, class: "input" %>
-              </div>
-              <% if resource.errors[:role].any? %>
-              <p class="help is-danger">
-                <%= resource.errors[:role].first %>
-              </p>
-              <% end %>
-            </div>
-          </div>
-          <% else %>
-          <div class="field">
-            <%= f.label :role_id, class: "label" %>
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <%= f.select :role_id, Role.all.collect {|r| [r.name, r.id]}, required: true, include_blank: true, class: "input" %>
-              </div>
-              <% if resource.errors[:role].any? %>
-              <p class="help is-danger">
-                <%= resource.errors[:role].first %>
-              </p>
-              <% end %>
-            </div>
-          </div>
-          <% end %>
 
-          <div class="field">
-            <%= f.label :name, class: "label" %>
-            <div class="control">
-              <%= f.text_field :name, placeholder: "Prénom et Nom", autocomplete: "name", autofocus: true, class: "input" %>
-            </div>
-            <% if resource.errors[:name].any? %>
-            <p class="help is-danger">
-              <%= resource.errors[:name].first %>
-            </p>
-            <% end %>
-          </div>
+          <%= f.collection_select :roles, Role.where.not(name: 'Admin'), :name, :name, required: true, name: "user[:roles][]" %>
+
+          <%# Role.all.each do |role| %>
+          <%#= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
+          <%#= role.name %>
+          <%# end %>
 
           <div class="field">
             <%= f.label :email, class: "label" %>
