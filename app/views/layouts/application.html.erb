@@ -3,196 +3,207 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RoverHouse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+  <title>RoverHouse</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 </head>
 
 <body class="<%= controller_name + '/' + action_name  %>">
-  <header>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <% if flash[:notice] %>
+  <div class="alert alert-success mb-0" role="alert">
+    <p class="text-center mb-0">
+      <strong><%= flash[:notice] %></strong>
+    </p>
+  </div>
+  <% elsif flash[:alert] %>
+  <div class="alert alert-danger mb-0" role="alert">
+    <p class="text-center mb-0">
+      <strong><%= flash[:alert] %></strong>
+    </p>
+  </div>
+  <% end %>
+
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <div class="container">
-        <div class="navbar-brand">
-          <%= link_to "ROVER HOUSE", root_path, class: "navbar-item title is-marginless" %>
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-            data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <%= link_to "Accueil", root_path, class: "navbar-item"  %>
+        <%= link_to root_path, class: "navbar-brand" do %>
+        <h2 class="mb-0">ROVER HOUSE</h2>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li> -->
+            <li class="nav-item">
+              <%= link_to "Accueil", root_path, class: "nav-link"  %>
+            </li>
             <% @ad_types.each do |ad_type| %>
             <% if ad_type.name == "Location" %>
-            <%= link_to "Louer", properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+            <li class="nav-item">
+              <%= link_to "Louer", properties_path(ad_type: ad_type.name), class: "nav-link"  %>
+            </li>
             <% elsif ad_type.name == "Vente" %>
-            <%= link_to "Acheter", properties_path(ad_type: ad_type.name), class: "navbar-item"  %>
+            <li class="nav-item">
+              <%= link_to "Acheter", properties_path(ad_type: ad_type.name), class: "nav-link"  %>
+            </li>
             <% end %>
             <% end %>
-            <%= link_to "Aménager", properties_path, class: "navbar-item"  %>
+            <li class="nav-item">
+              <%= link_to "Aménager", properties_path, class: "nav-link"  %>
+            </li>
 
-            <!--   <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            About
+            <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown
           </a>
-          <a class="navbar-item">
-            Jobs
-          </a>
-          <a class="navbar-item">
-            Contact
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Report an issue
-          </a>
-        </div>
-      </div> -->
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
+        </li> -->
+          </ul>
+
           <% if user_signed_in? %>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="navbar-item has-dropdown is-hoverable">
-                <%= link_to current_user.email, edit_user_registration_path, class: "navbar-link"  %>
-                <div class="navbar-dropdown is-right">
-                  <%= link_to 'Mon profile', edit_user_registration_path, :class => 'dropdown-item' %>
-                  <%= link_to 'Mon compte', edit_user_registration_path, :class => 'dropdown-item' %>
-                  <hr class="navbar-divider">
-                  <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}, id: "deconnexion"  %>
-                </div>
+          <ul class="list-unstyled list-inline ml-auto text-center mb-0">
+            <li class="list-inline-item dropdown">
+              <%= link_to current_user.email, edit_user_registration_path, class: "nav-link text-dark dropdown-toggle", id: "navbarDropdown", role: "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false"  %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to 'Mon profile', edit_user_registration_path, :class => 'dropdown-item' %>
+                <%= link_to 'Mon compte', edit_user_registration_path, :class => 'dropdown-item' %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}, id: "deconnexion"  %>
               </div>
-              <div class="buttons is-marginless">
-                <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron is-marginless" %>
-              </div>
-            </div>
-          </div>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to "Déposer une annonce", ad_types_path, class: "btn btn-marron" %>
+            </li>
+          </ul>
           <% else %>
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <%= link_to "Accès client", new_user_session_path, class: "button is-light" %>
-                <%= link_to "Déposer une annonce", ad_types_path, class: "button is-marron" %>
-              </div>
-            </div>
-          </div>
+          <ul class="list-unstyled list-inline ml-auto text-center mb-0">
+            <li class="list-inline-item">
+              <%= link_to "Accès client", new_user_session_path, class: "btn btn-light" %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to "Déposer une annonce", ad_types_path, class: "btn btn-marron" %>
+            </li>
+          </ul>
           <% end %>
         </div>
       </div>
     </nav>
   </header>
 
-  <% if flash[:notice] %>
-  <div class="notification is-success" style="margin-bottom: 0px;">
-    <button class="delete"></button>
-    <p class="has-text-centered">
-      <strong><%= notice %></strong>
-    </p>
-  </div>
-  <% elsif flash[:alert] %>
-  <div class="notification is-danger" style="margin-bottom: 0px;">
-    <button class="delete"></button>
-    <p class="has-text-centered">
-      <strong><%= alert %></strong>
-    </p>
-  </div>
-  <% end %>
+  <main>
+    <%= yield %>
+  </main>
 
-  <%= yield %>
-
-  <!-- <div class="columns is-multiline is-marginless" style="background-color: #a1887f ;">
-    <div class="container">
-      <div class="column is-12 has-text-centered">
-        <h4 class="title is-4 has-text-white">Obonnez-vous à la newsletter pour recevoir les dernières offres
-          immobilières.</h4>
+  <!-- <section class="container-fluid py-5" style="background-color: #a1887f ;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="text-center text-white">
+          Obonnez-vous à la newsletter pour recevoir les dernières offres
+          immobilières.
+        </h3>
         <%#= form_with url: root_path, method: :post do |f| %>
-
+        
         <%# end %>
       </div>
     </div>
-  </div> -->
+  </div>
+</section> -->
 
-  <footer class="footer" style="background-color: #424242;">
+  <footer class="container-fluid py-5" style="background-color: #424242;">
     <div class="container">
-      <div class="columns is-multiline">
-        <div class="column is-3 content">
-          <h2 class="title has-text-white is-4">ROVER HOUSE</h2>
-          <p class="has-text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur amet minus
+      <div class="row">
+        <div class="col-lg-3">
+          <h3 class="text-white">ROVER HOUSE</h3>
+          <p class="text-white">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur amet minus
             voluptatum, dignissimos unde architecto, omnis placeat blanditiis nesciunt, eos sunt eaque eum doloribus
-            voluptatem exercitationem neque cupiditate aliquam. Deleniti.</p>
+            voluptatem exercitationem neque cupiditate aliquam. Deleniti.
+          </p>
         </div>
-        <div class="column is-3">
-          <h5 class="title has-text-white is-4">Liens rapides</h5>
-          <ul class="content">
-            <li class="has-text-white">À propos de nous</li>
-            <!-- <li class="text-white py-1">Blog</li> -->
-            <!-- <li class="text-white py-1">Carrière</li> -->
-            <li class="has-text-white">
-              <%= link_to "Contactez nous", contactez_nous_path, class: "has-text-white" %>
+        <div class="col-lg-3">
+          <h3 class="text-white">Liens rapides</h3>
+          <ul class="list-unstyled">
+            <li>
+              <%= link_to "À propos de nous", root_path, class: "text-white" %>
+            </li>
+            <li>
+              <%= link_to "Contactez nous", contactez_nous_path, class: "text-white" %>
             </li>
           </ul>
         </div>
-        <div class="column is-3">
-          <h5 class="title has-text-white is-4">Liens utiles</h5>
-          <ul class="content">
-            <li class="has-text-white">
-              <%= link_to "Accès client", new_user_session_path, class: "has-text-white" %>
+        <div class="col-lg-3">
+          <h3 class="text-white">Liens utiles</h3>
+          <ul class="list-unstyled">
+            <li>
+              <%= link_to "Accès client", new_user_session_path, class: "text-white" %>
             </li>
             <li>
-              <%= link_to root_path, class: "has-text-white" do %>
-              Mes annonces sur <strong>ROVER HOUSE</strong></li>
-            <% end %>
+              <%= link_to root_path, class: "text-white" do %>
+              Mes annonces sur <strong>ROVER HOUSE</strong>
+              <% end %>
+            </li>
             <li>
-              <%= link_to root_path, class: "has-text-white" do %>
+              <%= link_to root_path, class: "text-white" do %>
               Nos services <strong>Pro</strong>
+              <% end %>
             </li>
-            <% end %>
             <li>
-              <%= link_to root_path, class: "has-text-white" do %>
+              <%= link_to root_path, class: "text-white" do %>
               Mentions Légales
               <% end %>
             </li>
             <li>
-              <%= link_to root_path, class: "has-text-white" do %>
+              <%= link_to root_path, class: "text-white" do %>
               Politique de Confidentialité
               <% end %>
             </li>
           </ul>
         </div>
-        <div class="column is-3">
-          <h5 class="title has-text-white is-4">Contacter nous</h5>
+        <div class="col-lg-3">
+          <h3 class="text-white">Contacter nous</h3>
           <address>
-            <ul class="content">
-              <li class="my-3 has-text-white">
-                <p>
+            <ul class="list-unstyled">
+              <li>
+                <p class="text-white">
+                  <i class="fas fa-map-marker-alt"></i>&nbsp;
                   Collins Street West, Victoria 8007, Australia
                 </p>
               </li>
-              <li class="my-3 has-text-white">
-                <p>
+              <li>
+                <p class="text-white">
+                  <i class="fas fa-phone"></i>&nbsp;
                   +1 246-345-0695
                 </p>
               </li>
-              <li class="my-3 has-text-white">
-                <p class="has-text-white">
-                  <%= mail_to "rover-house@exemple.com" %>
+              <li>
+                <p class="text-white">
+                  <i class="fas fa-envelope"></i>&nbsp;
+                  <%= mail_to "rover-house@exemple.com", "rover-house@exemple.com", class: "text-white" %>
                 </p>
               </li>
             </ul>
           </address>
         </div>
-        <div class="column is-12">
+        <div class="col-lg-12">
           <hr style="border: 0.3px solid grey">
         </div>
-        <div class="column is-12 has-text-centered">
-          <p class="has-text-white">&copy; Copyright 2019 ROVER HOUSE. Tous droits réservés.</p>
+        <div class="col-lg-12">
+          <p class="text-center text-white mt-3">&copy; Copyright 2019 ROVER HOUSE. Tous droits réservés.</p>
         </div>
       </div>
     </div>

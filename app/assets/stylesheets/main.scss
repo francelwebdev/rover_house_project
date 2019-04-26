@@ -23,9 +23,9 @@
   font-family: 'Lato', sans-serif !important;
 }
 
-// .navbar {
-//     box-shadow: 0 8px 12px 0 rgba(122, 122, 122, 0.2);
-// }
+.navbar {
+  box-shadow: 0 8px 12px 0 rgba(122, 122, 122, 0.2);
+}
 
 // .zone-1 {
 //     height: 75vh;
@@ -94,7 +94,7 @@
   background-color: #582900;
 }
 
-.button.is-marron {
+.btn.btn-marron {
   background-color: #795548 !important;
   border-color: transparent;
   color: #fff;
@@ -114,12 +114,13 @@ body>header>nav>div>div.navbar-brand>a.navbar-item.title.is-marginless:hover {
   background-color: #5d4037 !important;
 }
 
-.mon-hero-bgi-home {
+.jumbotron-home-page {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), image-url("architecture-building-country-home-1884269.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: 100vh;
 }
 
 .carousel-cell {
@@ -152,50 +153,6 @@ body>header>nav>div>div.navbar-brand>a.navbar-item.title.is-marginless:hover {
   display: none;
 }
 
-// Pour gérer les 2 arrow de flickity
-
-footer.footer {
-  padding-bottom: 3rem !important;
-}
-
-header>nav {
-  // box-shadow: 0px 1px #5d4037 !important;
-  // box-shadow: 0 0 20px 0 rgba(46,40,64,.5);
-  //   z-index: 9999;
-  border-bottom: 1px solid #5d4037;
-}
-
-// Pour indiquer que le champ du formulaire est obligatoire
-label.required:after {
-  content: " * ";
-  color: red;
-}
-
-// Pour indiquer que le champ du formulaire est obligatoire
-
-// .img {
-//     position: relative;
-//     float: left;
-//     width:  100px;
-//     height: 100px;
-//     background-position: 50% 50%;
-//     background-repeat:   no-repeat;
-//     background-size:     cover;
-// }
-
-// Pour gérer le tabs de bulma
-.tabs-content li {
-  display: none;
-  list-style: none;
-}
-
-.tabs-content li.is-active {
-  display: block;
-}
-
-// Pour gérer le tabs de bulma
-
-
-.button-recherche {
-  margin-top: 2.5rem;
+.btn-rechercher {
+  margin-top: 2rem;
 }

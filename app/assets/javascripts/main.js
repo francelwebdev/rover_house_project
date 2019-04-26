@@ -61,26 +61,8 @@
       }
     });
 
-    // Erreurs des champs de formulaire
-    $("div.field_with_errors input").addClass('is-danger');
-    $("div.field_with_errors div.select").addClass('is-danger');
-    $("div.field_with_errors + div.control > div.select").addClass('is-danger');
-    $("div.field_with_errors textarea.textarea").addClass('is-danger');
-
-    // $("input[aria-invalid=true]").addClass('is-danger');
-    // $("div.select > select[aria-invalid=true]").parent().addClass('is-danger');
-    // $("textarea[aria-invalid=true]").addClass('is-danger');
-    // Erreurs des champs de formulaire
-
     $("a.re-avance").on("click", function (e) {
       e.stopPropagation();
-
-      // if ($("div.avec-et-sans-is-sr-only").hasClass("is-sr-only")) {
-      //   $("div.avec-et-sans-is-sr-only").removeClass("is-sr-only");
-      // } else {
-      //   $("div.avec-et-sans-is-sr-only").addClass("is-sr-only");
-      // }
-
       $("div.avec-et-sans-is-sr-only").toggleClass("is-sr-only");
     })
 

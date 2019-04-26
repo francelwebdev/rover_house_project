@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
     include Pagy::Backend
-
+    
     protect_from_forgery
-
+    
     before_action :authenticate_user!
     before_action :set_locale
     before_action :all_ad_types, :all_property_types
-    # before_action :configure_permitted_parameters, if: :devise_controller?
+    before_action :configure_permitted_parameters, if: :devise_controller?
     
     def default_url_options
         { locale: I18n.locale }
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     def set_locale
         I18n.locale = params[:locale] || I18n.default_locale
     end
-
+    
     def all_ad_types
         @ad_types = AdType.all
     end
@@ -23,15 +23,11 @@ class ApplicationController < ActionController::Base
         @property_types = PropertyType.all
     end
     
-    # protected
+    protected
     
-    # def configure_permitted_parameters
+    def configure_permitted_parameters
         # devise_parameter_sanitizer.permit(:sign_up, keys: [{roles: []}])
-
-        # devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-        #     user_params.permit(:role_ids, :email, :password, :password_confirmation)
-        # end
-
-    # end
+        devise_parameter_sanitizer.permit(:account_update, keys: [])
+    end
     
 end

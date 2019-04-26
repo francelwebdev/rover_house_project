@@ -1,128 +1,77 @@
-  <section class="hero mon-hero-bgi-home is-large">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title is-1 has-text-white">
-          Bienvenue sur <strong>ROVER HOUSE</strong>
-        </h1>
-        <h2 class="subtitle has-text-white">
-          Trouvez la meilleure maison pour votre famille.
-        </h2>
-        <div class="box">
-          <%= form_with url: search_properties_path, method: :get, local: true do |f| %>
-          <div class="columns is-multiline">
-            <div class="column is-3">
-              <div class="field">
-                <%= f.label :ad_type, "Vous souhaitez ?", class: "label has-text-left is-medium"  %>
-                <div class="control is-expanded">
-                  <div class="select is-fullwidth is-medium">
-                    <%= f.select :ad_type, {"Louer un biens" => "Location", "Acheter un biens" => "Vente"}.sort, include_blank: true, class: "is-medium" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column is-3">
-              <div class="field">
-                <%= f.label :property_type, "Quel type de biens ?", class: "label has-text-left is-medium"  %>
-                <div class="control is-expanded">
-                  <div class="select is-fullwidth is-medium">
-                    <%= f.select :property_type, @property_types.collect {|pt| [pt.name, pt.name]}, include_blank: true, class: "is-medium" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column is-4">
-              <div class="field">
-                <%= f.label :location, "Où ?", class: "label has-text-left is-medium"  %>
-                <div class="control">
-                  <%= f.text_field :location, placeholder: "Nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
-                </div>
-              </div>
-            </div>
-            <div class="column is-2">
-              <div class="field">
-                <div class="control">
-                  <%= f.submit "Rechercher", class: "button is-marron is-fullwidth is-radiusless button-recherche is-medium" %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <% end %>
-        </div>
-
-        <!-- <p class="">
-  <a class="has-text-white">Recherche avancer</a>
-</p> -->
-
-        <!-- <div class="col-lg-2">
-  <%#= f.input :min_area, label: false %>
-  </div>
-  <div class="col-lg-2">
-  <%#= f.input :max_area, label: false %>
-  </div>
-  <div class="col-lg-2">
-  <%#= f.input :min_price, label: false %>
-  </div>
-  <div class="col-lg-2">
-  <%#= f.input :max_price, label: false %>
-</div> -->
-      </div>
+  <div class="jumbotron jumbotron-fluid mb-0 jumbotron-home-page d-flex flex-column justify-content-center">
+    <div class="container text-center">
+      <h1 class="display-4 text-white">Bienvenue sur <strong>ROVER HOUSE</strong></h1>
+      <p class="lead text-white">Trouvez la meilleure maison pour votre famille.</p>
     </div>
-  </section>
-
-
-  <section class="section">
     <div class="container">
-      <div class="columns is-multiline is-marginless">
-        <div class="column is-12 has-text-centered">
-          <h3 class="title">Dernières annonces publiés</h3>
+      <%= simple_form_for :search_properties_by, url: search_properties_path, method: :get do |f| %>
+      <div class="form-row">
+        <div class="col-lg-3">
+          <%= f.input :ad_type, collection: {"Louer un biens" => "Location", "Acheter un biens" => "Vente"}.sort, as: :select, include_blank: true, required: false, input_html: {class: "form-control-lg"}, label: "Vous souhaitez ?", label_html: {class: "text-left text-white"} %>
         </div>
-        <div class="column is-12">
+        <div class="col-lg-3">
+          <%= f.input :property_type, collection: @property_types, as: :select, include_blank: true, required: false, input_html: {class: "form-control-lg"}, label_html: {class: "text-left text-white"}, label: "Quel type de biens ?" %>
+        </div>
+        <div class="col-lg-4">
+          <%= f.input :location, placeholder: "Nom d'un pays ou d'une ville", input_html: {class: "form-control-lg"}, label_html: {class: "text-left text-white"}, required: false, label: "Où" %>
+        </div>
+        <div class="col-lg-2">
+          <%= f.button :submit, "Rechercher", class: "btn btn-marron btn-block btn-rechercher btn-lg" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <section class="container-fluid py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 py-3">
+          <h3 class="text-center">Dernières annonces publiés</h3>
+        </div>
+        <div class="col-lg-12">
           <div class="owl-carousel owl-theme owl-home-page">
             <% if @properties.present? %>
             <% @properties.each do |property| %>
             <div class="item">
+
               <div class="card"
                 style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-                <div class="card-image">
-                  <figure class="image is-4by3" style="position: relative;">
-                    <%= image_tag property.photos.first.url  %>
 
-                    <% if property.ad_type_id == 1 %>
-                    <span class="tag is-light is-medium" style="position: absolute; top: 10px; left: 10px;">
-                      A louer
-                    </span>
-                    <% elsif property.ad_type_id == 2 %>
-                    <span class="tag is-light is-medium" style="position: absolute; top: 10px; left: 10px;">
-                      A vendre
-                    </span>
-                    <% end %>
-                  </figure>
+                <%= image_tag property.photos.first.url, class: "card-img-top"  %>
 
-                  <% if property.ad_type_id == 1 %>
-                  <span class="tag is-dark is-medium" style="position: absolute; top: 10px; right: 10px;">
-                    <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
-                  </span>
-                  <% elsif property.ad_type_id == 2 %>
-                  <span class="tag is-dark is-medium" style="position: absolute; top: 10px; right: 10px;">
-                    <%= number_with_delimiter(property.price) %> <sup>f</sup>
-                  </span>
-                  <% end %>
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="content">
-                    <h4>
-                      <%= property.title %>
-                    </h4>
-                    <p>
-                      <i class="fas fa-map-marker-alt"></i>&nbsp;
-                      <%= property.country.name %> - <%= property.address.capitalize %>
-                    </p>
-                    <%= link_to "Détail", property, class: "button" %>
-                    <br>
-                  </div>
+                <% if property.ad_type_id == 1 %>
+                <span class="tag is-light is-medium" style="position: absolute; top: 10px; left: 10px;">
+                  A louer
+                </span>
+                <% elsif property.ad_type_id == 2 %>
+                <span class="tag is-light is-medium" style="position: absolute; top: 10px; left: 10px;">
+                  A vendre
+                </span>
+                <% end %>
+
+                <% if property.ad_type_id == 1 %>
+                <span class="tag is-dark is-medium" style="position: absolute; top: 10px; right: 10px;">
+                  <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+                </span>
+                <% elsif property.ad_type_id == 2 %>
+                <span class="tag is-dark is-medium" style="position: absolute; top: 10px; right: 10px;">
+                  <%= number_with_delimiter(property.price) %> <sup>f</sup>
+                </span>
+                <% end %>
+
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= property.title %>
+                  </h5>
+                  <p class="card-text">
+                    <i class="fas fa-map-marker-alt"></i>&nbsp;
+                    <%= property.country.name %> - <%= property.address.capitalize %>
+                  </p>
+                  <%= link_to "Détail", property, class: "btn btn-light" %>
                 </div>
               </div>
+
             </div>
             <% end %>
             <% end %>
@@ -132,21 +81,21 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="container-fluid py-5">
     <div class="container">
-      <div class="columns is-multiline">
-        <div class="column is-12">
-          <h3 class="title is-3 has-text-centered">
-            Types de biens
-          </h3>
+      <div class="row">
+        <div class="col-lg-12 py-3">
+          <h3 class="text-center">Types de biens</h3>
         </div>
         <% @property_types.each do |pt| %>
-        <div class="column is-4">
-          <%= link_to properties_path(property_type: pt.name) do %>
-          <div class="box">
-            <h4 class="title is-4 has-text-centered">
-              <%= pt.name %>
-            </h4>
+        <div class="col-lg-4 my-2">
+          <%= link_to properties_path(property_type: pt.name), class: "text-secondary" do %>
+          <div class="card">
+            <div class="card-body">
+              <h4 class="text-center">
+                <%= pt.name %>
+              </h4>
+            </div>
           </div>
           <% end %>
         </div>

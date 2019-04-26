@@ -3,13 +3,13 @@ class RegistrationsController < Devise::RegistrationsController
 
     def create
         super
-        resource.roles << params[:users][:roles]
+        resource.add_role(params[:user][:roles])
     end
 
     protected
 
     def configure_sign_up_params
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:roles])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [{roles: []}])
     end
 
 end

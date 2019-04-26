@@ -1,92 +1,70 @@
-
-
-<section class="section">
+<section class="container-fluid py-5 bg-light">
     <div class="container">
-        <div class="columns">
-            <div class="column is-12 has-text-centered">
-                <h2 class="title">Nous contacter</h2>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Nous contacter</h2>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section">
+<section class="container-fluid py-5">
     <div class="container">
-        <div class="columns is-multiline">
-            <div class="column is-7">
-                <h4 class="title is-4">Formulaire de contact</h4>
+        <div class="row">
+            <div class="col-lg-7">
+                <h4>Formulaire de contact</h4>
                 <p>
-                    <small>S'il vous plaît remplissez le formulaire ci-dessous pour nous envoyer un email et nous vous contacterons dans les plus brefs délais.</small>
+                    <small>S'il vous plaît remplissez le formulaire ci-dessous pour nous envoyer un email et nous vous
+                        contacterons dans les plus brefs délais.</small>
                 </p>
-                <%= form_with model: @contact_us, local: true do |f| %>
-                <div class="columns is-multiline">
-                    <div class="column is-6">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.text_field :first_name, placeholder: "Prénom", class: "input" %>
-                            </div>
-                        </div>
+                <%= simple_form_for @contact_us do |f| %>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <%= f.input :first_name %>
                     </div>
-                    <div class="column is-6">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.text_field :last_name, placeholder: "Nom", class: "input" %>
-                            </div>
-                        </div>
+                    <div class="col-lg-6">
+                        <%= f.input :last_name %>
                     </div>
-                    <div class="column is-6">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.email_field :email, placeholder: "adresse email", class: "input" %>
-                            </div>
-                        </div>
+                    <div class="col-lg-6">
+                        <%= f.input :email %>
                     </div>
-                    <div class="column is-6">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.phone_field :phone_number, placeholder: "Numéro de téléphone", label: "Numero de téléphone", class: "input" %>
-                            </div>
-                        </div>
+                    <div class="col-lg-6">
+                        <%= f.input :phone_number %>
                     </div>
-                    <div class="column is-12">
-                        <div class="field">
-                            <div class="control">
-                                <%= f.text_area :message, placeholder: "Message", class: "textarea" %>
-                            </div>
-                        </div>
+                    <div class="col-lg-12">
+                        <%= f.input :message, as: :text %>
+                    </div>
+                    <div class="col-lg-12">
+                        <%= f.submit "Envoyer", class: "btn btn-marron" %>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="control">
-                        <%= f.submit "Envoyer", class: "button is-marron" %>
-                    </div>
-                </div>
+
                 <% end %>
             </div>
-            <div class="column is-4 is-offset-1">
-                <h4 class="title is-4">Nos informations de contact</h4>
+            <div class="col-lg-4 offset-lg-1">
+                <h4>Nos informations de contact</h4>
                 <address>
-                <ul class="list-unstyled">
-                    <li>
-                        <p><strong>Adresse</strong></p>
-                        <p>
-                            4321 California St,
-                            San Francisco, CA 12345
-                        </p>
-                    </li>
-                    <li>
-                        <p><strong>Téléphone</strong></p>
-                        <p>
-                            +1 123 456 1234
-                        </p>
-                    </li>
-                    <li>
-                        <p><strong>Email</strong></p>
-                        <p>
-                            info@company.com
-                        </p>
-                    </li>
-                </ul>
+                    <ul class="list-unstyled">
+                        <li>
+                            <strong>Adresse</strong>
+                            <p>
+                                4321 California St,
+                                San Francisco, CA 12345
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Téléphone</strong>
+                            <p>
+                                +1 123 456 1234
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Email</strong>
+                            <p>
+                                <%= mail_to "rover-house@exemple.com", "rover-house@exemple.com", class: "text-dark" %>
+                            </p>
+                        </li>
+                    </ul>
                 </address>
             </div>
         </div>

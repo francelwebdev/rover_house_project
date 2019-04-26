@@ -1,124 +1,87 @@
-<section class="hero has-background-grey">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title is-3 has-text-white">
-        Recherche avancé
-      </h1>
-      <h2 class="subtitle has-text-white">
-        Trouvez la meilleure maison pour votre famille.
-      </h2>
-      <div class="box">
-        <%= form_with url: search_properties_path, method: :get, local: true do |f| %>
-        <div class="columns is-multiline">
-          <div class="column is-3">
-            <div class="field">
-              <%= f.label :ad_type, "Vous souhaitez ?", class: "label has-text-left is-medium"  %>
-              <div class="control is-expanded">
-                <div class="select is-fullwidth is-medium">
-                  <%= f.select :ad_type, {"Louer un biens" => "Location", "Acheter un biens" => "Vente"}.sort, include_blank: true, class: "is-medium" %>
-                </div>
-              </div>
+<div class="jumbotron jumbotron-fluid mb-0 jumbotron-search-result">
+  <div class="container">
+    <h1>Recherche avancé</h1>
+    <p>Trouvez la meilleure maison pour votre famille.</p>
+  </div>
+  <div class="container">
+    <%= simple_form_for :search_properties_by, url: search_properties_path, method: :get do |f| %>
+    <div class="form-row">
+      <div class="col-lg-3">
+        <%= f.input :ad_type, collection: {"Louer un biens" => "Location", "Acheter un biens" => "Vente"}.sort, as: :select, include_blank: true, required: false, input_html: {class: "form-control-lg"}, label: "Vous souhaitez ?" %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.input :property_type, collection: @property_types, as: :select, include_blank: true, required: false, input_html: {class: "form-control-lg"}, label: "Quel type de biens ?" %>
+      </div>
+      <div class="col-lg-4">
+        <%= f.input :location, placeholder: "Nom d'un pays ou d'une ville", input_html: {class: "form-control-lg"}, required: false, label: "Où" %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.button :submit, "Rechercher", class: "btn btn-marron btn-block btn-rechercher btn-lg" %>
+      </div>
+    </div>
+    <% end %>
+
+    <a class="re-avance">Recherche avancée</a>
+  </div>
+</div>
+
+<section class="container-fluid py-5">
+  <div class="container">
+    <div class="row">
+      <div class="owl-carousel owl-theme owl-home-page">
+        <% if @properties.present? %>
+        <% @properties.each do |property| %>
+        <div class="item">
+
+          <div class="card"
+            style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+
+            <%= image_tag property.photos.first.url, class: "card-img-top"  %>
+
+            <% if property.ad_type_id == 1 %>
+            <span class="tag is-light is-medium" style="position: absolute; top: 10px; left: 10px;">
+              A louer
+            </span>
+            <% elsif property.ad_type_id == 2 %>
+            <span class="tag is-light is-medium" style="position: absolute; top: 10px; left: 10px;">
+              A vendre
+            </span>
+            <% end %>
+
+            <% if property.ad_type_id == 1 %>
+            <span class="tag is-dark is-medium" style="position: absolute; top: 10px; right: 10px;">
+              <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+            </span>
+            <% elsif property.ad_type_id == 2 %>
+            <span class="tag is-dark is-medium" style="position: absolute; top: 10px; right: 10px;">
+              <%= number_with_delimiter(property.price) %> <sup>f</sup>
+            </span>
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= property.title %>
+              </h5>
+              <p class="card-text">
+                <i class="fas fa-map-marker-alt"></i>&nbsp;
+                <%= property.country.name %> - <%= property.address.capitalize %>
+              </p>
+              <%= link_to "Détail", property, class: "btn btn-light" %>
             </div>
           </div>
-          <div class="column is-3">
-            <div class="field">
-              <%= f.label :property_type, "Quel type de biens ?", class: "label has-text-left is-medium"  %>
-              <div class="control is-expanded">
-                <div class="select is-fullwidth is-medium">
-                  <%= f.select :property_type, @property_types.collect {|pt| [pt.name, pt.name]}, include_blank: true, class: "is-medium" %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="field">
-              <%= f.label :location, "Où ?", class: "label has-text-left is-medium"  %>
-              <div class="control">
-                <%= f.text_field :location, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
-              </div>
-            </div>
-          </div>
-          <div class="column is-2">
-            <div class="field">
-              <div class="control">
-                <%= f.submit "Rechercher", class: "button is-marron is-fullwidth is-radiusless button-recherche is-medium" %>
-              </div>
-            </div>
-          </div>
-          <div class="column is-12 is-sr-only avec-et-sans-is-sr-only">
-            <div class="columns is-multiline">
-              <div class="column is-3">
-                <div class="field">
-                  <%= f.label :min_price, "Prix minimum", class: "label has-text-left is-medium"  %>
-                  <div class="control">
-                    <%= f.number_field :min_price, class: "input is-radiusless is-medium"  %>
-                  </div>
-                </div>
-              </div>
-              <div class="column is-3">
-                <div class="field">
-                  <%= f.label :max_price, "Prix maximum", class: "label has-text-left is-medium"  %>
-                  <div class="control">
-                    <%= f.number_field :max_price, class: "input is-radiusless is-medium"  %>
-                  </div>
-                </div>
-              </div>
-              <div class="column is-3">
-                <div class="field">
-                  <%= f.label :min_area, "Surface minimum", class: "label has-text-left is-medium"  %>
-                  <div class="control">
-                    <%= f.text_field :min_area, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
-                  </div>
-                </div>
-              </div>
-              <div class="column is-3">
-                <div class="field">
-                  <%= f.label :max_area, "surface maximum", class: "label has-text-left is-medium"  %>
-                  <div class="control">
-                    <%= f.text_field :max_area, placeholder: "Saisissez le nom d'un pays ou d'une ville", class: "input is-radiusless is-medium"  %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column is-12">
-            <a class="re-avance">Recherche avancée</a>
-          </div>
+
         </div>
+        <% end %>
         <% end %>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="container-fluid py-5">
   <div class="container">
-    <div class="columns is-multiline">
-      <% if @properties.present? %>
-      <% @properties.each do |property| %>
-      <div class="column is-4">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <%=  %>
-            </figure>
-          </div>
-          <div class="card-content">
-            <h4 class="title is-4"><%= property.title %></h4>
-          </div>
-        </div>
-      </div>
-      <% end %>
-      <% end %>
-
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-12">
+    <div class="row">
+      <div class="col-lg-12">
         <%== pagy_bulma_nav(@pagy) %>
       </div>
     </div>

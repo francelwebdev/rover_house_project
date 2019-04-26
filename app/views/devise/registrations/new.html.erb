@@ -1,77 +1,36 @@
-<section class="section">
-  <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-6 is-offset-3">
-        <h2 class="title has-text-centered"><%= t('.sign_up') %></h2>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-multiline">
-      <div class="column is-6 is-offset-3">
-        <div class="box">
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%#= render "devise/shared/error_messages", resource: resource %>
-
-
-          <%= f.collection_select :roles, Role.where.not(name: 'Admin'), :name, :name, required: true, name: "user[:roles][]" %>
-
-          <%# Role.all.each do |role| %>
-          <%#= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id) %>
-          <%#= role.name %>
-          <%# end %>
-
-          <div class="field">
-            <%= f.label :email, class: "label" %>
-            <div class="control">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
+<section class="container-fluid py-5">
+  <div class="containe">
+    <div class="row">
+      <div class="col-lg-4 offset-lg-4">
+        <h2 class="text-center"><%= t(".sign_up") %></h2>
+        <div class="card">
+          <div class="card-body">
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <%= f.input :roles, as: :radio_buttons, collection: Role.where.not(name: "Admin"), value_method: :name, required: true, wrapper: :vertical_collection_inline %>
+              <%= f.input :email,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "email" }%>
+              <%= f.input :password,
+                required: true,
+                hint: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+              <%= f.input :password_confirmation,
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
             </div>
-            <% if resource.errors[:email].any? %>
-            <p class="help is-danger">
-              <%= resource.errors[:email].first %>
-            </p>
+            <div class="form-actions">
+              <%= f.button :submit, t(".sign_up"), class: "btn btn-block btn-marron" %>
+            </div>
             <% end %>
           </div>
-
-          <div class="field">
-            <%= f.label :password, class: "label" %>
-            <% if @minimum_password_length %>
-            <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-            <% end %>
-            <div class="control">
-              <%= f.password_field :password, autocomplete: "new-password", class: "input" %>
-            </div>
-            <% if resource.errors[:password].any? %>
-            <p class="help is-danger">
-              <%= resource.errors[:password].first %>
-            </p>
-            <% end %>
-          </div>
-
-          <div class="field">
-            <%= f.label :password_confirmation, class: "label" %>
-            <div class="control">
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input" %>
-            </div>
-            <% if resource.errors[:password_confirmation].any? %>
-            <p class="help is-danger">
-              <%= resource.errors[:password_confirmation].first %>
-            </p>
-            <% end %>
-          </div>
-
-          <div class="actions">
-            <div class="control">
-              <%= f.submit t('.sign_up'), class: "button is-marron is-fullwidth" %>
-            </div>
-          </div>
-          <% end %>
         </div>
-
+      </div>
+      <div class="col-lg-4 offset-lg-4 py-3">
         <%= render "devise/shared/links" %>
       </div>
     </div>
+  </div>
 </section>

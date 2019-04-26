@@ -80,8 +80,8 @@ group :development do
   gem 'pry-byebug'
   gem 'meta_request'
 end
-# gem 'rails_db' # Permet de voir les données de la bdd
-# gem "axlsx_rails" # Permet d'exporter la bdd
+gem 'rails_db'
+gem "axlsx_rails"
 group :production do
   gem "passenger"
   # Use mysql as the database for Active Record
@@ -91,10 +91,11 @@ group :production do
   gem 'redis-rack-cache'
 end
 # gem 'dalli'
-gem 'rails-i18n'#, github: 'svenfuchs/rails-i18n', branch: 'master'
+gem 'rails-i18n'
 gem "cocoon"
 gem 'devise'
 gem 'devise-i18n'
+gem "simple_form"
 gem 'friendly_id'
 gem 'cancancan'
 gem 'gibbon'
@@ -126,7 +127,6 @@ gem 'acts_as_votable'
 gem 'data-confirm-modal'
 gem 'prawn'
 gem 'prawn-qrcode'
-# gem 'rails-tables'
 
 gem 'populator'
 
@@ -138,8 +138,6 @@ gem 'public_activity'
 gem 'impressionist'
 
 gem 'fastentry'
-
-# gem 'annotate', git: 'https://github.com/ctran/annotate_models.git'
 
 gem "table_print"
 
