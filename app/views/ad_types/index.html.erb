@@ -1,15 +1,21 @@
 
 
-<section class="section">
+<section class="container-fluid py-5">
     <div class="container">
-        <div class="columns is-multiline">
-            <div class="column is-12">
-                <h2 class="title has-text-centered">Choisissez le type d'annonce</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-center">Choisissez le type d'annonce</h2>
             </div>
             <% @ad_types.each do |at|  %>
-            <div class="column is-6 has-text-centered">
-                <%= link_to at.name, new_ad_type_property_path(ad_type_id: at.id), class: "button is-large"  %>
+            <% if at == @ad_types.last %>
+            <div class="col-lg-3 text-center">
+                <%= link_to at.name, new_ad_type_property_path(ad_type_id: at.name), class: "btn btn-light btn-lg"  %>
             </div>
+            <% else %>
+            <div class="col-lg-3 offset-lg-3 text-center">
+                <%= link_to at.name, new_ad_type_property_path(ad_type_id: at.name), class: "btn btn-light btn-lg"  %>
+            </div>
+            <% end %>
             <% end %>
         </div>
     </div>

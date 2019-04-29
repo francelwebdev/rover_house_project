@@ -8,10 +8,10 @@
             <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= f.error_notification %>
             <div class="form-inputs">
-              <%= f.input :roles, as: :radio_buttons, collection: Role.where.not(name: "Admin"), value_method: :name, required: true, wrapper: :vertical_collection_inline %>
+              <%= f.input :name, placeholder: "Prénom et Nom", autofocus: true, label: "Votre nom" %>
+              <%= f.input :role, collection: User::ROLES, label: "Vous êtes un ?", required: true %>
               <%= f.input :email,
-                required: true,
-                autofocus: true ,
+                required: true, 
                 input_html: { autocomplete: "email" }%>
               <%= f.input :password,
                 required: true,

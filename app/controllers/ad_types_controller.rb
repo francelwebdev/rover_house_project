@@ -1,5 +1,4 @@
 class AdTypesController < ApplicationController
-    def index
-        @ad_types = AdType.all
+    def choose_ad_type
     end
 end

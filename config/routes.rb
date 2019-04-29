@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
   scope "/(:locale)", locale: /fr/ do
     root to: "pages#home"
-    devise_for :users, controllers: {registrations: "registrations"}
+    devise_for :users
     resources :properties do
       collection do
-        get "search"
+        get "search", to: "properties#index"
       end
     end
+    resource :profile, only: [:show]
+    resources :my_properties, only: [:index]
     resources :contact_us, only: [:create]
-    get "contactez-nous", to: "contact_us#new"
-    get "contact_us", to: redirect("/contactez-nous")
-    resources :ad_types, only: [:index, :show] do
-      resources :properties, only: :new
-    end
+    get "nous-contacter", to: "contact_us#new"
+    get "contact_us", to: redirect("/nous-contacter")
+    get "users", to: redirect("/users/sign_up")
     # get '/img/:name.:ext', :to => redirect('/assets/%{name}.%{ext}')
     # match '/404' => 'errors#not_found'
     # match '/422' => 'errors#server_error'

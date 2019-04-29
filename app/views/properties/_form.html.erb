@@ -1,110 +1,102 @@
-<%= form_with(model: property, local: true) do |form| %>
-<%# if property.errors.any? %>
-<!-- <div id="error_explanation" class="is-hidden">
-  <h2><%#= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+<%= simple_form_for(property) do |form| %>
+<div class="card">
+  <div class="card-header">
+    <p class="mb-0 h5">Informations sur le biens</p>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-lg-6">
+        <%= form.input :ad_type, collection: Property::AD_TYPES, include_blank: false, label: "Type d'annonce" %>
+      </div>
+      <div class="col-lg-6">
+        <%= form.input :category, collection: Property::CATEGORIES, include_blank: false, label: "Catégorie" %>
+      </div>
+      <div class="col-lg-3">
+        <%= form.input :area, as: :integer, label: "Surface du biens" %>
+      </div>
+      <div class="col-lg-3">
+        <%= form.input :price, as: :integer, label: "Prix de vente ou location" %>
+      </div>
+      <div class="col-lg-3">
+        <%= form.input :bedroom, as: :integer, required: true, label: "Nombre de chambres" %>
+      </div>
+      <div class="col-lg-3">
+        <%= form.input :bathroom, as: :integer, required: true, label: "Nombre de salles de bain" %>
+      </div>
+      <div class="col-lg-12">
+        <%= form.input :description, as: :text, input_html: {rows: "5"}, label: "Description du biens" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <ul>
-    <%# property.errors.full_messages.each do |message| %>
-    <li><%#= message %></li>
-    <%# end %>
-  </ul>
-</div> -->
-<%# end %>
+<br>
+
+<!-- <div class="card sr-only">
+  <div class="card-header">
+    <p class="mb-0 h5">Commodité (Optionel)</p>
+  </div>
+  <div class="card-body">
+
+  </div>
+</div>
+
+<br> -->
 
 <div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Informations de base sur le biens
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <%= form.hidden_field :ad_type_id, value: session[:ad_type_id] %>
+  <div class="card-header">
+    <p class="mb-0 h5">Photos du biens</p>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-lg-4">
+        <%= form.input :photos, as: :file, input_html: {name: "property[photos][]"} %>
+      </div>
+      <div class="col-lg-4">
+        <%= form.input :photos, as: :file, input_html: {name: "property[photos][]"} %>
+      </div>
+      <div class="col-lg-4">
+        <%= form.input :photos, as: :file, input_html: {name: "property[photos][]"} %>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <!--         <div class="column is-12">
-          <div class="field">
-            <%#= form.label :ad_type_id, "Type d'annonce", class: "label required"  %>
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <%#= form.select :ad_type_id, AdType.pluck(:name, :id), include_blank: true %>
-              </div>
-            </div>
-          </div>
-        </div> -->
+<br>
 
-        <div class="column is-12">
-          <div class="field">
-            <%= form.label :title, "Titre de l'annonce", class: "label required"  %>
-            <div class="control">
-              <%= form.text_field :title, class: "input", placeholder: "Titre de l'annonce" %>
-            </div>
-            <% if @property.errors[:title].any? %>
-            <p class="help is-danger">
-              <%= @property.errors[:title].first %>
-            </p>
-            <% end %>
-          </div>
-        </div>
-        <div class="column is-6">
-          <div class="field">
-            <%= form.label :property_type_id, "Type de biens", class: "label required" %>
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <%= form.select :property_type_id, PropertyType.pluck(:name, :id), include_blank: true %>
-              </div>
-              <% if @property.errors[:property_type_id].any? %>
-              <p class="help is-danger">
-                <%= @property.errors[:property_type_id].first %>
-              </p>
-              <% end %>
-            </div>
-          </div>
-        </div>
+<% if current_user.phone_number.blank? %>
+<%= form.simple_fields_for :user do |user_form| %>
+<div class="card">
+  <div class="card-header">
+    <p class="mb-0 h5">Informations de contact</p>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-lg-6">
+        <%= user_form.input :email, label: "Adresse email", input_html: {value: current_user.email}, readonly: true  %>
+      </div>
+      <div class="col-lg-6">
+        <%= user_form.input :phone_number, label: "Numéro de téléphone"  %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>
 
-        <% if session[:ad_type_name] == "Vente" %>
-        <div class="column is-6">
-          <div class="field">
-            <%= form.label :price, "Prix de vente", class: "label required" %>
-            <div class="control">
-              <%= form.number_field :price, class: "input" %>
-            </div>
-            <% if @property.errors[:price].any? %>
-            <p class="help is-danger">
-              <%= @property.errors[:price].first %>
-            </p>
-            <% end %>
-          </div>
-        </div>
-        <% elsif session[:ad_type_name] == "Location" %>
-        <div class="column is-6">
-          <%= form.label :price, "Prix de loyer", class: "label required" %>
-          <div class="field has-addons">
-            <div class="control">
-              <%= form.number_field :price, class: "input" %>
-            </div>
-            <div class="control">
-              <a class="button is-static">
-                /mois
-              </a>
-            </div>
-          </div>
-        </div>
-        <% end %>
+<br>
 
-        <div class="column is-6">
-          <%= form.label :area, "Surface du biens", class: "label required"  %>
-          <div class="field has-addons">
-            <div class="control">
-              <%= form.number_field :area, placeholder: "Surface du biens", class: "input" %>
-            </div>
-            <div class="control">
-              <a class="button is-static">
-                m<sup>2</sup>
-              </a>
-            </div>
-          </div>
-        </div>
+<div class="card">
+  <div class="card-header">
+    <p class="mb-0 h5">(Optionnel)</p>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-lg-6">
+        <%= form.input :sponsoring, as: :radio_buttons, label: "Souhaitez-vous sponsoriser votre annonce ?", wrapper: :vertical_collection_inline %>
+      </div>
+      <div class="col-lg-6">
+
       </div>
     </div>
   </div>
@@ -113,178 +105,25 @@
 <br>
 
 <div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Informations détaillés sur le biens
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <div class="column is-12">
-          <div class="field">
-            <%= form.label :description, "Description du biens", class: "label required"  %>
-            <div class="control">
-              <%= form.text_area :description, placeholder: "Description du biens", class: "textarea" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Commodité (Optionel)
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <div class="column is-12">
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Photos du biens
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <%# 3.times do %>
-        <div class="column is-6">
-          <div class="file has-name is-fullwidth">
-            <label class="file-label">
-              <%= form.file_field :photos, class: "file-input help is-danger", multiple: true %>
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload fa-lg"></i>
-                </span>
-                <span class="file-label">
-                  Photos
-                </span>
-              </span>
-              <span class="file-name is-large">
-                <% if @property.photos.present? %>
-                <% @property.photos.each do |p| %>
-                <p><%= image_tag p.url, size: "100x100" %></p>
-                <% end %>
-                <% end %>
-              </span>
-            </label>
-          </div>
-          <%# if @property.errors[:photos].any? %>
-          <!-- <p class="help is-danger"> -->
-          <%#= @property.errors[:photos].first %>
-          <!-- </p> -->
-          <%# end %>
-          <p class="help">3 photos maximum.</p>
-        </div>
-        <%# end %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Informations sur la localisation du biens
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <div class="column is-6">
-          <div class="field">
-            <%= form.label :country_id, "Pays", class: "label required"  %>
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <%= form.select :country_id, Country.pluck(:name, :id), include_blank: true %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-6">
-          <div class="field">
-            <%= form.label :location, "Ville ou l'adresse du biens", class: "label"  %>
-            <div class="control">
-              <%= form.text_field :address, class: "input"  %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<div class="card">
-  <header class="card-header has-background-white-ter">
-    <p class="card-header-title">
-      Informations de contact
-    </p>
-  </header>
-  <div class="card-content">
-    <div class="content">
-      <div class="columns is-multiline">
-        <div class="column is-4">
-          <div class="field">
-            <%= form.label :first_name, "Votre prénom", class: "label" %>
-            <div class="control">
-              <%= form.text_field :first_name, class: "input" %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="field">
-            <%= form.label :last_name, "Votre Nom", class: "label"  %>
-            <div class="control">
-              <%= form.text_field :last_name, class: "input" %>
-            </div>
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="field">
-            <%= form.label :phone_number, "Votre numéro de téléphone", class: "label"   %>
-            <div class="control">
-              <%= form.text_field :phone_number, class: "input" %>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<br>
-
-<div class="columns">
-  <div class="column is-12">
-    <div class="box">
+  <div class="card-body">
+    <div class="form-row">
       <% if @property.persisted? %>
-      <%= form.submit "Modifier", class: "button is-marron is-fullwidth" %>
+      <div class="col-lg-4">
+        <%#= link_to 'Annuler', properties_path, class: "btn btn-light btn-block" %>
+      </div>
+      <div class="col-lg-4">
+        <%= form.submit "Modifier l'annonce", class: "btn btn-marron btn-block" %>
+      </div>
       <% else %>
-      <%= form.submit "Enregistrer", class: "button is-marron is-fullwidth" %>
+      <div class="col-lg-4">
+        <%#= link_to 'Annuler', properties_path, class: "btn btn-light btn-block" %>
+      </div>
+      <div class="col-lg-4">
+        <%= form.submit "Publier l'annonce", class: "btn btn-marron btn-block" %>
+      </div>
       <% end %>
     </div>
   </div>
+</div>
 </div>
 <% end %>

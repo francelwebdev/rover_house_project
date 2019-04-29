@@ -1,52 +1,44 @@
 class PropertiesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:search, :index, :show]
   before_action :set_property, only: [:show, :edit, :update, :destroy]
-
-  def search
-    @properties = Property.search(ad_type: params[:ad_type], property_type: params[:property_type], address: params[:location])
-  end
-
+  
   # GET /properties
   # GET /properties.json
   def index
+    if params.has_key?(:ad_type) and params.has_key?(:category) and params.has_key?(:country) and params.has_key?(:city) and params.has_key?(:price)
+      @pagy, @properties = pagy(Property.search(ad_type: params[:ad_type], category: params[:category], country: params[:country], city: params[:city], price: params[:price]))
+    else
       @pagy, @properties = pagy(Property.all)
+    end
   end
-
+  
   # GET /properties/1
   # GET /properties/1.json
   def show
+    @photos = @property.photos.all
   end
-
+  
   # GET /properties/new
   def new
-    if params[:ad_type_id].present?
-      @ad_type = AdType.find(params[:ad_type_id])
-      session[:ad_type_id] = @ad_type.id
-      session[:ad_type_name] = @ad_type.name
-      @property = current_user.properties.build
-    else
-      flash[:notice] = "Veuillez choisir un type d'annonce."
-      redirect_to ad_types_path
-    end
-    
+    @property = current_user.properties.build
   end
-
+  
   # GET /properties/1/edit
   def edit
   end
-
+  
   # POST /properties
   # POST /properties.json
   def create
     @property = current_user.properties.build(property_params)
     if @property.save
+      @property.user.update_attributes!(first_name: params[:first_name], last_name: params[:last_name, phone_number: params[:phone_number]])
       redirect_to @property, notice: 'Property was successfully created.'
     else
-      puts @property.errors.to_hash
       render :new
     end
   end
-
+  
   # PATCH/PUT /properties/1
   # PATCH/PUT /properties/1.json
   def update
@@ -60,7 +52,7 @@ class PropertiesController < ApplicationController
       end
     end
   end
-
+  
   # DELETE /properties/1
   # DELETE /properties/1.json
   def destroy
@@ -70,15 +62,15 @@ class PropertiesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = Property.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def property_params
-      params.require(:property).permit(:title, :price, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, photos: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_property
+    @property = Property.find(params[:id])
   end
+  
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def property_params
+    params.require(:property).permit(:title, :price_for_rent, :price_for_sale, :bedroom, :bathroom, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, :photos, user_attributes: [:id, :first_name, :last_name, :phone_number])
+  end
+end

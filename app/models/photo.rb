@@ -1,6 +1,7 @@
 class Photo < ApplicationRecord
-    # mount_uploader :name, PhotosUploader
-    # validates :name, presece: true
+    mount_uploader :name, PhotosUploader
 
-  # belongs_to :property
+    belongs_to :property
+    
+    validates :name, presence: true
 end

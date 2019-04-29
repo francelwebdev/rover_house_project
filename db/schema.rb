@@ -10,30 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_184532) do
+ActiveRecord::Schema.define(version: 2019_04_29_094631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "ad_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "cities", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "country_id"
-    t.index ["country_id"], name: "index_cities_on_country_id"
-  end
-
-  create_table "countries", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "photos", force: :cascade do |t|
     t.string "name"
@@ -44,44 +24,25 @@ ActiveRecord::Schema.define(version: 2019_04_25_184532) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string "title"
-    t.decimal "price", precision: 8
     t.integer "area"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "property_type_id"
-    t.bigint "ad_type_id"
     t.boolean "verified", default: false
-    t.bigint "country_id"
-    t.bigint "city_id"
-    t.string "location"
-    t.string "bedroom"
-    t.string "bathroom"
-    t.bigint "user_id"
+    t.string "city"
     t.string "address"
+    t.string "location"
     t.json "photos"
-    t.index ["ad_type_id"], name: "index_properties_on_ad_type_id"
-    t.index ["city_id"], name: "index_properties_on_city_id"
-    t.index ["country_id"], name: "index_properties_on_country_id"
-    t.index ["property_type_id"], name: "index_properties_on_property_type_id"
+    t.decimal "price", precision: 9
+    t.string "category"
+    t.string "bathroom"
+    t.string "bedroom"
+    t.string "ad_type"
+    t.bigint "user_id"
+    t.boolean "available", default: false
+    t.string "country"
+    t.boolean "sponsoring", default: false
     t.index ["user_id"], name: "index_properties_on_user_id"
-  end
-
-  create_table "property_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,35 +54,25 @@ ActiveRecord::Schema.define(version: 2019_04_25_184532) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
     t.string "first_name"
     t.string "last_name"
-    t.boolean "admin", default: false
+    t.integer "phone_number"
+    t.string "role"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_roles", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "role_id"
-    t.index ["role_id"], name: "index_users_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
-    t.index ["user_id"], name: "index_users_roles_on_user_id"
-  end
-
-  add_foreign_key "cities", "countries"
   add_foreign_key "photos", "properties"
-  add_foreign_key "properties", "ad_types"
-  add_foreign_key "properties", "cities"
-  add_foreign_key "properties", "countries"
-  add_foreign_key "properties", "property_types"
   add_foreign_key "properties", "users"
 end

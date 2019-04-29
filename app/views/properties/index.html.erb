@@ -4,24 +4,32 @@
     <p>Trouvez la meilleure maison pour votre famille.</p>
   </div>
   <div class="container">
-    <%= simple_form_for :search_properties_by, url: search_properties_path, method: :get do |f| %>
-    <div class="form-row">
-      <div class="col-lg-3">
-        <%= f.input :ad_type, collection: {"Louer un biens" => "Location", "Acheter un biens" => "Vente"}.sort, as: :select, include_blank: true, required: false, input_html: {class: "form-control-lg"}, label: "Vous souhaitez ?" %>
+          <div class="card">
+        <div class="card-body">
+          <%= simple_form_for "", url: search_properties_path , method: :get do |f| %>
+          <div class="form-row">
+            <div class="col-lg-2">
+              <%= f.input :ad_type, collection: Property::AD_TYPES, label: false, include_blank: true, prompt: "Type d'annonce" %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :category, collection: Property::CATEGORIES, as: :select, required: false, label: false, include_blank: true, prompt: "Catégorie" %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :country, collection: ["Bénin", "Togo", "Gabon", "Cameroun", "Burkina Faso", "Niger", "Côte d’Ivoire"].sort, include_blank: true, required: false, label: false, prompt: "Pays" %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :city, placeholder: "Ville", required: false, label: false %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.input :price, as: :integer, placeholder: "Prix max", required: false, label: false %>
+            </div>
+            <div class="col-lg-2">
+              <%= f.button :submit, "Rechercher", class: "btn btn-marron btn-block btn-rechercher" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
       </div>
-      <div class="col-lg-3">
-        <%= f.input :property_type, collection: @property_types, as: :select, include_blank: true, required: false, input_html: {class: "form-control-lg"}, label: "Quel type de biens ?" %>
-      </div>
-      <div class="col-lg-4">
-        <%= f.input :location, placeholder: "Nom d'un pays ou d'une ville", input_html: {class: "form-control-lg"}, required: false, label: "Où" %>
-      </div>
-      <div class="col-lg-2">
-        <%= f.button :submit, "Rechercher", class: "btn btn-marron btn-block btn-rechercher btn-lg" %>
-      </div>
-    </div>
-    <% end %>
-
-    <a class="re-avance">Recherche avancée</a>
   </div>
 </div>
 
@@ -74,15 +82,9 @@
         <% end %>
         <% end %>
       </div>
-    </div>
-  </div>
-</section>
 
-<section class="container-fluid py-5">
-  <div class="container">
-    <div class="row">
       <div class="col-lg-12">
-        <%== pagy_bulma_nav(@pagy) %>
+        <%== pagy_bootstrap_nav(@pagy) %>
       </div>
     </div>
   </div>

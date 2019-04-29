@@ -1,2 +1,2 @@
-require 'pagy/extras/bulma'
+require 'pagy/extras/bootstrap'
 # require 'pagy/extras/i18n'
