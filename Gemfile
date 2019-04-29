@@ -65,13 +65,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 #---- MES GEMS ----#
 #--------------------------#
-gem "bootstrap_form"
-gem "rolify"
+# gem "rolify"
 gem 'autoprefixer-rails'
 gem 'administrate'
 gem 'sitemap_generator'
 gem 'local_time'
 group :development do
+  gem "table_print"
   gem "awesome_print", require:"ap"
   gem 'bullet'
   gem 'pry-rails'
@@ -96,15 +96,16 @@ gem "cocoon"
 gem 'devise'
 gem 'devise-i18n'
 gem "simple_form"
+gem "bootstrap_form"
 gem 'friendly_id'
+gem "pundit"
 gem 'cancancan'
 gem 'gibbon'
 gem 'pagy'
 # gem 'stripe'
 # gem 'stripe-rails'
-gem 'activeadmin'
 gem 'name_of_person'
-gem 'meta-tags', '~> 2.11'
+gem 'meta-tags'
 gem 'activestorage-validator'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
@@ -119,30 +120,27 @@ gem "seedbank"
 # gem 'country_select'
 gem 'faker'
 gem 'active_link_to'
-gem "pundit"
 # gem "devise_invitable"
 gem 'globalize'
-gem 'acts-as-taggable-on'
-gem 'acts_as_votable'
+# gem 'acts-as-taggable-on'
+# gem 'acts_as_votable'
 gem 'data-confirm-modal'
-gem 'prawn'
-gem 'prawn-qrcode'
+# gem 'prawn'
+# gem 'prawn-qrcode'
 
-gem 'populator'
+# gem 'populator'
 
-gem 'acts_as_commentable'
-gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
-gem 'counter_culture'
-gem 'public_activity'
+# gem 'acts_as_commentable'
+# gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+# gem 'counter_culture'
+# gem 'public_activity'
 
-gem 'impressionist'
+# gem 'impressionist'
 
-gem 'fastentry'
-
-gem "table_print"
+# gem 'fastentry'
 
 gem "breadcrumbs_on_rails"
-gem 'has_friendship'
+# gem 'has_friendship'
 
 gem 'file_validators'
 gem 'email_validator'
@@ -155,13 +153,13 @@ gem 'inline_svg'
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
-gem 'shrine'
 
 # Pour l'upload de fichier.
+gem 'shrine'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 
 # Pour systeme de recherche dans une bdd, utile pour les formulaire de recherche.
-gem "pg_search"
+# gem "pg_search"
 gem 'search_cop'
 gem 'ransack'
 
