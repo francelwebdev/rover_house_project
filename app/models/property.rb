@@ -25,4 +25,12 @@ class Property < ApplicationRecord
 
     validates :photos, attached: true, file_size: { less_than_or_equal_to: 1.megabyte }, file_content_type: { allow: ['image/jpeg', 'image/png', 'image/jpg'] }, limit: { min: 1, max: 3 }
 
+#     validate  :images_size_validation, if: "images?"
+
+# def images_size_validation
+#     images.each do |image|
+#       errors.add(:images, "All the images must be less than 1MB")  if image.size > 1.megabytes
+#     end
+#   end
+
 end

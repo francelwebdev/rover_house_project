@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   scope "/(:locale)", locale: /fr|en/ do
-    namespace :admin do
-      root to: "users#index"
-    end
+    # namespace :admin do
+    #   resources :users
+    #   root to: "dashboard#home"
+    # end
     root to: "pages#home"
     devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
       resources :properties do

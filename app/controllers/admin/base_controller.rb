@@ -7,7 +7,7 @@ class Admin::BaseController < ActionController::Base
     
     def authenticate_admin!
         authenticate_user!
-        redirect_to :root_path, status: :forbidden if !current_user.admin?
+        redirect_to :root_path, status: :forbidden if current_user.role != "Admin"
     end
     
 end
