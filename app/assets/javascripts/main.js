@@ -19,10 +19,10 @@ $(document).on("turbolinks:load", function() {
       items: 2
     },
     900: {
-      items: 4
+      items: 3
     },
     1024: {
-      items: 4
+      items: 3
     }
   }
 });
@@ -49,12 +49,11 @@ $(document).on("turbolinks:load", function() {
 });
 
 
-
  $("a.re-avance").on("click", function (e) {
+  e.preventDefault();
   e.stopPropagation();
-  $("div.avec-et-sans-is-sr-only").toggleClass("is-sr-only");
+  $("div.avec-et-sans-is-sr-only").toggleClass("sr-only");
 })
-
 
 
  if ($("select#property_ad_type_id").val() == "1") {

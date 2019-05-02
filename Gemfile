@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+# gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -65,11 +65,26 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #--------------------------#
 #---- MES GEMS ----#
 #--------------------------#
-# gem "rolify"
-gem 'autoprefixer-rails'
+
+# Serveur web et serveur d'application en dev et prod
+  gem "passenger"
+# Serveur web et serveur d'application en dev et prod
+
+# Pour l'administration
 gem 'administrate'
+gem 'rails_admin'
+gem 'rails_db'
+gem "axlsx_rails"
+# Pour l'administration
+
+# Pole utlisateur
+# gem "rolify"
+# Role utlisateur
+
+gem 'autoprefixer-rails'
 gem 'sitemap_generator'
 gem 'local_time'
+
 group :development do
   gem "table_print"
   gem "awesome_print", require:"ap"
@@ -80,95 +95,151 @@ group :development do
   gem 'pry-byebug'
   gem 'meta_request'
 end
-gem 'rails_db'
-gem "axlsx_rails"
+
 group :production do
-  gem "passenger"
-  # Use mysql as the database for Active Record
-  # gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+# Production database
+# gem 'mysql2'
+# Production database
+
+# Email
   gem 'postmark-rails'
+# Email
+
+# Caching
   gem 'redis-rails'
   gem 'redis-rack-cache'
-end
 # gem 'dalli'
-gem 'rails-i18n'
-gem "cocoon"
-gem 'devise'
-gem 'devise-i18n'
+# Caching
+end
+
+# Form Builders
 gem "simple_form"
 gem "bootstrap_form"
-gem 'friendly_id'
-gem "pundit"
-gem 'cancancan'
-gem 'gibbon'
-gem 'pagy'
-# gem 'stripe'
-# gem 'stripe-rails'
-gem 'name_of_person'
-gem 'meta-tags'
-gem 'activestorage-validator'
-gem 'cloudinary'
-gem 'activestorage-cloudinary-service'
+# Form Builders
 
+# Nested Records
+gem "cocoon"
+# Nested Records
+
+# Authentication
+gem 'devise'
+gem 'devise-i18n'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-# gem 'geocoder', '~> 1.4', '>= 1.4.7'
+# gem "devise_invitable"
+# Authentication
+
+gem 'friendly_id'
+
+# Authorization
+gem 'cancancan'
+# Authorization
+
+# Email Processing
+# gem 'griddler'
+# Email Processing
+
+# Newsletter
+gem 'gibbon'
+# Newsletter
+
+# Pagination
+gem 'pagy'
+# Pagination
+
+# Payment Processing
+# gem 'stripe'
+# gem 'stripe-rails'
+# gem 'activemerchant'
+# Payment Processing
+
+# Internationalization (I18n)
+gem 'rails-i18n'
+# Internationalization (I18n)
+
+# Maps et Geocoding
+# gem 'gmapsjs'
 # gem 'gmaps4rails', '~> 2.1', '>= 2.1.2'
+# gem 'geocoder', '~> 1.4', '>= 1.4.7'
+# Maps et Geocoding
+
+gem 'name_of_person'
+
+# SEO
+gem 'meta-tags'
+# SEO
+
 gem "seedbank"
 # gem 'ahoy_matey'
-# gem 'webpacker', '~> 3.5'
+# gem 'webpacker'
 # gem 'country_select'
 gem 'faker'
 gem 'active_link_to'
-# gem "devise_invitable"
-gem 'globalize'
 # gem 'acts-as-taggable-on'
 # gem 'acts_as_votable'
 gem 'data-confirm-modal'
+
+# PDF Generation
 # gem 'prawn'
 # gem 'prawn-qrcode'
+# PDF Generation
 
 # gem 'populator'
 
 # gem 'acts_as_commentable'
 # gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
 # gem 'counter_culture'
+
+# Activity Feeds
 # gem 'public_activity'
+# Activity Feeds
 
 # gem 'impressionist'
-
 # gem 'fastentry'
 
 gem "breadcrumbs_on_rails"
 # gem 'has_friendship'
-
-gem 'file_validators'
 gem 'email_validator'
-
 gem 'rails_autolink'
 # gem 'strong_migrations'
 gem 'inline_svg'
 
-# Shrine Dependencies
+# File Uploading
+gem 'activestorage-validator'
+gem 'cloudinary'
+gem 'activestorage-cloudinary-service'
+gem 'file_validators'
+gem 'active_storage_drag_and_drop'
+gem 'active_storage_validations'
+gem 'active_storage-postgresql'
+# gem 'shrine'
+# File Uploading
+
+# Image Processing
 gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
+# Image Processing
 
-# Pour l'upload de fichier.
-gem 'shrine'
-gem 'carrierwave', '~> 1.3', '>= 1.3.1'
-
-# Pour systeme de recherche dans une bdd, utile pour les formulaire de recherche.
+# Moteur de recherche
 # gem "pg_search"
 gem 'search_cop'
 gem 'ransack'
-
-# Ces gem nécessite que elasticsearch soit installé sur la machine
 # gem 'searchkick'
-# gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '5.x'
-# gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '5.x'
-# Pour systeme de recherche dans une bdd, utile pour les formulaire de recherche.
+# Moteur de recherche
 
 gem "htmlcompressor"
 gem "yui-compressor"
 gem 'babel-transpiler'
+
+# Ecommerce
+# spree
+# Ecommerce
+
+# Charts & Graphs
+# chartkick
+# Charts & Graphs
+
+# Calendars
+# simple_calendar
+# Calendars

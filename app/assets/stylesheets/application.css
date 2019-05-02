@@ -18,6 +18,7 @@
  *= require @fortawesome/fontawesome-free/css/solid.min.css
  *= require @fortawesome/fontawesome-free/css/svg-with-js.min.css
  *= require @fortawesome/fontawesome-free/css/v4-shims.min.css
+ *= require active_storage_drag_and_drop
  *= require owl.carousel/dist/assets/owl.carousel.min.css
  *= require owl.carousel/dist/assets/owl.theme.default.min.css
  *= require flickity/dist/flickity.min.css
@@ -27,5 +28,6 @@
  *= require slick-carousel/slick/slick.css
  *= require slick-carousel/slick/slick-theme.css
  *= require dropzone/dist/dropzone.css
+ *= require formvalidation/dist/css/formValidation.min.css
  *= require main.scss
  */

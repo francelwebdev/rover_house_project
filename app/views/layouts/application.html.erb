@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <title>RoverHouse</title>
+  <title>RoverHouse - <%= controller_name + '/' + action_name  %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body class="<%= controller_name + '/' + action_name  %>">
+<body>
   <% if flash[:notice] %>
   <div class="alert alert-success mb-0" role="alert">
     <p class="text-center mb-0">
@@ -45,6 +45,7 @@
             <li class="nav-item">
               <%= link_to "Accueil", root_path, class: "nav-link"  %>
             </li>
+
             <% Property::AD_TYPES.each do |ad_type| %>
             <% if ad_type == "A louer" %>
             <li class="nav-item">
@@ -56,6 +57,7 @@
             </li>
             <% end %>
             <% end %>
+
             <li class="nav-item">
               <%= link_to "Aménager", root_path, class: "nav-link"  %>
             </li>
@@ -82,7 +84,7 @@
             <li class="list-inline-item dropdown">
               <%= link_to current_user.name.first.capitalize, edit_user_registration_path, class: "nav-link text-dark dropdown-toggle", id: "navbarDropdown", role: "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false"  %>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <%= link_to 'Mes annonces', edit_user_registration_path, :class => 'dropdown-item' if !current_user.admin? %>
+                <%= link_to 'Mes annonces', my_properties_path, :class => 'dropdown-item' %>
                 <%= link_to 'Mon profile', profile_path, :class => 'dropdown-item' %>
                 <%= link_to 'Mon compte', edit_user_registration_path, :class => 'dropdown-item' %>
                 <div class="dropdown-divider"></div>
@@ -137,7 +139,7 @@
             <li>
               <%= link_to "Nous contacter", nous_contacter_path, class: "text-white" %>
             </li>
-                        <li>
+            <li>
               <%= link_to "Mentions Légales", root_path, class: "text-white" %>
             </li>
             <li>

@@ -1,21 +1,25 @@
 class PropertiesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:search, :index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   
   # GET /properties
   # GET /properties.json
   def index
-    if params.has_key?(:ad_type) and params.has_key?(:category) and params.has_key?(:country) and params.has_key?(:city) and params.has_key?(:price)
-      @pagy, @properties = pagy(Property.search(ad_type: params[:ad_type], category: params[:category], country: params[:country], city: params[:city], price: params[:price]))
+    if params.has_key?(:ad_type)
+      @pagy, @properties = pagy(Property.search(ad_type: params[:ad_type]))
+    elsif params.has_key?(:property_type) and params.has_key?(:ad_type) and params.has_key?(:country)
+      @pagy, @properties = pagy(Property.search(property_type: params[:property_type], ad_type: params[:ad_type], country: params[:country]))
+    elsif params.has_key?(:property_type) and params.has_key?(:ad_type) and params.has_key?(:country) and params.has_key?(:city) and params.has_key?(:maximm_price) and params.has_key?(:minimum_area)
+      
     else
-      @pagy, @properties = pagy(Property.all)
+      @pagy, @properties = pagy(Property.all.includes(:property_type, :ad_type, :country))
     end
   end
   
   # GET /properties/1
   # GET /properties/1.json
   def show
-    @photos = @property.photos.all
+    
   end
   
   # GET /properties/new
@@ -32,7 +36,9 @@ class PropertiesController < ApplicationController
   def create
     @property = current_user.properties.build(property_params)
     if @property.save
-      @property.user.update_attributes!(first_name: params[:first_name], last_name: params[:last_name, phone_number: params[:phone_number]])
+      puts "*"*50
+      puts @property.user.update(phone_number: params[:property][:user_attributes][:phone_number])
+      puts "*"*50
       redirect_to @property, notice: 'Property was successfully created.'
     else
       render :new
@@ -66,11 +72,11 @@ class PropertiesController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_property
-    @property = Property.find(params[:id])
+      @property = Property.find(params[:id])
   end
   
   # Never trust parameters from the scary internet, only allow the white list through.
   def property_params
-    params.require(:property).permit(:title, :price_for_rent, :price_for_sale, :bedroom, :bathroom, :area, :description, :ad_type_id, :property_type_id, :country_id, :address, :photos, user_attributes: [:id, :first_name, :last_name, :phone_number])
+    params.require(:property).permit(:price, :bedroom, :bathroom, :area, :description, :ad_type_id, :property_type_id, :country_id, :sponsored, :city, {photos: []}, user_attributes: [:phone_number])
   end
 end

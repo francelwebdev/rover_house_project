@@ -1,0 +1,40 @@
+fr:
+  activerecord:
+    models:
+      property: "Bien immobilier"
+    attributes:
+      property:
+        title: "Titre de l'annonce"
+        price: "Prix"
+        area: "Surface (en m2)"
+        description: "Description de l'annonce"
+        address: "Adresse/Quartier"
+        city: "Commune"
+        room: "Nombres de pièce"
+        available: "Disponible ?"
+        deposit: "Avance (nombres de mois)"
+        property_type: "Type de bien"
+        ad_type: "Type d'annonce"
+        etage: "Étage"
+        feature: "Caractéristique"
+
+
+# Validation des attachement pour active_storage
+    errors:
+      messages:
+        content_type_invalid: "a un type de contenu invalide"
+        file_size_out_of_range: "la taille %{file_size} n'est pas comprise entre la plage requise"
+        limit_out_of_range: "le nombre total est hors limites"
+        dimension_min_inclusion: "doit être supérieur ou égal à %{width} x %{height} pixel."
+        dimension_max_inclusion: "doit être inférieur ou égal à %{width} x %{height} pixel."
+        dimension_width_inclusion: "la largeur n'est pas comprise entre %{min} et %{max} pixels."
+        dimension_height_inclusion: "la hauteur n'est pas comprise entre %{min} et %{max} pixels."
+        dimension_width_greater_than_or_equal_to: "la largeur doit être supérieure ou égale à %{length} pixel."
+        dimension_height_greater_than_or_equal_to: "la hauteur doit être supérieure ou égale à %{length} pixel."
+        dimension_width_less_than_or_equal_to: "la largeur doit être inférieure ou égale à %{length} pixel."
+        dimension_height_less_than_or_equal_to: "la hauteur doit être inférieure ou égale à %{length} pixel."
+        dimension_width_equal_to: "la largeur doit être égale à %{length} pixel."
+        dimension_height_equal_to: "la hauteur doit être égale à %{length} pixel."
+
+        allowed_file_content_types: "allowed_file_content_types"
+        file_size_is_less_than_or_equal_to: "file_size_is_less_than_or_equal_to"

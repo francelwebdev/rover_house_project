@@ -1,46 +1,48 @@
-<section class="section">
+<section class="container-fluid py-5">
     <div class="container">
-        <div class="columns is-multiline">
-            <div class="column is-8">
-                <div class="columns is-multiline">
-                    <div class="column is-12">
-                        <div class="columns is-multiline">
-                            <div class="column is-12">
-                                <div class="columns is-multiline">
-                                    <div class="column is-8">
-                                        <h4 class="title is-4">
-                                            <%= @property.title.capitalize %>
-                                        </h4>
-                                    </div>
-                                    <div class="column is-4">
-                                        <% if @property.ad_type.name == "Location" %>
-                                        <h3 class="title is-4">
-                                            <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f/mois</sup>
-                                        </h3>
-                                        <% elsif @property.ad_type.name == "Vente" %>
-                                        <h3 class="title is-4">
-                                            <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f</sup>
-                                        </h3>
-                                        <% end %>
-                                    </div>
-                                </div>
-                                <hr class="is-marginless">
-                                <div class="column is-12">
-                                    <p>
-                                        <i class="fas fa-map-marker-alt fa-lg"></i>&nbsp;
-                                        <%= @property.country.name.capitalize %> - <%= @property.address.capitalize %>
-                                    </p>
-                                </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <% if @property.ad_type_id == 1 %>
+                                <h3>
+                                    <span class="badge badge-secondary">A louer</span>
+                                </h3>
+                                <% elsif @property.ad_type_id == 2 %>
+                                <h3>
+                                    <span class="badge badge-secondary">A vendre</span>
+                                </h3>
+                                <% end %>
+                                <h4>
+                                    <%= @property.property_type.name.capitalize + " - " + @property.area.to_s %>m<sup>2</sup>
+                                </h4>
+                                <p>
+                                    <i class="fas fa-map-marker-alt fa-lg"></i>&nbsp;
+                                    <%= @property.country.name.capitalize %> - <%= @property.city.capitalize %>
+                                </p>
+                            </div>
+                            <div class="col-lg-4">
+                                <% if @property.ad_type_id == 1 %>
+                                <h3>
+                                    <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f/mois</sup>
+                                </h3>
+                                <% elsif @property.ad_type_id == 2 %>
+                                <h3>
+                                    <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f</sup>
+                                </h3>
+                                <% end %>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-12">
+                    <div class="col-lg-12">
                         <div class="owl-carousel owl-theme owl-property-show-page">
                             <% if @property.photos.present? %>
-                            <% @property.photos.each do |pt| %>
+                            <% @property.photos.each do |photo| %>
                             <div class="item">
                                 <figure class="image">
-                                    <%= image_tag(pt.url) %>
+                                    <%= image_tag photo, class: "img-fluid" %>
                                 </figure>
                             </div>
                             <% end %>
@@ -49,81 +51,48 @@
                             <% end %>
                         </div>
                     </div>
-                    <div class="column is-12">
-                        <div class="tabs-wrapper">
-                            <div class="tabs">
-                                <ul>
-                                    <li class="is-active">
-                                        <a>Description</a>
-                                    </li>
-                                    <li>
-                                        <a>Détail</a>
-                                    </li>
-                                    <li>
-                                        <a>Localisation</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="tabs-content">
-                                <ul>
-                                    <li class="is-active">
-                                        <h1>Pictures</h1>
-                                    </li>
-                                    <li>
-                                        <h1>Music</h1>
-                                    </li>
-                                    <li>
-                                        <h1>Videos</h1>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-lg-12">
+                        <h4>Description</h4>
+                        <p>
+                            <%= @property.description %>
+                        </p>
+                    </div>
+                    <div class="col-lg-12">
+                        <h4>Détails</h4>
+
+                    </div>
+                    <div class="col-lg-12">
+                        <h4>Localisation</h4>
+
                     </div>
                 </div>
             </div>
-            <div class="column is-4">
-                <div class="box">
-                    <h3 class="title">Contacter</h3>
-                    <%= form_with url: root_path, local: true do |f| %>
-                    <div class="columns is-multiline">
-                        <div class="column is-12">
-                            <div class="field">
-                                <div class="control">
-                                    <%= f.text_field :first_name, class: "input"  %>
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Contacter</h3>
+                                <%= simple_form_for "" do |f| %>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <%= f.input :name %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :email, as: :email %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :phone_number, as: :tel %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :body, as: :text %>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="column is-12">
-                            <div class="field">
-                                <div class="control">
-                                    <%= f.text_field :last_name, class: "input"  %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column is-12">
-                            <div class="field">
-                                <div class="control">
-                                    <%= f.phone_field :last_name, class: "input"  %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column is-12">
-                            <div class="field">
-                                <div class="control">
-                                    <%= f.email_field :last_name, class: "input"  %>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column is-12">
-                            <div class="field">
-                                <div class="control">
-                                    <%= f.text_area :body, class: "textarea"  %>
-                                </div>
+                                <%= f.button :submit, "Envoyer", class: "btn btn-marron"  %>
+                                <% end %>
                             </div>
                         </div>
                     </div>
-                    <%= f.submit "Envoyer", class: "button is-marron"  %>
-                    <% end %>
                 </div>
             </div>
         </div>

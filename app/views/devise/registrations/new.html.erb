@@ -9,7 +9,7 @@
             <%= f.error_notification %>
             <div class="form-inputs">
               <%= f.input :name, placeholder: "Prénom et Nom", autofocus: true, label: "Votre nom" %>
-              <%= f.input :role, collection: User::ROLES, label: "Vous êtes un ?", required: true %>
+              <%= f.input :role, collection: User::ROLES.select {|r| r != "Admin"}, label: "Vous êtes un(e) ?", required: true %>
               <%= f.input :email,
                 required: true, 
                 input_html: { autocomplete: "email" }%>

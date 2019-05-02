@@ -1,0 +1,71 @@
+https://simpleisbetterthancomplex.com/series/beginners-guide/1.11/
+
+https://www.neontsunami.com/posts/replacing-rails-asset-pipeline-with-webpacker
+
+
+https://gist.github.com/simonc/3a21074223d2f36a7232
+
+http://preview.themeforest.net/item/safedia-security-html-template/full_screen_preview/23683512
+
+Terms & Condition
+Privacy Policy
+Help & Contact
+FAQ
+company
+about us
+team
+services
+contact us
+
+
+
+
+<%= form.simple_fields_for :photos do |photos_form| %>
+<div class="card">
+  <div class="card-header">
+    <p class="mb-0 h5">Photos du biens</p>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <div class="col-lg-4">
+        <%= photos_form.input :name, as: :file, input_html: {name: "photos[name][]" } %>
+      </div>
+      <div class="col-lg-4">
+        <%= photos_form.input :name, as: :file, input_html: {name: "photos[name][]" } %>
+      </div>
+      <div class="col-lg-4">
+        <%= photos_form.input :name, as: :file, input_html: {name: "photos[name][]" } %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
+<div class="card">
+  <div class="card-header">
+    <p class="mb-0 h5">Photos du biens</p>
+  </div>
+  <div class="card-body">
+    <div class="form-row">
+      <% 3.times do %>
+      <div class="col-lg-12">
+        <%= form.input :photos, as: :file, input_html: {name: "property[photos][]"} %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<% if property.errors.any? %>
+<div id="error_explanation" class="is-hidden">
+  <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+  <ul>
+    <% property.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    models:
+      agency: "Agence immobilière"
+    attributes:
+      agency:
+        name: "Nom de l'agence"
+        about_agency: "À propos de l'agence"
+        address: "Adresse/Quartier"
+        city: "Commune"
+        email: "Adresse email"
+        website: "Site web"
+        rccm: "N° du régistre de commerce"
+        ifu: "N° d'identification fiscale unique"
+        phone_number: "Numéro de téléphone mobile"

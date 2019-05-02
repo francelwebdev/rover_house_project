@@ -18,9 +18,12 @@
 //= require turbolinks
 //= require cocoon
 //= require local-time
+//= require active_storage_drag_and_drop
 //= require owl.carousel/dist/owl.carousel.min
 //= require flickity/dist/flickity.pkgd.min
 //= require flatpickr/dist/flatpickr.min
 //= require slick-carousel/slick/slick.min
 //= require toastr/build/toastr.min
+//= require formvalidation/dist/js/formValidation.min.js
+//= require formvalidation/dist/js/framework/bootstrap.min.js
 //= require main

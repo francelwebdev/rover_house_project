@@ -10,17 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_094631) do
+ActiveRecord::Schema.define(version: 2019_05_02_111049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "photos", force: :cascade do |t|
-    t.string "name"
-    t.bigint "property_id"
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["property_id"], name: "index_photos_on_property_id"
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_postgresql_files", force: :cascade do |t|
+    t.oid "oid"
+    t.string "key"
+    t.index ["key"], name: "index_active_storage_postgresql_files_on_key", unique: true
   end
 
   create_table "properties", force: :cascade do |t|
@@ -32,16 +51,18 @@ ActiveRecord::Schema.define(version: 2019_04_29_094631) do
     t.string "city"
     t.string "address"
     t.string "location"
-    t.json "photos"
     t.decimal "price", precision: 9
-    t.string "category"
     t.string "bathroom"
     t.string "bedroom"
-    t.string "ad_type"
     t.bigint "user_id"
     t.boolean "available", default: false
+    t.boolean "sponsored", default: false
+    t.string "property_type"
+    t.string "ad_type"
     t.string "country"
-    t.boolean "sponsoring", default: false
+    t.index ["ad_type"], name: "index_properties_on_ad_type"
+    t.index ["country"], name: "index_properties_on_country"
+    t.index ["property_type"], name: "index_properties_on_property_type"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
@@ -62,7 +83,6 @@ ActiveRecord::Schema.define(version: 2019_04_29_094631) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "admin", default: false
     t.string "first_name"
     t.string "last_name"
     t.integer "phone_number"
@@ -73,6 +93,6 @@ ActiveRecord::Schema.define(version: 2019_04_29_094631) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "photos", "properties"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "properties", "users"
 end
