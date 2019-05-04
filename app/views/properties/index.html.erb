@@ -3,35 +3,43 @@
     <!-- <h1>Recherche avancé</h1> -->
     <!-- <p>Trouvez la meilleure maison pour votre famille.</p> -->
     <div class="card">
-      <div class="card-body">
-        <%= simple_form_for "", url: search_properties_path , method: :get do |f| %>
-        <div class="form-row">
-          <div class="col-lg-4">
-            <%= f.input :property_type, collection: PropertyType.all, label_method: :name, value_method: :name, required: false, label: false, prompt: "Choisissez le type de biens", input_html: {class: "form-control-lg"}, wrapper_html: {class: "my-1"} %>
+    <div class="card-body">
+          <%= simple_form_for "", url: search_properties_path , method: :get do |f| %>
+          <div class="form-row">
+            <div class="col-lg-4">
+              <%= f.input :property_type, collection: Property::PROPERTY_TYPES, required: false, label: false, prompt: "Choisissez le type de biens", input_html: {class: "form-control-lg"} %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.input :ad_type, collection: Property::AD_TYPES, label: false, prompt: "Choisissez le type d'annonce", input_html: {class: "form-control-lg"} %>
+            </div>
+            <div class="col-lg-4">
+              <%= f.input :country, collection: Property::COUNTRIES, label: false, prompt: "Choisissez un pays", input_html: {class: "form-control-lg"} %>
+            </div>
+
+            <div class="col-lg-4">
+              <%= f.input :city, label: false, placeholder: "Ville", input_html: {class: "form-control-lg"} %>
+            </div>
+
+            <div class="col-lg-2">
+              <%= f.input :min_price, as: :integer, label: false, placeholder: "Prix minimal", input_html: {class: "form-control-lg"} %>
+            </div>
+
+            <div class="col-lg-2">
+              <%= f.input :max_price, as: :integer, label: false, placeholder: "Prix maximum", input_html: {class: "form-control-lg"} %>
+            </div>
+
+            <div class="col-lg-2">
+              <%= f.input :min_area, as: :integer, label: false, placeholder: "Surface minimal", input_html: {class: "form-control-lg"} %>
+            </div>
+
+            <div class="col-lg-2">
+              <%= f.button :button, class: "btn btn-marron btn-block btn-lg btn-rechercher" do %>
+              <i class="fas fa-search"></i>
+              <% end %>
+            </div>
           </div>
-          <div class="col-lg-4">
-            <%= f.input :ad_type, collection: AdType.all, label_method: :name, value_method: :name, label: false, prompt: "Choisissez le type d'annonce", input_html: {class: "form-control-lg"}, wrapper_html: {class: "my-1"} %>
-          </div>
-          <div class="col-lg-3">
-            <%= f.input :country, collection: Country.all, label_method: :name, value_method: :name, label: false, prompt: "Choisissez un pays", input_html: {class: "form-control-lg"}, wrapper_html: {class: "my-1"} %>
-          </div>
-          <div class="col-lg-2">
-            <%#= f.input :city, label: "Dans quel ville ?", input_html: {class: "form-control-lg"}%>
-          </div>
-          <div class="col-lg-2">
-            <%#= f.input :price, as: :integer, placeholder: "Prix max", required: false, label: false %>
-          </div>
-          <div class="col-lg-1">
-            <%= f.button :button, class: "btn btn-marron btn-block btn-lg btn-rechercher" do %>
-            <i class="fas fa-search"></i>
-            <% end %>
-          </div>
+          <% end %>
         </div>
-        <% end %>
-        <p>
-          <a href="" class="re-avance text-dark text-decoration-none">Plus d'option</a>
-        </p>
-      </div>
     </div>
   </div>
 </div>
@@ -49,52 +57,52 @@
       <% @properties.each do |property| %>
       <div class="col-lg-4">
         <div class="card"
-          style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-          <%= image_tag property.photos.first, class: "card-img-top"  %>
-          <% if property.ad_type.name == "A louer" %>
-          <p class="h4" style="position: absolute; top: 10px; left: 10px;">
-            <span class="badge badge-light">
-              A louer
-            </span>
+        style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+        <%= image_tag property.photos.first, class: "card-img-top"  %>
+        <% if property.ad_type.name == "A louer" %>
+        <p class="h4" style="position: absolute; top: 10px; left: 10px;">
+          <span class="badge badge-light">
+            A louer
+          </span>
+        </p>
+        <% elsif property.ad_type.name == "A vendre" %>
+        <p class="h4" style="position: absolute; top: 10px; left: 10px;">
+          <span class="badge badge-light">
+            A vendre
+          </span>
+        </p>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= property.property_type.name + " - " + property.area.to_s %>m<sup>2</sup></%>
+          </h5>
+          <p class="card-text">
+            <i class="fas fa-map-marker-alt"></i>&nbsp;
+            <%= property.country.name.capitalize %> - <%= property.city.capitalize %>
           </p>
-          <% elsif property.ad_type.name == "A vendre" %>
-          <p class="h4" style="position: absolute; top: 10px; left: 10px;">
-            <span class="badge badge-light">
-              A vendre
-            </span>
+          <p class="card-text h4">
+            <strong>
+              <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+            </strong>
           </p>
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= property.property_type.name + " - " + property.area.to_s %>m<sup>2</sup></%>
-            </h5>
-            <p class="card-text">
-              <i class="fas fa-map-marker-alt"></i>&nbsp;
-              <%= property.country.name.capitalize %> - <%= property.city.capitalize %>
-            </p>
-            <p class="card-text h4">
-              <strong>
-                <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
-              </strong>
-            </p>
-            <p class="card-text text-right">
-              <%= link_to "Détail", property, class: "btn btn-marron stretched-link" %>
-            </p>
-          </div>
+          <p class="card-text text-right">
+            <%= link_to "Détail", property, class: "btn btn-marron stretched-link" %>
+          </p>
         </div>
       </div>
-      <% end %>
-      <% else %>
-      <div class="col-lg-12">
-        <p>
-          <%= pluralize(@properties.count, "résultat") %> trouvées pour votre recherche.
-        </p>
-      </div>
-      <% end %>
+    </div>
+    <% end %>
+    <% else %>
+    <div class="col-lg-12">
+      <p>
+        <%= pluralize(@properties.count, "résultat") %> trouvées pour votre recherche.
+      </p>
+    </div>
+    <% end %>
 
-      <div class="col-lg-12">
-        <%== pagy_bootstrap_nav(@pagy) %>
-      </div>
+    <div class="col-lg-12">
+      <%== pagy_bootstrap_nav(@pagy) %>
     </div>
   </div>
+</div>
 </section>

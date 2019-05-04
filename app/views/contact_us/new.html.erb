@@ -20,19 +20,19 @@
                 <%= simple_form_for @contact_us do |f| %>
                 <div class="row">
                     <div class="col-lg-6">
-                        <%= f.input :first_name %>
+                        <%= f.input :first_name, label: "Prénom" %>
                     </div>
                     <div class="col-lg-6">
-                        <%= f.input :last_name %>
+                        <%= f.input :last_name, label: "Nom" %>
                     </div>
                     <div class="col-lg-6">
-                        <%= f.input :email %>
+                        <%= f.input :email, label: "Email" %>
                     </div>
                     <div class="col-lg-6">
-                        <%= f.input :phone_number %>
+                        <%= f.input :phone_number, label: "Numero de téléphone" %>
                     </div>
                     <div class="col-lg-12">
-                        <%= f.input :message, as: :text %>
+                        <%= f.input :message, as: :text, label: "Message", input_html: { rows: 5 } %>
                     </div>
                     <div class="col-lg-12">
                         <%= f.submit "Envoyer", class: "btn btn-marron" %>
@@ -48,20 +48,19 @@
                         <li>
                             <strong>Adresse</strong>
                             <p>
-                                4321 California St,
-                                San Francisco, CA 12345
+                                xxxxxxxxxxxx
                             </p>
                         </li>
                         <li>
                             <strong>Téléphone</strong>
                             <p>
-                                +1 123 456 1234
+                                xxxxxxxxxxxx
                             </p>
                         </li>
                         <li>
                             <strong>Email</strong>
                             <p>
-                                <%= mail_to "rover-house@exemple.com", "rover-house@exemple.com", class: "text-dark" %>
+                                <%= mail_to "xxxxxxxxxxxx", "xxxxxxxxxxxx", class: "text-dark" %>
                             </p>
                         </li>
                     </ul>

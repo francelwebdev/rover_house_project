@@ -1,108 +1,112 @@
-  <div class="jumbotron jumbotron-fluid mb-0 jumbotron-home-page d-flex flex-column justify-content-center">
-    <div class="container text-center">
-      <h1 class="display-4 text-white">Bienvenue sur <strong>ROVER HOUSE</strong></h1>
-      <p class="lead text-white">Trouvez la meilleure maison pour votre famille.</p>
-    </div>
-    <div class="container">
-      <div class="card">
-        <div class="card-body">
-          <%= simple_form_for "", url: search_properties_path , method: :get do |f| %>
-          <div class="form-row">
-            <div class="col-lg-4">
-              <%= f.input :property_type, collection: Property::PROPERTY_TYPES, required: false, label: false, prompt: "Choisissez le type de biens", input_html: {class: "form-control-lg"} %>
-            </div>
-            <div class="col-lg-4">
-              <%= f.input :ad_type, collection: Property::AD_TYPES, label: false, prompt: "Choisissez le type d'annonce", input_html: {class: "form-control-lg"} %>
-            </div>
-            <div class="col-lg-3">
-              <%= f.input :country, collection: Property::COUNTRIES, label: false, prompt: "Choisissez un pays", input_html: {class: "form-control-lg"} %>
-            </div>
-            <div class="col-lg-1">
-              <%= f.button :button, class: "btn btn-marron btn-block btn-lg btn-rechercher" do %>
-              <i class="fas fa-search"></i>
-              <% end %>
-            </div>
-          </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
+<% set_meta_tags title: 'Accueil',
+description: 'Rover House - Annonces immobilières.',
+keywords: 'Annonces immobilières' %>
+
+<div class="jumbotron jumbotron-fluid mb-0 jumbotron-home-page d-flex flex-column justify-content-center">
+  <div class="container text-center">
+    <h1 class="display-4 text-white">Bienvenue sur <strong>ROVER HOUSE</strong></h1>
+    <p class="lead text-white">Trouvez la meilleure maison pour votre famille.</p>
   </div>
-
-  <section class="container-fluid py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 py-3">
-          <h3 class="text-center">Dernières annonces immobilières publiés</h3>
-        </div>
-        <div class="col-lg-12">
-          <div class="owl-carousel owl-theme owl-home-page">
-            <% if @properties.present? %>
-            <% @properties.each do |property| %>
-            <div class="item">
-              <div class="card"
-                style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-
-                <%= image_tag property.photos.first, class: "card-img-top"  %>
-
-                <% if property.ad_type_id == 1 %>
-                <p class="h4" style="position: absolute; top: 10px; left: 10px;">
-                  <span class="badge badge-light">
-                    A louer
-                  </span>
-                </p>
-                <% elsif property.ad_type_id == 2 %>
-                <p class="h4" style="position: absolute; top: 10px; left: 10px;">
-                  <span class="badge badge-light">
-                    A vendre
-                  </span>
-                </p>
-                <% end %>
-
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <%= property.property_type.name + " - " + property.area.to_s %>m<sup>2</sup></%>
-                  </h5>
-                  <p class="card-text">
-                    <i class="fas fa-map-marker-alt"></i>&nbsp;
-                    <%= property.country.name.capitalize %> - <%= property.city.capitalize %>
-                  </p>
-                  <p class="card-text h4">
-                    <strong>
-                      <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
-                    </strong>
-                  </p>
-                  <p class="card-text text-right">
-                    <%= link_to "Détail", property, class: "btn btn-marron stretched-link" %>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <% end %>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <%= simple_form_for "", url: search_properties_path , method: :get do |f| %>
+        <div class="form-row">
+          <div class="col-lg-4">
+            <%= f.input :property_type, collection: Property::PROPERTY_TYPES, required: false, label: false, prompt: "Choisissez le type de biens", input_html: {class: "form-control-lg"} %>
+          </div>
+          <div class="col-lg-4">
+            <%= f.input :ad_type, collection: Property::AD_TYPES, label: false, prompt: "Choisissez le type d'annonce", input_html: {class: "form-control-lg"} %>
+          </div>
+          <div class="col-lg-3">
+            <%= f.input :country, collection: Property::COUNTRIES, label: false, prompt: "Choisissez un pays", input_html: {class: "form-control-lg"} %>
+          </div>
+          <div class="col-lg-1">
+            <%= f.button :button, class: "btn btn-marron btn-block btn-lg btn-rechercher" do %>
+            <i class="fas fa-search"></i>
             <% end %>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container-fluid py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 py-3">
-          <h3 class="text-center">Trouver un biens immobilier par pays</h3>
-        </div>
-        <% Property::COUNTRIES.each do |country| %>
-        <div class="col-lg-3 my-2">
-          <%= link_to properties_path(country: country), class: "text-decoration-none text-dark" do %>
-          <div class="card" style="height: 200px;">
-            <div class="card-body d-flex justify-content-center align-items-center">
-              <h4 class="text-center m-0"><%= country %></h4>
-            </div>
-          </div>
-          <% end %>
         </div>
         <% end %>
       </div>
     </div>
-  </section>
+  </div>
+</div>
+
+<section class="container-fluid py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 py-3">
+        <h3 class="text-center">Dernières annonces immobilières publiés</h3>
+      </div>
+      <div class="col-lg-12">
+        <div class="owl-carousel owl-theme owl-home-page">
+          <% if @properties.present? %>
+          <% @properties.each do |property| %>
+          <div class="item">
+            <div class="card"
+            style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+
+            <%= image_tag property.photos.first, class: "card-img-top"  %>
+
+            <% if property.ad_type_id == 1 %>
+            <p class="h4" style="position: absolute; top: 10px; left: 10px;">
+              <span class="badge badge-light">
+                A louer
+              </span>
+            </p>
+            <% elsif property.ad_type_id == 2 %>
+            <p class="h4" style="position: absolute; top: 10px; left: 10px;">
+              <span class="badge badge-light">
+                A vendre
+              </span>
+            </p>
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= property.property_type.name + " - " + property.area.to_s %>m<sup>2</sup></%>
+              </h5>
+              <p class="card-text">
+                <i class="fas fa-map-marker-alt"></i>&nbsp;
+                <%= property.country.name.capitalize %> - <%= property.city.capitalize %>
+              </p>
+              <p class="card-text h4">
+                <strong>
+                  <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+                </strong>
+              </p>
+              <p class="card-text text-right">
+                <%= link_to "Détail", property, class: "btn btn-marron stretched-link" %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="container-fluid py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 py-3">
+        <h3 class="text-center">Trouver un biens immobilier par pays</h3>
+      </div>
+      <% Property::COUNTRIES.each do |country| %>
+      <div class="col-lg-3 my-2">
+        <%= link_to properties_path(country: country), class: "text-decoration-none text-dark" do %>
+        <div class="card" style="height: 200px;">
+          <div class="card-body d-flex justify-content-center align-items-center">
+            <h4 class="text-center m-0"><%= country %></h4>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>

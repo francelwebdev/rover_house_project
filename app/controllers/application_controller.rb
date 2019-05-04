@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    layout :layout_to_use
+
     include Pagy::Backend
     
     protect_from_forgery
@@ -21,5 +23,17 @@ class ApplicationController < ActionController::Base
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role])
         # devise_parameter_sanitizer.permit(:account_update, keys: [])
     end
-    
+
+    private
+
+    def layout_to_use
+        if user_signed_in? 
+            if current_user.is_admin?
+            "admin"
+            else
+                "application"
+            end
+        end
+  end
+
 end

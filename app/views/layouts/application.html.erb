@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <title>RoverHouse - <%= controller_name + '/' + action_name  %></title>
+  <!-- <title></title> -->
+  <%= display_meta_tags site: 'Rover House' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body>
+<body class="<%= controller_name + '/' + action_name  %>">
   <% if flash[:notice] %>
   <div class="alert alert-success mb-0" role="alert">
     <p class="text-center mb-0">

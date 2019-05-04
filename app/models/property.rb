@@ -2,11 +2,14 @@ class Property < ApplicationRecord
     include SearchCop
 
     search_scope :search do
-        attributes property_type: "property_type.name"
-        attributes ad_type: "ad_type.name"
-        attributes country: "country.name"
-        # attributes :price, :category, :ad_type, :country, :city, :location
+        # attributes property_type: "property_type.name"
+        # attributes ad_type: "ad_type.name"
+        # attributes country: "country.name"
+        attributes :price, :property_type, :ad_type, :country, :city
     end
+
+    # after_create :set_expiry_date
+
 
     PROPERTY_TYPES = ["Appartement", "Terrain", "Suite", "Motel", "Hôtel", "Maison", "Villa", "Parcelle", "Domaine", "Bureau", "Boutique", "Immeuble"].sort
 
@@ -32,5 +35,14 @@ class Property < ApplicationRecord
 #       errors.add(:images, "All the images must be less than 1MB")  if image.size > 1.megabytes
 #     end
 #   end
+
+
+# private
+
+# def set_expiry_date
+#     expiry_date = Date.today + 30.days
+#     self.update_column(:expires_on, expiry_date)
+# end
+
 
 end

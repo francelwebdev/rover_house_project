@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-# gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -66,10 +66,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #---- MES GEMS ----#
 #--------------------------#
 
-# Serveur web et serveur d'application en dev et prod
-  gem "passenger"
-# Serveur web et serveur d'application en dev et prod
-
 # Pour l'administration
 gem 'administrate'
 gem 'rails_admin'
@@ -97,6 +93,10 @@ group :development do
 end
 
 group :production do
+  # Serveur web et serveur d'application en dev et prod
+  gem "passenger"
+# Serveur web et serveur d'application en dev et prod
+
 # Production database
 # gem 'mysql2'
 # Production database

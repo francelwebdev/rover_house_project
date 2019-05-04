@@ -9,8 +9,8 @@ class PropertiesController < ApplicationController
       @pagy, @properties = pagy(Property.search(ad_type: params[:ad_type]))
     elsif params.has_key?(:property_type) and params.has_key?(:ad_type) and params.has_key?(:country)
       @pagy, @properties = pagy(Property.search(property_type: params[:property_type], ad_type: params[:ad_type], country: params[:country]))
-    elsif params.has_key?(:property_type) and params.has_key?(:ad_type) and params.has_key?(:country) and params.has_key?(:city) and params.has_key?(:maximm_price) and params.has_key?(:minimum_area)
-      
+    elsif params.has_key?(:country)
+      @pagy, @properties = pagy(Property.search(country: params[:country]))
     else
       @pagy, @properties = pagy(Property.all.includes(:property_type, :ad_type, :country))
     end
