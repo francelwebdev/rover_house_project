@@ -1,8 +1,10 @@
 <%= simple_form_for(property) do |form| %>
 
+<% if Rails.env.development? %>
 <p>
   <%= property.errors.messages.inspect %>
 </p>
+<% end %>
 
 <div class="card">
   <div class="card-header">
@@ -11,16 +13,16 @@
   <div class="card-body">
     <div class="form-row">
       <div class="col-lg-6">
-        <%= form.input :ad_type, collection: Property::AD_TYPES, include_blank: false, label: "Type d'annonce" %>
+        <%= form.input :ad_type, collection: Property::AD_TYPES, include_blank: false, label: "Type d'annonce", include_blank: true %>
       </div>
       <div class="col-lg-6">
-        <%= form.input :property_type, collection: Property::PROPERTY_TYPES, include_blank: false, label: "Type de biens" %>
+        <%= form.input :property_type, collection: Property::PROPERTY_TYPES, include_blank: false, label: "Type de biens", include_blank: true %>
       </div>
       <div class="col-lg-3">
-        <%= form.input :area, as: :integer, label: "Surface du biens" %>
+        <%= form.input :area, as: :integer, label: "Surface du biens", hint: "Nombres de m2" %>
       </div>
       <div class="col-lg-3">
-        <%= form.input :price, as: :integer, label: "Prix de vente ou location" %>
+        <%= form.input :price, as: :integer, label: "Prix", hint: "Le prix de vente ou de location" %>
       </div>
       <div class="col-lg-3">
         <%= form.input :bedroom, as: :integer, required: true, label: "Nombre de chambres" %>
@@ -44,10 +46,10 @@
   <div class="card-body">
     <div class="form-row">
       <div class="col-lg-6">
-        <%= form.input :country, collection: Property::COUNTRIES, include_blank: false, label: "Pays" %>
+        <%= form.input :country, collection: Property::COUNTRIES, include_blank: false, label: "Pays", include_blank: true, hint: "Dans quel pays se trouve le biens ?" %>
       </div>
       <div class="col-lg-6">
-        <%= form.input :city, label: "Ville" %>
+        <%= form.input :city, label: "Ville", hint: "Dans quel ville se trouve le biens ?" %>
       </div>
     </div>
   </div>
@@ -61,12 +63,19 @@
   </div>
   <div class="card-body">
     <div class="form-row">
+
       <!-- <div class="col-lg-4"> -->
       <%#= form.drag_and_drop_file_field :photos, 'Drag and drop images here!' %>
       <!-- </div> -->
+
+      <%#= form.input :photos, as: :file, input_html: { multiple: true }, hint: "3 photos maximum acceptés et la taille de chacune des photos ne doit pas dépasser 1Mb ou 1Mo." %>
+
+
       <div class="col-lg-12">
-        <%= form.input :photos, as: :file, input_html: { multiple: true }, hint: "3 photos maximum acceptés et la taille de chacune des photos ne doit pas dépasser 1Mb ou 1Mo." %>
+        <%= form.input :photos, as: :file, input_html: { multiple: true }, hint: "3 photos maximum acceptés. La taille de chacunes des photos ne doit pas dépasser 1Mb." %>
       </div>
+
+
     </div>
   </div>
 </div>
@@ -91,7 +100,6 @@
 
 <br>
 
-<% if current_user.phone_number.blank? %>
 <%= form.simple_fields_for :user do |user_form| %>
 <div class="card">
   <div class="card-header">
@@ -100,15 +108,14 @@
   <div class="card-body">
     <div class="form-row">
       <div class="col-lg-6">
-        <%= user_form.input :email, as: :email, label: "Adresse email", input_html: {value: current_user.email}, readonly: true  %>
+        <%= user_form.input :email, as: :email, label: "Adresse email", readonly: true %>
       </div>
       <div class="col-lg-6">
-        <%= user_form.input :phone_number, as: :tel, label: "Numéro de téléphone"  %>
+        <%= user_form.input :phone_number, as: :tel, label: "Numéro de téléphone", readonly: true %>
       </div>
     </div>
   </div>
 </div>
-<% end %>
 <% end %>
 
 <br>

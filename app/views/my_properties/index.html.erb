@@ -1,2 +1,59 @@
-<h1>MyProperties#index</h1>
-<p>Find me in app/views/my_properties/index.html.erb</p>
+<% set_meta_tags title: 'Mes annonces',
+description: 'Mes annonces publiés sur Rover House',
+keywords: 'Annonces immobilières' %>
+
+<section class="container-fluid py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>Mes annonces</h3>
+                <p>
+                    <%= pluralize(@my_properties.count, "annonce") %> publié.
+                </p>
+            </div>
+            <% if @properties.present? %>
+            <% @my_properties.each do |property| %>
+            <div class="col-lg-4 my-3">
+                <div class="card">
+                    <%= image_tag property.photos.first, class: "card-img-top"  %>
+                    <% if property.ad_type == "A louer" %>
+                    <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
+                        <span class="badge badge-light">
+                            A louer
+                        </span>
+                    </p>
+                    <% elsif property.ad_type == "A vendre" %>
+                    <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
+                        <span class="badge badge-light">
+                            A vendre
+                        </span>
+                    </p>
+                    <% end %>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= property.property_type + " - " + property.area.to_s %>m<sup>2</sup></%>
+                        </h5>
+                        <p class="card-text">
+                            <i class="fas fa-map-marker-alt"></i>&nbsp;
+                            <%= property.country.capitalize %> - <%= property.city.capitalize %>
+                        </p>
+                        <p class="card-text h4">
+                            <strong>
+                                <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+                            </strong>
+                        </p>
+                        <p class="card-text text-right">
+                            <%= link_to "Détail", property, class: "btn btn-marron btn-sm stretched-link" %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            <% end %>
+
+            <div class="col-lg-12">
+                <%== pagy_bootstrap_nav(@pagy) %>
+            </div>
+        </div>
+    </div>
+</section>

@@ -6,10 +6,10 @@ fr:
       property:
         title: "Titre de l'annonce"
         price: "Prix"
-        area: "Surface (en m2)"
+        area: "Surface du biens"
         description: "Description de l'annonce"
         address: "Adresse/Quartier"
-        city: "Commune"
+        city: "Ville"
         room: "Nombres de pièce"
         available: "Disponible ?"
         deposit: "Avance (nombres de mois)"
@@ -17,6 +17,10 @@ fr:
         ad_type: "Type d'annonce"
         etage: "Étage"
         feature: "Caractéristique"
+        bedroom: "Nombre de chambre"
+        bathroom: "Nombre de salle de bain"
+        country: "Pays"
+        sponsored: "Sponsoriser"
 
 
 # Validation des attachement pour active_storage

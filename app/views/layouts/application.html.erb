@@ -1,121 +1,135 @@
-<!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
+  <!DOCTYPE html>
+  <html lang="<%= I18n.locale %>">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <!-- <title></title> -->
-  <%= display_meta_tags site: 'Rover House' %>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= display_meta_tags site: 'ROVER HOUSE' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+  </head>
 
-<body class="<%= controller_name + '/' + action_name  %>">
-  <% if flash[:notice] %>
-  <div class="alert alert-success mb-0" role="alert">
-    <p class="text-center mb-0">
-      <strong><%= flash[:notice] %></strong>
-    </p>
-  </div>
-  <% elsif flash[:alert] %>
-  <div class="alert alert-danger mb-0" role="alert">
-    <p class="text-center mb-0">
-      <strong><%= flash[:alert] %></strong>
-    </p>
-  </div>
-  <% end %>
-
-  <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
-      <div class="container">
-        <%= link_to root_path, class: "navbar-brand" do %>
-        <h2 class="mb-0">ROVER HOUSE</h2>
-        <% end %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+  <body class="<%= controller_name + '/' + action_name  %>">
+    <% if flash[:notice] %>
+    <div class="alert alert-success mb-0 rounded-0" role="alert">
+      <p class="text-center mb-0">
+        <%= flash[:notice] %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
         </button>
+      </p>
+    </div>
+    <% elsif flash[:alert] %>
+    <div class="alert alert-danger mb-0 rounded-0" role="alert">
+      <p class="text-center mb-0">
+        <%= flash[:alert] %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </p>
+    </div>
+    <% end %>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <!-- <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li> -->
-            <li class="nav-item">
-              <%= link_to "Accueil", root_path, class: "nav-link"  %>
-            </li>
-
-            <% Property::AD_TYPES.each do |ad_type| %>
-            <% if ad_type == "A louer" %>
-            <li class="nav-item">
-              <%= link_to "Louer", properties_path(ad_type: ad_type), class: "nav-link"  %>
-            </li>
-            <% elsif ad_type == "A vendre" %>
-            <li class="nav-item">
-              <%= link_to "Acheter", properties_path(ad_type: ad_type), class: "nav-link"  %>
-            </li>
-            <% end %>
-            <% end %>
-
-            <li class="nav-item">
-              <%= link_to "Aménager", root_path, class: "nav-link"  %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Vendre", new_property_path, class: "nav-link"  %>
-            </li>
-
-            <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li> -->
-          </ul>
-
-          <% if user_signed_in? %>
-          <ul class="list-unstyled list-inline ml-auto text-center mb-0">
-            <li class="list-inline-item dropdown">
-              <%= link_to current_user.name.first.capitalize, edit_user_registration_path, class: "nav-link text-dark dropdown-toggle", id: "navbarDropdown", role: "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false"  %>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <%= link_to 'Mes annonces', my_properties_path, :class => 'dropdown-item' %>
-                <%= link_to 'Mon profile', profile_path, :class => 'dropdown-item' %>
-                <%= link_to 'Mon compte', edit_user_registration_path, :class => 'dropdown-item' %>
-                <div class="dropdown-divider"></div>
-                <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}, id: "deconnexion"  %>
-              </div>
-            </li>
-            <li class="list-inline-item">
-              <%= link_to "Déposer une annonce", new_property_path, class: "btn btn-marron" %>
-            </li>
-          </ul>
-          <% else %>
-          <ul class="list-unstyled list-inline ml-auto text-center mb-0">
-            <li class="list-inline-item">
-              <%= link_to "Accès client", new_user_session_path, class: "btn btn-light" %>
-            </li>
-            <li class="list-inline-item">
-              <%= link_to "Déposer une annonce", new_property_path, class: "btn btn-marron" %>
-            </li>
-          </ul>
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow p-lg-0">
+        <div class="container">
+          <%= link_to root_path, class: "navbar-brand mr-0" do %>
+          <h2 class="mb-0">ROVER HOUSE</h2>
           <% end %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li> -->
+              <li class="nav-item">
+                <%= link_to "Accueil", root_path, class: "nav-link"  %>
+              </li>
+
+              <% Property::AD_TYPES.each do |ad_type| %>
+              <% if ad_type == "A louer" %>
+              <li class="nav-item">
+                <%= link_to "Louer", properties_path(ad_type: ad_type), class: "nav-link"  %>
+              </li>
+              <% elsif ad_type == "A vendre" %>
+              <li class="nav-item">
+                <%= link_to "Acheter", properties_path(ad_type: ad_type), class: "nav-link"  %>
+              </li>
+              <% end %>
+              <% end %>
+
+              <li class="nav-item">
+                <%= link_to "Aménager", root_path, class: "nav-link"  %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Vendre", new_property_path, class: "nav-link"  %>
+              </li>
+
+              <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+            </ul>
+
+            <% if user_signed_in? %>
+            <% if current_user.is_admin? and current_user.role == "Admin" %>
+            <ul class="list-unstyled list-inline ml-auto text-center mb-0">
+              <li class="list-inline-item">
+                <%= link_to "Accéder à l'administration", admin_root_path, class: "btn btn-marron" %>
+              </li>
+            </ul>
+            <% else %>
+            <ul class="list-unstyled list-inline ml-auto text-center mb-0">
+              <li class="list-inline-item dropdown">
+                <%= link_to current_user.name.first.capitalize, edit_user_registration_path, class: "nav-link text-dark dropdown-toggle", id: "navbarDropdown", role: "button", "data-toggle" => "dropdown", "aria-haspopup" => "true", "aria-expanded" => "false"  %>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <%= link_to 'Mes annonces', my_properties_path, :class => 'dropdown-item' %>
+                  <%#= link_to 'Mon profile', profile_path, :class => 'dropdown-item' %>
+                  <%= link_to 'Mon profile', edit_user_registration_path, :class => 'dropdown-item' %>
+                  <div class="dropdown-divider"></div>
+                  <%= link_to "Déconnexion", destroy_user_session_path, method: :delete, :class => 'dropdown-item', data: {confirm: "Are your sûre ?"}, id: "deconnexion"  %>
+                </div>
+              </li>
+              <li class="list-inline-item">
+                <%= link_to "Déposer une annonce", new_property_path, class: "btn btn-marron" %>
+              </li>
+            </ul>
+            <% end %>
+            <% else %>
+            <ul class="list-unstyled list-inline ml-auto text-center mb-0">
+              <li class="list-inline-item">
+                <%= link_to "Connexion", new_user_session_path, class: "btn btn-secondary" %>
+              </li>
+              <li class="list-inline-item">
+                <%= link_to "Déposer une annonce", new_property_path, class: "btn btn-marron" %>
+              </li>
+            </ul>
+            <% end %>
+
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
 
-  <main>
-    <%= yield %>
-  </main>
+    <main>
+      <%= yield %>
+    </main>
 
-  <!-- <section class="container-fluid py-5" style="background-color: #a1887f ;">
+    <!-- <section class="container-fluid py-5" style="background-color: #a1887f ;">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -131,72 +145,72 @@
   </div>
 </section> -->
 
-  <footer class="container-fluid py-5" style="background-color: #424242;">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <h3 class="text-white">L'entreprise ROVER HOUSE</h3>
-          <ul class="list-unstyled">
-            <li>
-              <%= link_to "Nous contacter", nous_contacter_path, class: "text-white" %>
-            </li>
-            <li>
-              <%= link_to "Mentions Légales", root_path, class: "text-white" %>
-            </li>
-            <li>
-              <%= link_to "Politique de Confidentialité", root_path, class: "text-white" %>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-4">
-          <h3 class="text-white">Services Pro</h3>
-          <ul class="list-unstyled">
-            <li>
-              <%= link_to "Tout nos services pros", root_path, class: "text-white" %>
-            </li>
-            <li>
-              <%= link_to "Accès client", new_user_session_path, class: "text-white" %>
-            </li>
-            <li>
-              <%= link_to "Mes annonces sur ROVER HOUSE", my_properties_path, class: "text-white" %>
-            </li>
-
-          </ul>
-        </div>
-        <div class="col-lg-4">
-          <h3 class="text-white">Nous contacter</h3>
-          <address>
+    <footer class="container-fluid py-5" style="background-color: #424242;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <h3 class="text-white">L'entreprise ROVER HOUSE</h3>
             <ul class="list-unstyled">
               <li>
-                <p class="text-white">
-                  <i class="fas fa-map-marker-alt"></i>&nbsp;
-                  xxxxxxxxxxxx
-                </p>
+                <%= link_to "Nous contacter", nous_contacter_path, class: "text-white" %>
               </li>
               <li>
-                <p class="text-white">
-                  <i class="fas fa-phone"></i>&nbsp;
-                  xxxxxxxxxxxx
-                </p>
+                <%= link_to "Mentions Légales", root_path, class: "text-white" %>
               </li>
               <li>
-                <p class="text-white">
-                  <i class="fas fa-envelope"></i>&nbsp;
-                  <%= mail_to "xxxxxxxxxxxx", "xxxxxxxxxxxx", class: "text-white" %>
-                </p>
+                <%= link_to "Politique de Confidentialité", root_path, class: "text-white" %>
               </li>
             </ul>
-          </address>
-        </div>
-        <div class="col-lg-12">
-          <hr style="border: 0.3px solid grey">
-        </div>
-        <div class="col-lg-12">
-          <p class="text-center text-white m-0">&copy; Copyright 2019 ROVER HOUSE. Tous droits réservés.</p>
+          </div>
+          <div class="col-lg-4">
+            <h3 class="text-white">Services Pro</h3>
+            <ul class="list-unstyled">
+              <li>
+                <%= link_to "Tout nos services Pro", root_path, class: "text-white" %>
+              </li>
+              <li>
+                <%= link_to "Accès client", new_user_session_path, class: "text-white" %>
+              </li>
+              <li>
+                <%= link_to "Mes annonces sur ROVER HOUSE", my_properties_path, class: "text-white" %>
+              </li>
+
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h3 class="text-white">Nous contacter</h3>
+            <address>
+              <ul class="list-unstyled">
+                <li>
+                  <p class="text-white">
+                    <i class="fas fa-map-marker-alt"></i>&nbsp;
+                    xxxxxxxxxxxx
+                  </p>
+                </li>
+                <li>
+                  <p class="text-white">
+                    <i class="fas fa-phone"></i>&nbsp;
+                    xxxxxxxxxxxx
+                  </p>
+                </li>
+                <li>
+                  <p class="text-white">
+                    <i class="fas fa-envelope"></i>&nbsp;
+                    <%= mail_to "xxxxxxxxxxxx", "xxxxxxxxxxxx", class: "text-white" %>
+                  </p>
+                </li>
+              </ul>
+            </address>
+          </div>
+          <div class="col-lg-12">
+            <hr style="border: 0.3px solid grey">
+          </div>
+          <div class="col-lg-12">
+            <p class="text-center text-white m-0">&copy; Copyright 2019 ROVER HOUSE. Tous droits réservés.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 
-</html>
+  </html>

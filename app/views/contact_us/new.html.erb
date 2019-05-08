@@ -26,10 +26,10 @@
                         <%= f.input :last_name, label: "Nom" %>
                     </div>
                     <div class="col-lg-6">
-                        <%= f.input :email, label: "Email" %>
+                        <%= f.input :email, as: :email, label: "Email" %>
                     </div>
                     <div class="col-lg-6">
-                        <%= f.input :phone_number, label: "Numero de téléphone" %>
+                        <%= f.input :phone_number, as: :tel, label: "Numero de téléphone" %>
                     </div>
                     <div class="col-lg-12">
                         <%= f.input :message, as: :text, label: "Message", input_html: { rows: 5 } %>

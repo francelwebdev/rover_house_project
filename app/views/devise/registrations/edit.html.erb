@@ -8,6 +8,8 @@
             <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= f.error_notification %>
             <div class="form-inputs">
+              <%= f.input :name, placeholder: "Prénom et Nom", autofocus: true, label: "Votre nom" %>
+              <%= f.input :phone_number, as: :tel %>
               <%= f.input :email, required: true, autofocus: true %>
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p><%= t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email) %></p>
@@ -25,13 +27,16 @@
                 input_html: { autocomplete: "current-password" } %>
             </div>
             <div class="form-actions">
-              <%= f.button :submit, t(".update") %>
+              <%= f.button :submit, t(".update"), class: "btn btn-marron btn-block" %>
             </div>
             <% end %>
-            <h3><%= t(".cancel_my_account") %></h3>
-            <p><%= t(".unhappy") %>
-              <%= link_to t(".cancel_my_account"), registration_path(resource_name), data: { confirm: t(".are_you_sure") }, method: :delete %>
-            </p>
+            <div class="text-center">
+              <!-- <h3><%#= t(".cancel_my_account") %></h3> -->
+              <p>
+                <%= t(".unhappy") %>
+                <%= link_to t(".cancel_my_account"), registration_path(resource_name), data: { confirm: t(".are_you_sure") }, method: :delete %>
+              </p>
+            </div>
           </div>
         </div>
       </div>

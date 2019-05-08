@@ -216,15 +216,3 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
     pm: pm
-
-
-    # Mon code
-  activemodel:
-    attributes:
-      contactu:
-        first_name: 'Prénom'
-        last_name: "Nom"
-        email: Email
-        phone_number: "Téléphone" 
-        message: "Message"
-    # Mon code

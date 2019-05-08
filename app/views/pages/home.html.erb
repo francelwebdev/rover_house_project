@@ -10,7 +10,7 @@ keywords: 'Annonces immobilières' %>
   <div class="container">
     <div class="card">
       <div class="card-body">
-        <%= simple_form_for "", url: search_properties_path , method: :get do |f| %>
+        <%= simple_form_for "", url: search_properties_path, method: :get do |f| %>
         <div class="form-row">
           <div class="col-lg-4">
             <%= f.input :property_type, collection: Property::PROPERTY_TYPES, required: false, label: false, prompt: "Choisissez le type de biens", input_html: {class: "form-control-lg"} %>
@@ -33,61 +33,65 @@ keywords: 'Annonces immobilières' %>
   </div>
 </div>
 
-<section class="container-fluid py-5">
+<section class="container-fluid py-5 bg-light">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 py-3">
-        <h3 class="text-center">Dernières annonces immobilières publiés</h3>
+      <div class="col-lg-12 py-3 my-3">
+        <h3 class="text-center">Dernières annonces immobilières</h3>
       </div>
-      <div class="col-lg-12">
+      <div class="col-lg-12 my-3">
         <div class="owl-carousel owl-theme owl-home-page">
           <% if @properties.present? %>
           <% @properties.each do |property| %>
           <div class="item">
-            <div class="card"
-            style="border-bottom: 3px solid #5d4037; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+            <div class="card">
 
-            <%= image_tag property.photos.first, class: "card-img-top"  %>
+              <%= image_tag property.photos.first, class: "card-img-top"  %>
 
-            <% if property.ad_type_id == 1 %>
-            <p class="h4" style="position: absolute; top: 10px; left: 10px;">
-              <span class="badge badge-light">
-                A louer
-              </span>
-            </p>
-            <% elsif property.ad_type_id == 2 %>
-            <p class="h4" style="position: absolute; top: 10px; left: 10px;">
-              <span class="badge badge-light">
-                A vendre
-              </span>
-            </p>
-            <% end %>
+              <% if property.ad_type == "A louer" %>
+              <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
+                <span class="badge badge-light">
+                  A louer
+                </span>
+              </p>
+              <% elsif property.ad_type == "A vendre" %>
+              <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
+                <span class="badge badge-light">
+                  A vendre
+                </span>
+              </p>
+              <% end %>
 
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= property.property_type.name + " - " + property.area.to_s %>m<sup>2</sup></%>
-              </h5>
-              <p class="card-text">
-                <i class="fas fa-map-marker-alt"></i>&nbsp;
-                <%= property.country.name.capitalize %> - <%= property.city.capitalize %>
-              </p>
-              <p class="card-text h4">
-                <strong>
-                  <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
-                </strong>
-              </p>
-              <p class="card-text text-right">
-                <%= link_to "Détail", property, class: "btn btn-marron stretched-link" %>
-              </p>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= property.property_type + " - " + property.area.to_s %>m<sup>2</sup></%>
+                </h5>
+                <p class="card-text">
+                  <i class="fas fa-map-marker-alt"></i>&nbsp;
+                  <%= property.country.capitalize %> - <%= property.city.capitalize %>
+                </p>
+                <p class="card-text h4">
+                  <strong>
+                    <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+                  </strong>
+                </p>
+                <p class="card-text text-right">
+                  <%= link_to "Détail", property, class: "btn btn-marron btn-sm stretched-link" %>
+                </p>
+              </div>
             </div>
           </div>
+          <% end %>
+          <% end %>
         </div>
-        <% end %>
-        <% end %>
+      </div>
+      <div class="col-lg-12 my-3">
+        <p class="text-center m-0">
+          <%= link_to "Voir tout les annonces", properties_path, class: "btn btn-marron" %>
+        </p>
       </div>
     </div>
   </div>
-</div>
 </section>
 
 <section class="container-fluid py-5">

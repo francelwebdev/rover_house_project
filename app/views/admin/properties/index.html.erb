@@ -1,0 +1,61 @@
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h2 class="">Les biens immobilières</h2>
+      <div class="btn-toolbar mb-2 mb-md-0">
+          <!-- <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div> -->
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button> -->
+
+          <%= link_to "Ajouter une annonce", new_admin_property_path, class: "btn btn-marron btn-sm" %>
+      </div>
+  </div>
+
+  <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+          <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Type d'annonce</th>
+                  <th scope="col">Type de biens</th>
+                  <th scope="col">Surface</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Sponsorisé</th>
+                  <th scope="col">Publié le</th>
+                  <th scope="col">Expire dans</th>
+                  <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% @properties.each do |property| %>
+              <tr>
+                  <th scope="row"><%= property.id %></th>
+                  <td><%= property.ad_type %></td>
+                  <td><%= property.property_type %></td>
+                  <td><%= property.area %> m<sup>2</sup></td>
+                  <% if property.ad_type == "A louer" %>
+                  <td><%= property.price %> /mois</td>
+                  <% elsif property.ad_type == "A vendre" %>
+                  <td><%= property.price %></td>
+                  <% end %>
+                  <th><%= property.sponsored? ? "Oui" : "Non" %></th>
+                  <th><%= property.created_at.to_formatted_s(:short) %></th>
+                  <th><%= time_ago_in_words property.expires_on %></th>
+                  <td>
+                      <ul class="list-unstyled d-flex justify-content-around">
+                          <li>
+                              <%= link_to "Voir", property_path(id: property.id), class: "btn btn-secondary btn-sm" %>
+                          </li>
+                          <li>
+                              <%= link_to "Suprimer", admin_property_path(id: property.id), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "êtes vous sûre ?"} %>
+                          </li>
+                      </ul>
+                  </td>
+              </tr>
+              <% end %>
+          </tbody>
+      </table>
+  </div>

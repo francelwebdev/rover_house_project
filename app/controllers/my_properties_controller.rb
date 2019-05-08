@@ -1,5 +1,10 @@
 class MyPropertiesController < ApplicationController
+    include Pagy::Backend
+
+    before_action :authenticate_user!
+
   def index
-    @my_properties = current_user.properties
+    @pagy, @my_properties = pagy(current_user.properties)
   end
+  
 end

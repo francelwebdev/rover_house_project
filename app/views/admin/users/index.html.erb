@@ -1,0 +1,56 @@
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h2 class="">Les utilisateurs</h2>
+      <div class="btn-toolbar mb-2 mb-md-0">
+          <!-- <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div> -->
+          <!-- <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+        </button> -->
+
+          <a href="" class="btn btn-marron btn-sm">Ajouter un utilisateur</a>
+      </div>
+  </div>
+
+  <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+          <thead>
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Prénom</th>
+                  <th scope="col">NOM</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Téléphone</th>
+                  <th scope="col">Rôle</th>
+                  <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% @users.each do |user| %>
+              <tr>
+                  <th scope="row"><%= user.id %></th>
+                  <td><%= user.first_name.capitalize %></td>
+                  <td><%= user.last_name.upcase if user.last_name.present? %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.phone_number %></td>
+                  <td><%= user.role %></td>
+                  <td>
+                      <ul class="list-unstyled d-flex justify-content-around">
+                          <!-- <li>
+                            <%#= link_to "Voir", root_path, class: "btn btn-secondary btn-sm" %>
+                        </li> -->
+                          <li>
+                              <%= link_to "Modifier", root_path, class: "btn btn-secondary btn-sm" %>
+                          </li>
+                          <li>
+                              <%= link_to "Suprimer", root_path, class: "btn btn-danger btn-sm" %>
+                          </li>
+                      </ul>
+                  </td>
+              </tr>
+              <% end %>
+          </tbody>
+      </table>
+  </div>

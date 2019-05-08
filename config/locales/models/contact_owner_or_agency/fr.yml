@@ -1,0 +1,11 @@
+# Mon code
+fr:
+  activemodel:
+    attributes:
+      contact_owner_or_agency:
+        first_name: 'Prénom'
+        last_name: "Nom"
+        email: Email
+        phone_number: "Téléphone" 
+        message: "Message"
+# Mon code

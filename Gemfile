@@ -197,7 +197,7 @@ gem 'data-confirm-modal'
 # gem 'impressionist'
 # gem 'fastentry'
 
-gem "breadcrumbs_on_rails"
+gem "breadcrumbs_on_rails" # je vais enlever ce gem
 # gem 'has_friendship'
 gem 'email_validator'
 gem 'rails_autolink'
@@ -212,7 +212,12 @@ gem 'file_validators'
 gem 'active_storage_drag_and_drop'
 gem 'active_storage_validations'
 gem 'active_storage-postgresql'
+
 # gem 'shrine'
+
+gem 'carrierwave'
+gem 'carrierwave-i18n'
+gem 'carrierwave-postgresql'
 # File Uploading
 
 # Image Processing
@@ -224,7 +229,7 @@ gem 'mini_magick'
 # Moteur de recherche
 # gem "pg_search"
 gem 'search_cop'
-gem 'ransack'
+gem 'ransack' # je vais enlever ce gem
 # gem 'searchkick'
 # Moteur de recherche
 
@@ -243,3 +248,6 @@ gem 'babel-transpiler'
 # Calendars
 # simple_calendar
 # Calendars
+
+
+gem 'mail_form'

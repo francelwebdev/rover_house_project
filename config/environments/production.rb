@@ -99,6 +99,7 @@ Rails.application.configure do
     # ================================================== #
   # Mon code #
   # ================================================== #
+  
   # Pour utiliser le service Cloudinary
   # config.active_storage.service = :cloudinary
 
@@ -119,6 +120,7 @@ config.action_mailer.smtp_settings = {
 
   # config.action_mailer.delivery_method = :postmark
   # config.action_mailer.postmark_settings = { :api_token => Rails.application.credentials.postmark_api_token }
+
   # ================================================== #
   # Mon code #
   # ================================================== #

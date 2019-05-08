@@ -96,8 +96,12 @@
   color: #fff;
 
   &:hover {
-    background-color: #5d4037 !important;
+    background-color: #6d4c41 !important;
     color: white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.1rem #6d4c41 !important;
   }
 }
 
@@ -151,4 +155,8 @@ body>header>nav>div>div.navbar-brand>a.navbar-item.title.is-marginless:hover {
 
 .btn-rechercher {
   // margin-top: 2rem;
+}
+
+.jumbotron .container .card {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) !important;
 }
