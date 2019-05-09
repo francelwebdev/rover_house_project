@@ -23,6 +23,5 @@
 //= require cocoon
 //
 //= require owl.carousel/dist/owl.carousel.min.js
-//= require flickity/dist/flickity.pkgd.min.js
 //= require flatpickr/dist/flatpickr.min.js
 //= require main.js

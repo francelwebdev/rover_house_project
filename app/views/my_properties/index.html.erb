@@ -11,42 +11,55 @@ keywords: 'Annonces immobilières' %>
                     <%= pluralize(@my_properties.count, "annonce") %> publié.
                 </p>
             </div>
-            <% if @properties.present? %>
+            <% if @my_properties.present? %>
             <% @my_properties.each do |property| %>
-            <div class="col-lg-4 my-3">
+            <div class="col-lg-3 mb-3">
                 <div class="card">
-                    <%= image_tag property.photos.first, class: "card-img-top"  %>
-                    <% if property.ad_type == "A louer" %>
-                    <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
-                        <span class="badge badge-light">
-                            A louer
-                        </span>
-                    </p>
-                    <% elsif property.ad_type == "A vendre" %>
-                    <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
-                        <span class="badge badge-light">
-                            A vendre
-                        </span>
-                    </p>
-                    <% end %>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= property.property_type + " - " + property.area.to_s %>m<sup>2</sup></%>
-                        </h5>
-                        <p class="card-text">
-                            <i class="fas fa-map-marker-alt"></i>&nbsp;
-                            <%= property.country.capitalize %> - <%= property.city.capitalize %>
-                        </p>
-                        <p class="card-text h4">
-                            <strong>
-                                <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
-                            </strong>
-                        </p>
-                        <p class="card-text text-right">
-                            <%= link_to "Détail", property, class: "btn btn-marron btn-sm stretched-link" %>
-                        </p>
-                    </div>
-                </div>
+
+              <% if property.photos.present? %>
+              <%= image_tag property.photos.first, class: "card-img-top"  %>
+              <% end %>
+
+              <% if property.ad_type == "A louer" %>
+              <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
+                <span class="badge badge-light">
+                  A louer
+                </span>
+              </p>
+              <% elsif property.ad_type == "A vendre" %>
+              <p class="h4" style="position: absolute; bottom: 190px; left: 10px;">
+                <span class="badge badge-light">
+                  A vendre
+                </span>
+              </p>
+              <% end %>
+
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= property.property_type + " - " + property.area.to_s %>m<sup>2</sup></%>
+                </h5>
+                <p class="card-text">
+                  <i class="fas fa-map-marker-alt"></i>&nbsp;
+                  <%= property.country.capitalize %> - <%= property.city.capitalize %>
+                </p>
+                <p class="card-text h4">
+                  <strong>
+                    <%= number_with_delimiter(property.price) %> <sup>f/mois</sup>
+                  </strong>
+                </p>
+                <ul class="list-unstyled d-flex justify-content-between">
+                    <li>
+                        <%= link_to "Voir", property, class: "btn btn-secondary btn-sm" %>
+                    </li>
+                    <li>
+                        <%= link_to "Modifier", edit_property_path(property), class: "btn btn-secondary btn-sm" %>
+                    </li>
+                    <li>
+                        <%= link_to "Suprimer", property_path(id: property.id), class: "btn btn-danger btn-sm", data: { confirm: "Êtes-vous sûr ?" }, method: :delete %>
+                    </li>
+                </ul>
+              </div>
+            </div>
             </div>
             <% end %>
             <% end %>

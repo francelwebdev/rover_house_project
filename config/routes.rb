@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get "search", to: "properties#index"
     end
   end
-  resource :profile, only: [:show]
+  resource :profile, only: [:show, :edit, :update]
   resources :my_properties, only: [:index]
   resources :contact_us, only: [:create]
   get "nous-contacter", to: "contact_us#new"
@@ -19,10 +19,11 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    root to: 'dashboards#home'
+    root to: 'users#index'
     resources :users
     resources :properties
-    resource :profile, only: [:show]
+    # resource :profile, only: [:show]
+  devise_for :users
   end
   
   get "fradmin", to: redirect("/fr/admin")

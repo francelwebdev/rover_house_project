@@ -2,7 +2,9 @@ class PropertiesController < ApplicationController
     include Pagy::Backend
 
 	before_action :authenticate_user!, except: [:index, :show]
-	before_action :set_property, only: [:show, :edit, :update, :destroy]
+	before_action :set_property, only: [:edit, :destroy]
+	before_action :set_property_avec_les_photos, only: [:show, :update]
+	before_action :verifier_si_lutilisateur_possede_les_informations_de_contact, only: [:new]
 	
 	def index
 		if params.has_key?(:ad_type) and !params.has_key?(:property_type) and !params.has_key?(:country) and !params.has_key?(:city) and !params.has_key?(:max_price) and !params.has_key?(:min_area)
@@ -32,7 +34,6 @@ class PropertiesController < ApplicationController
 	
 
 	def show
-		@property = Property.with_attached_photos.find(params[:id])
 		@contact_owner_or_agency = ContactOwnerOrAgency.new
 	end
 	
@@ -46,7 +47,6 @@ class PropertiesController < ApplicationController
 	def create
 		@property = current_user.properties.build(property_params)
 		if @property.save
-			@property.user.update(phone_number: params[:property][:user_attributes][:phone_number])
 			redirect_to @property, notice: 'Property was successfully created.'
 		else
 			render :new
@@ -71,14 +71,25 @@ class PropertiesController < ApplicationController
 	end
 	
 	private
+
 	# Use callbacks to share common setup or constraints between actions.
 	def set_property
-		@property = Property.with_attached_photos.find(params[:id])
+		@property = Property.find(params[:id])
 	end
 	
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def property_params
-		params.require(:property).permit(:ad_type, :property_type, :country, :sponsored, :price, :bedroom, :bathroom, :area, :description, :city, { photos: [] }, { user_attributes: [:phone_number] })
+		params.require(:property).permit(:ad_type, :property_type, :country, :sponsored, :price, :bedroom, :bathroom, :area, :description, :city, { photos: [] })
+	end
+
+	def set_property_avec_les_photos
+		@property = Property.with_attached_photos.find(params[:id])
+	end
+
+	def verifier_si_lutilisateur_possede_les_informations_de_contact
+		if current_user.phone_number.blank?
+			redirect_to edit_user_registration_path, alert: "SVP, veuillez compléter les informations de votre compte puis cliquer à nouveau sur déposer une annonce."
+		end
 	end
 	
 end

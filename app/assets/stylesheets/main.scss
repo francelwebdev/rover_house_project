@@ -5,18 +5,16 @@
 // Jaune : #f7b918
 
 @font-face {
-  font-family: 'Lato', sans-serif;
-  // font-family: 'Raleway', sans-serif;
-  // font-family: 'Montserrat', sans-serif;
+  // font-family: 'Lato', sans-serif;
+  font-family: 'Raleway', sans-serif;
 
-  src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
-  // src: url("/fonts/Raleway/Raleway-Regular.ttf") format("ttf");
-  // src: url("/fonts/Montserrat/Montserrat-Regular.ttf") format("ttf");
+  // src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
+  src: url("/fonts/Raleway/Raleway-Regular.ttf") format("ttf");
 
 }
 
 * {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 *:not(.fas, .fab) {
@@ -123,40 +121,14 @@ body>header>nav>div>div.navbar-brand>a.navbar-item.title.is-marginless:hover {
   min-height: 100vh;
 }
 
-.carousel-cell {
-  width: 100%;
-  /* full width */
-  height: 50vh;
-  /* height of carousel */
-  margin-right: 10px;
-}
-
-// Pour gérer les 2 arrow de flickity
-/* no circle */
-.flickity-button {
-  background: transparent !important;
-}
-
-/* big previous & next buttons */
-.flickity-prev-next-button {
-  width: 100px;
-  height: 100px;
-}
-
-/* icon color */
-.flickity-button-icon {
-  fill: white;
-}
-
-/* hide disabled button */
-.flickity-button:disabled {
-  display: none;
-}
-
 .btn-rechercher {
   // margin-top: 2rem;
 }
 
 .jumbotron .container .card {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) !important;
+}
+
+.property-card:hover img {
+  opacity: 0.8;
 }

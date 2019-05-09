@@ -16,9 +16,13 @@ class NotificationsMailer < ApplicationMailer
         mail(from: @contact_us_message.email, to: "francel.webdev@gmail.com", subject: "Nouveau message dépuis le formulaire de contact de ROVER HOUSE")
   end
 
-  def contact_owner_or_agency(message_data)
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+  def send_message_to_owner_or_agency(message_data)
+    @destinataire_email = message_data.owner_or_agency_email
+    @expediteur_email = message_data.email
+    @expediteur_first_name = message_data.first_name
+    @expediteur_last_name = message_data.last_name
+    @message = message_data.message
+    @expediteur_phone_number = message_data.phone_number
+    mail(to: @destinataire_email, from: @expediteur_email, reply_to: @expediteur_email, subject: "Message d'un visiteur pour votre annonce sur ROVER HOUSE")
   end
 end

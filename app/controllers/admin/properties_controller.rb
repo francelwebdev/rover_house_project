@@ -1,4 +1,4 @@
-class Admin::PropertiesController < ApplicationController
+class Admin::PropertiesController < Admin::BaseController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   
   def index

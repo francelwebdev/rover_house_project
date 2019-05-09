@@ -13,10 +13,10 @@
     <div class="card-body">
         <div class="form-row">
             <div class="col-lg-6">
-                <%= form.input :ad_type, collection: Property::AD_TYPES, include_blank: false, label: "Type d'annonce" %>
+                <%= form.input :ad_type, collection: Property::AD_TYPES, include_blank: true, label: "Type d'annonce" %>
             </div>
             <div class="col-lg-6">
-                <%= form.input :property_type, collection: Property::PROPERTY_TYPES, include_blank: false, label: "Type de biens" %>
+                <%= form.input :property_type, collection: Property::PROPERTY_TYPES, include_blank: true, label: "Type de biens" %>
             </div>
             <div class="col-lg-3">
                 <%= form.input :area, as: :integer, label: "Surface du biens en m2" %>
@@ -46,7 +46,7 @@
     <div class="card-body">
         <div class="form-row">
             <div class="col-lg-6">
-                <%= form.input :country, collection: Property::COUNTRIES, include_blank: false, label: "Pays" %>
+                <%= form.input :country, collection: Property::COUNTRIES, include_blank: true, label: "Pays" %>
             </div>
             <div class="col-lg-6">
                 <%= form.input :city, label: "Ville" %>

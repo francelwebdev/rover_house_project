@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    @properties = Property.order(created_at: :desc).limit(10).with_attached_photos
+    @properties = Property.order(created_at: :desc).limit(10)
   end
 
   def about_us

@@ -1,85 +1,101 @@
+
+
 <section class="container-fluid py-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
                     <div class="col-lg-12 mb-3">
-
-                        <% if @property.photos.present? %>
-                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-
-                                <div class="carousel-item active">
-                                    <%= image_tag @property.photos.first, class: "img-fluid" %>
-                                </div>
-
-                                <% @property.photos.each do |photo| %>
-                                <div class="carousel-item">
-                                    <%= image_tag photo, class: "img-fluid -block w-100" %>
-                                </div>
-                                <% end %>
-
+                        <% if @property.photos.attached? %>
+                        <div class="owl-carousel owl-theme owl-property-show-page">
+                            <% @property.photos.each do |photo| %>
+                            <div class="item">
+                                <%= image_tag photo, class: "img-fluid" %>
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                            <% end %>
                         </div>
                         <% else %>
                         <p>ANNONCE SANS PHOTO</p>
                         <% end %>
                     </div>
                     <div class="col-lg-12 mb-3">
-                        <div class="row">
-                            <div class="col-lg-12 d-flex justify-content-between">
-                                <h4>
-                                    <%= @property.ad_type.capitalize + " - " + @property.property_type.capitalize + " - " + @property.area.to_s %>m<sup>2</sup>
-                                </h4>
-                                <% if @property.ad_type == "A louer" %>
-                                <h3>
-                                    <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f/mois</sup>
-                                </h3>
-                                <% elsif @property.ad_type == "A vendre" %>
-                                <h3>
-                                    <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f</sup>
-                                </h3>
-                                <% end %>
-                            </div>
-                            <div class="col-lg-12">
-                                <p>
-                                    <i class="fas fa-map-marker-alt"></i>&nbsp;
-                                    <%= @property.country.capitalize %> - <%= @property.city.capitalize %>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 mb-3">
                         <h4>Description</h4>
-                        <hr>
-                        <p class="lead">
+                        <p>
                             <%= @property.description.capitalize %>
                         </p>
                     </div>
-                    <div class="col-lg-12">
-                        <h4>Détails</h4>
-                        <hr>
-
+                    <div class="col-lg-12 mb-3">
+                        <h4>Détail</h4>
+                        <table class="table">
+                            <tr>
+                                <th scope="col">Type d'annonce</th>
+                                <td>
+                                    <%= @property.ad_type.capitalize %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Type de biens</th>
+                                <td>
+                                    <%= @property.property_type.capitalize %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Surface</th>
+                                <td>
+                                    <%= @property.area.to_s %>m<sup>2</sup>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Prix</th>
+                                <td>
+                                    <% if @property.ad_type == "A louer" %>
+                                    <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f/mois</sup>
+                                    <% elsif @property.ad_type == "A vendre" %>
+                                    <%= number_with_delimiter(@property.price)  %>&nbsp; <sup>f</sup>
+                                    <% end %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Pays</th>
+                                <td>
+                                    <%= @property.country.capitalize %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Ville</th>
+                                <td>
+                                    <%= @property.city.capitalize %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Nombre(s) de chambre</th>
+                                <td>
+                                    <%= @property.bedroom %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Nombre(s) de salle de bain</th>
+                                <td>
+                                    <%= @property.bathroom %>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <!-- <div class="col-lg-12">
+                    <!-- <div class="col-lg-12 mb-3">
                         <h4>Localisation</h4>
-                        
                     </div> -->
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="row">
-                    <aside class="col-lg-12">
+                    <div class="col-lg-12 mb-2">
+                    <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Zone administrateur</h3>
+                    </div>
+                    </div>
+                    </div>
+                    <aside class="col-lg-12 mb-2">
                         <div class="card">
                             <div class="card-body">
                                 <% if @property.user.role == "Particulier" %>
@@ -94,74 +110,83 @@
                                         </li>
                                     </ul>
                                 </address>
-                                <% elsif @property.user.role == "Profesionnel" or @property.user.role == "Admin" %>
+                                <% elsif @property.user.role == "Agence" or @property.user.role == "Admin" %>
                                 <h3 class="card-title">Contacter l'agence</h3>
                                 <address class="row">
                                     <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col-lg-3">
-                                                <p>Tél : </p>
+                                            <div class="col-2">
+                                                <p>
+                                                    <i class="fas fa-phone"></i>
+                                                </p>
                                             </div>
-                                            <div class="col-lg-9">
-                                                <p><%= @property.user.phone_number %></p>
+                                            <div class="col-10">
+                                                <p>
+                                                    <%= @property.user.phone_number %>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col-lg-3">
-                                                <p>Email : </p>
+                                            <div class="col-2">
+                                                <p>
+                                                    <i class="fas fa-envelope"></i>
+                                                </p>
                                             </div>
-                                            <div class="col-lg-9">
-                                                <p><%= @property.user.email %></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </address>
-                                <% end %>
-                                <hr>
-                                <p class="card-text text-center">Ou envoyer un message en remplissant
-                                    le formulaire ci-dessous.</p>
-                                <%= simple_form_for @contact_owner_or_agency, url: contact_owners_or_agencies_path do |f| %>
-                                <div class="form-row">
-                                    <div class="col-lg-12 sr-only">
-                                        <%= f.input :property_id, as: :hidden, input_html: {value: @property.id} %>
-                                    </div>
-                                    <div class="col-lg-12 sr-only">
-                                        <%= f.input :owner_or_agency_email, as: :hidden, input_html: {value: @property.user.email} %>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <%= f.input :first_name, label: "Votre prénom" %>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <%= f.input :last_name, label: "Votre nom" %>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <%= f.input :email, as: :email, label: "Votre email" %>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <%= f.input :phone_number, as: :tel, label: "Votre numero de téléphone" %>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <% if Time.now.hour < 12 %>
-                                        <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonjour, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
-                                        <% else %>
-                                        <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonsoir, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
-                                        <% end %>
+                                            <div class="col-10">
+                                                <p>
+                                                   <%= @property.user.email %>
+                                               </p>
+                                           </div>
+                                       </div>
+                                   </div>
 
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <%= f.button :submit, "Envoyer", class: "btn btn-marron"  %>
-                                    </div>
+                               </address>
+                               <% end %>
+                               <hr>
+                               <p class="card-text text-center">Ou envoyer un message en remplissant
+                               le formulaire ci-dessous.</p>
+                               <%= simple_form_for @contact_owner_or_agency, url: contact_owners_or_agencies_path do |f| %>
+                               <div class="form-row">
+                                <div class="col-lg-12 sr-only">
+                                    <%= f.input :property_id, as: :hidden, input_html: {value: @property.id} %>
                                 </div>
-                                <% end %>
+                                <div class="col-lg-12 sr-only">
+                                    <%= f.input :owner_or_agency_email, as: :hidden, input_html: {value: @property.user.email} %>
+                                </div>
+                                <div class="col-lg-12">
+                                    <%= f.input :first_name, label: "Votre prénom" %>
+                                </div>
+                                <div class="col-lg-12">
+                                    <%= f.input :last_name, label: "Votre nom" %>
+                                </div>
+                                <div class="col-lg-12">
+                                    <%= f.input :email, as: :email, label: "Votre email" %>
+                                </div>
+                                <div class="col-lg-12">
+                                    <%= f.input :phone_number, as: :tel, label: "Votre numero de téléphone" %>
+                                </div>
+                                <div class="col-lg-12">
+                                    <% if Time.now.hour < 12 %>
+                                    <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonjour, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
+                                    <% else %>
+                                    <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonsoir, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
+                                    <% end %>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <%= f.button :submit, "Envoyer", class: "btn btn-marron"  %>
+                                </div>
                             </div>
+                            <% end %>
                         </div>
-                        </asi>
-                </div>
+                    </div>
+                </asi>
             </div>
         </div>
     </div>
+</div>
 </section>
 
 <!-- <p id="notice"><%#= notice %></p> -->
