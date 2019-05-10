@@ -10,14 +10,15 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery/dist/jquery.min.js
-//
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //
+//= require jquery/dist/jquery.min.js
 //= require popper.js/dist/umd/popper.min.js
 //= require bootstrap/dist/js/bootstrap.min.js
+//
+//= require jquery.flexslider-min.js
 //
 //= require local-time
 //= require cocoon
@@ -25,3 +26,4 @@
 //= require owl.carousel/dist/owl.carousel.min.js
 //= require flatpickr/dist/flatpickr.min.js
 //= require main.js
+//

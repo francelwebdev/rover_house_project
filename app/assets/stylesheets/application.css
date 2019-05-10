@@ -21,5 +21,6 @@
  *= require owl.carousel/dist/assets/owl.carousel.min.css
  *= require owl.carousel/dist/assets/owl.theme.default.min.css
  *= require flatpickr/dist/flatpickr.min.css
+ *= require flexslider.css
  *= require main.scss
  */

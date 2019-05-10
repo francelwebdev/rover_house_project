@@ -44,7 +44,7 @@
                               <%= link_to "Voir", admin_user_path(id: user.id), class: "btn btn-secondary btn-sm" %>
                           </li>
                           <li>
-                              <%= link_to "Suprimer", root_path, class: "btn btn-danger btn-sm" %>
+                              <%= link_to "Suprimer", admin_user_path(id: user.id), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "Êtes-vous sûr ?"} %>
                           </li>
                       </ul>
                   </td>

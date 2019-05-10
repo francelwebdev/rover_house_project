@@ -1,5 +1,12 @@
 $(document).on("turbolinks:load", function() {
 
+  $(document).ready(function() {
+  $('.flexslider').flexslider({
+    animation: "slide",
+    animationLoop: true,
+  });
+});
+
   $(".owl-home-page").owlCarousel({
     loop: true,
     margin: 10,
@@ -74,5 +81,7 @@ $(document).on("turbolinks:load", function() {
       $("input#property_price_for_rent").parent().parent().show();
     }
   })
+
+
 
 });

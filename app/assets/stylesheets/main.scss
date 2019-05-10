@@ -21,6 +21,18 @@
   font-family: 'Lato', sans-serif !important;
 }
 
+
+/* Icon Fonts
+*********************************/
+/* Font-face Icons */
+@font-face {
+  font-family: 'flexslider-icon';
+  src: url('/fonts/flexslider-icon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 // .zone-1 {
 //     height: 75vh;
 //     background-image: linear-gradient(rgba(0, 30, 10, 0.7), rgba(0, 30, 10, 0.7)), image-url("blank-composition-desk-317355.jpg");
