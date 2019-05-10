@@ -182,6 +182,7 @@ gem 'data-confirm-modal'
 # PDF Generation
 # gem 'prawn'
 # gem 'prawn-qrcode'
+# wicked_pdf
 # PDF Generation
 
 # gem 'populator'

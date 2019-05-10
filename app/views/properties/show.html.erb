@@ -100,7 +100,7 @@
                     <h3 class="card-title">Zone administrateur</h3>
                     <ul class="list-unstyled d-flex justify-content-between">
                         <li>
-                            <%= link_to "Publier", property_path(@property), class: "btn btn-success btn-sm" %>
+                            <%= link_to "Valider", property_path(@property), class: "btn btn-success btn-sm", method: :post %>
                         </li>
                         <li>
                             <%= link_to "Sponsoriser", property_path(@property), class: "btn btn-secondary btn-sm" %>
