@@ -1,12 +1,12 @@
 $(document).on("turbolinks:load", function() {
-
+  
   $(document).ready(function() {
-  $('.flexslider').flexslider({
-    animation: "slide",
-    animationLoop: true,
+    $('.flexslider').flexslider({
+      animation: "slide",
+      animationLoop: true,
+    });
   });
-});
-
+  
   $(".owl-home-page").owlCarousel({
     loop: true,
     margin: 10,
@@ -33,7 +33,7 @@ $(document).on("turbolinks:load", function() {
       }
     }
   });
-
+  
   $(".owl-property-show-page").owlCarousel({
     loop: true,
     margin: 10,
@@ -54,15 +54,15 @@ $(document).on("turbolinks:load", function() {
       }
     }
   });
-
-
+  
+  
   $("a.re-avance").on("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
     $("div.avec-et-sans-is-sr-only").toggleClass("sr-only");
   })
-
-
+  
+  
   if ($("select#property_ad_type_id").val() == "1") {
     $("input#property_price_for_sale").parent().parent().hide();
     $("input#property_price_for_rent").parent().parent().show();
@@ -70,7 +70,7 @@ $(document).on("turbolinks:load", function() {
     $("input#property_price_for_sale").parent().parent().show();
     $("input#property_price_for_rent").parent().parent().hide();
   }
-
+  
   $("select#property_ad_type_id").on("change", function () {
     let leSelected = $("select#property_ad_type_id option:selected");
     if (leSelected.val() == "2") {
@@ -81,7 +81,7 @@ $(document).on("turbolinks:load", function() {
       $("input#property_price_for_rent").parent().parent().show();
     }
   })
-
-
-
+  
+  
+  
 });
