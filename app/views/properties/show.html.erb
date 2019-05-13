@@ -1,5 +1,3 @@
-
-
 <section class="container-fluid py-5">
     <div class="container">
         <div class="row">
@@ -85,127 +83,127 @@
                             </tr>
                         </table>
                     </div>
-<!-- <div class="col-lg-12 mb-3">
+                    <!-- <div class="col-lg-12 mb-3">
 <h4>Localisation</h4>
 </div> -->
-</div>
-</div>
-<div class="col-lg-4">
-    <div class="row">
-
-        <% if user_signed_in? and current_user.is_admin? and current_user.role == "Admin" %>
-        <aside class="col-lg-12 mb-2">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Zone administrateur</h3>
-                    <ul class="list-unstyled d-flex justify-content-between">
-                        <li>
-                            <%= link_to "Valider", property_path(@property), class: "btn btn-success btn-sm", method: :post %>
-                        </li>
-                        <li>
-                            <%= link_to "Sponsoriser", property_path(@property), class: "btn btn-secondary btn-sm" %>
-                        </li>
-                        <li>
-                            <%= link_to "Suprimer", property_path(@property), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "êtes vous sûre ?"} %>
-                        </li>
-                    </ul>
                 </div>
             </div>
-        </aside>
-        <% end %>
+            <div class="col-lg-4">
+                <div class="row">
 
-        <aside class="col-lg-12 mb-2">
-            <div class="card">
-                <div class="card-body">
-                    <% if @property.user.role == "Particulier" %>
-                    <h3 class="card-title">Contacter le propriétaire</h3>
-                    <address>
-                        <ul class="list-unstyled">
-                            <li class="h5">
-                                Tél : <%= @property.user.phone_number %>
-                            </li>
-                            <li class="h5">
-                                Email : <%= @property.user.email %>
-                            </li>
-                        </ul>
-                    </address>
-                    <% elsif @property.user.role == "Agence" or @property.user.role == "Admin" %>
-                    <h3 class="card-title">Contacter l'agence</h3>
-                    <address class="row">
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-2">
-                                    <p>
-                                        <i class="fas fa-phone"></i>
-                                    </p>
-                                </div>
-                                <div class="col-10">
-                                    <p>
-                                        <%= @property.user.phone_number %>
-                                    </p>
-                                </div>
+                    <% if user_signed_in? and current_user.is_admin? and current_user.role == "Admin" %>
+                    <aside class="col-lg-12 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">Zone administrateur</h3>
+                                <ul class="list-unstyled d-flex justify-content-between">
+                                    <li class="sr-only">
+                                        <%= link_to "Valider", property_path(@property), class: "btn btn-success btn-sm", method: :post %>
+                                    </li>
+                                    <li class="sr-only">
+                                        <%= link_to "Sponsoriser", property_path(@property), class: "btn btn-secondary btn-sm" %>
+                                    </li>
+                                    <li>
+                                        <%= link_to "Suprimer", property_path(@property), class: "btn btn-danger btn-sm", method: :delete, data: {confirm: "êtes vous sûre ?"} %>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <div class="col-2">
-                                    <p>
-                                        <i class="fas fa-envelope"></i>
-                                    </p>
+                    </aside>
+                    <% end %>
+
+                    <aside class="col-lg-12 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <% if @property.user.role == "Particulier" %>
+                                <h3 class="card-title">Contacter le propriétaire</h3>
+                                <address>
+                                    <ul class="list-unstyled">
+                                        <li class="h5">
+                                            Tél : <%= @property.user.phone_number %>
+                                        </li>
+                                        <li class="h5">
+                                            Email : <%= @property.user.email %>
+                                        </li>
+                                    </ul>
+                                </address>
+                                <% elsif @property.user.role == "Agence" or @property.user.role == "Admin" %>
+                                <h3 class="card-title">Contacter l'agence</h3>
+                                <address class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <p>
+                                                    <i class="fas fa-phone"></i>
+                                                </p>
+                                            </div>
+                                            <div class="col-10">
+                                                <p>
+                                                    <%= @property.user.phone_number %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <p>
+                                                    <i class="fas fa-envelope"></i>
+                                                </p>
+                                            </div>
+                                            <div class="col-10">
+                                                <p>
+                                                    <%= @property.user.email %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </address>
+                                <% end %>
+                                <hr>
+                                <p class="card-text text-center">Ou envoyer un message en remplissant
+                                    le formulaire ci-dessous.</p>
+                                <%= simple_form_for @contact_owner_or_agency, url: contact_owners_or_agencies_path do |f| %>
+                                <div class="form-row">
+                                    <div class="col-lg-12 sr-only">
+                                        <%= f.input :property_id, as: :hidden, input_html: {value: @property.id} %>
+                                    </div>
+                                    <div class="col-lg-12 sr-only">
+                                        <%= f.input :owner_or_agency_email, as: :hidden, input_html: {value: @property.user.email} %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :first_name, label: "Votre prénom" %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :last_name, label: "Votre nom" %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :email, as: :email, label: "Votre email" %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.input :phone_number, as: :tel, label: "Votre numero de téléphone" %>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <% if Time.now.hour < 12 %>
+                                        <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonjour, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
+                                        <% else %>
+                                        <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonsoir, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
+                                        <% end %>
+
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <%= f.button :submit, "Envoyer", class: "btn btn-marron"  %>
+                                    </div>
                                 </div>
-                                <div class="col-10">
-                                    <p>
-                                        <%= @property.user.email %>
-                                    </p>
-                                </div>
+                                <% end %>
                             </div>
                         </div>
-
-                    </address>
-                    <% end %>
-                    <hr>
-                    <p class="card-text text-center">Ou envoyer un message en remplissant
-                    le formulaire ci-dessous.</p>
-                    <%= simple_form_for @contact_owner_or_agency, url: contact_owners_or_agencies_path do |f| %>
-                    <div class="form-row">
-                        <div class="col-lg-12 sr-only">
-                            <%= f.input :property_id, as: :hidden, input_html: {value: @property.id} %>
-                        </div>
-                        <div class="col-lg-12 sr-only">
-                            <%= f.input :owner_or_agency_email, as: :hidden, input_html: {value: @property.user.email} %>
-                        </div>
-                        <div class="col-lg-12">
-                            <%= f.input :first_name, label: "Votre prénom" %>
-                        </div>
-                        <div class="col-lg-12">
-                            <%= f.input :last_name, label: "Votre nom" %>
-                        </div>
-                        <div class="col-lg-12">
-                            <%= f.input :email, as: :email, label: "Votre email" %>
-                        </div>
-                        <div class="col-lg-12">
-                            <%= f.input :phone_number, as: :tel, label: "Votre numero de téléphone" %>
-                        </div>
-                        <div class="col-lg-12">
-                            <% if Time.now.hour < 12 %>
-                            <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonjour, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
-                            <% else %>
-                            <%= f.input :message, as: :text, label: "Votre message", input_html: {rows: 5, value: "Bonsoir, j'ai vu votre annonce sur ROVER HOUSE et souhaite m'entretenir avec vous."} %>
-                            <% end %>
-
-                        </div>
-                        <div class="col-lg-12">
-                            <%= f.button :submit, "Envoyer", class: "btn btn-marron"  %>
-                        </div>
-                    </div>
-                    <% end %>
+                        </asi>
                 </div>
             </div>
-        </asi>
+        </div>
     </div>
-</div>
-</div>
-</div>
 </section>
 
 <!-- <p id="notice"><%#= notice %></p> -->

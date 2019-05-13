@@ -112,10 +112,16 @@
             <% else %>
             <ul class="list-unstyled list-inline ml-auto text-center mb-0">
               <li class="list-inline-item">
-                <%= link_to "Connexion", new_user_session_path, class: "btn btn-secondary" %>
+                <%= link_to new_user_session_path, class: "btn btn-secondary" do %>
+                <i class="fas fa-sign-in-alt"></i>&nbsp;
+                <span>Connexion</span>
+                <% end %>
               </li>
               <li class="list-inline-item">
-                <%= link_to "Déposer une annonce", new_property_path, class: "btn btn-marron" %>
+                <%= link_to new_property_path, class: "btn btn-marron" do %>
+                <i class="fas fa-bullhorn"></i>&nbsp;
+                <span>Déposer une annonce</span>
+                <% end %>
               </li>
             </ul>
             <% end %>

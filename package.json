@@ -30,6 +30,7 @@
   "author": "Francel <francel.webdev@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1"
+    "@fortawesome/fontawesome-free": "^5.8.1",
+    "tailwindcss": "^1.0.0-beta.10"
   }
 }
