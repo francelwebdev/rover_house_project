@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     collection do
       get "search", to: "properties#index"
     end
+    member do
+      post "validate"
+    end
   end
   resource :profile, only: [:show, :edit, :update]
   resources :my_properties, only: [:index]

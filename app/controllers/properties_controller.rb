@@ -3,32 +3,37 @@ class PropertiesController < ApplicationController
 
 	before_action :authenticate_user!, except: [:index, :show]
 	before_action :set_property, only: [:edit, :destroy]
-	before_action :set_property_avec_les_photos, only: [:show, :update]
+	before_action :set_property_avec_les_photos, only: [:show, :update, :validate]
 	before_action :verifier_si_lutilisateur_possede_les_informations_de_contact, only: [:new]
+
+	def validate
+		@property.update(published: true, published_at: Time.now)
+		redirect_to @property
+	end
 	
 	def index
 		if params.has_key?(:ad_type) and !params.has_key?(:property_type) and !params.has_key?(:country) and !params.has_key?(:city) and !params.has_key?(:max_price) and !params.has_key?(:min_area)
-			@pagy, @properties = pagy(Property.search(ad_type: params[:ad_type]))
+			@pagy, @properties = pagy(Property.search(ad_type: params[:ad_type], published: true))
 		elsif params.has_key?(:ad_type) and params.has_key?(:property_type) and params.has_key?(:country) and !params.has_key?(:city) and !params.has_key?(:max_price) and !params.has_key?(:min_area)
-			@pagy, @properties = pagy(Property.search(property_type: params[:property_type], ad_type: params[:ad_type], country: params[:country]))
+			@pagy, @properties = pagy(Property.search(property_type: params[:property_type], ad_type: params[:ad_type], country: params[:country], published: true))
 		elsif !params.has_key?(:ad_type) and !params.has_key?(:property_type) and params.has_key?(:country) and !params.has_key?(:city) and !params.has_key?(:max_price) and !params.has_key?(:min_area)
-			@pagy, @properties = pagy(Property.search(country: params[:country]))
+			@pagy, @properties = pagy(Property.search(country: params[:country], published: true))
 		elsif params.has_key?(:ad_type) and params.has_key?(:property_type) and params.has_key?(:country) and params.has_key?(:city) and params.has_key?(:max_price) and params.has_key?(:min_area)
 			
 			p "#"*25
 			if params[:max_price].blank? and params[:min_area].blank?
-				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city]))
+				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], published: true))
 			elsif params[:max_price].blank? and params[:min_area].present?
-				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], area: {gteq: params[:min_area]}))
+				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], area: {gteq: params[:min_area]}, published: true))
 			elsif params[:max_price].present? and params[:min_area].blank?
-				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], price: {lteq: params[:max_price]}))
+				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], price: {lteq: params[:max_price]}, published: true))
 			elsif params[:max_price].present? and params[:min_area].present?
-				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], price: {lteq: params[:max_price]}, area: {gteq: params[:min_area]}))
+				@pagy, @properties = pagy(Property.search(country: params[:country], property_type: params[:property_type], ad_type: params[:ad_type], city: params[:city], price: {lteq: params[:max_price]}, area: {gteq: params[:min_area]}, published: true))
 			end
 			p "#"*25
 			
 		else
-			@pagy, @properties = pagy(Property.all)
+			@pagy, @properties = pagy(Property.all.where(published: true))
 		end
 	end
 	

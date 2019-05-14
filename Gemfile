@@ -93,13 +93,13 @@ group :development do
 end
 
 group :production do
-  # Serveur web et serveur d'application en dev et prod
-  gem "passenger"
-# Serveur web et serveur d'application en dev et prod
-
 # Production database
 # gem 'mysql2'
 # Production database
+
+# Serveur de prod
+gem "passenger"
+# Serveur de prod
 
 # Email
   gem 'postmark-rails'

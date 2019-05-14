@@ -97,10 +97,16 @@
                             <div class="card-body">
                                 <h3 class="card-title">Zone administrateur</h3>
                                 <ul class="list-unstyled d-flex justify-content-between">
-                                    <li class="sr-only">
-                                        <%= link_to "Valider", property_path(@property), class: "btn btn-success btn-sm", method: :post %>
+                                    <% if @property.published? %>
+                                    <li>
+                                        <%= button_to "Annonce Validé", validate_property_path, class: "btn btn-success btn-sm" %>
                                     </li>
-                                    <li class="sr-only">
+                                    <% else %>
+                                    <li>
+                                        <%= button_to "Valider cette annonce", validate_property_path, class: "btn btn-secondary btn-sm" %>
+                                    </li>
+                                    <% end %>
+                                    <li>
                                         <%= link_to "Sponsoriser", property_path(@property), class: "btn btn-secondary btn-sm" %>
                                     </li>
                                     <li>

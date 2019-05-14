@@ -5,7 +5,7 @@ class Property < ApplicationRecord
         # attributes property_type: "property_type.name"
         # attributes ad_type: "ad_type.name"
         # attributes country: "country.name"
-        attributes :property_type, :ad_type, :country, :city, :price, :area
+        attributes :property_type, :ad_type, :country, :city, :price, :area, :published
     end
 
     PROPERTY_TYPES = ["Appartement", "Terrain", "Suite", "Motel", "Hôtel", "Maison", "Villa", "Parcelle", "Domaine", "Bureau", "Boutique", "Immeuble"].sort
