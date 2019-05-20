@@ -17,7 +17,12 @@ Rails.application.configure do
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
-    config.cache_store = :memory_store
+    config.cache_store = :memory_store # Jai commenté cette ligne moi même pour utiliser celui qui est juste en bas.
+
+    # Mon code
+    # config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 1.days }
+    # Mon code
+
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -59,7 +64,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-    # ================================================== #
+  # ================================================== #
   # Mon code #
   # ================================================== #
 
@@ -68,14 +73,14 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
-  # Pour Mailcatcher
+  # Pour Mailcatcher ou Maildev
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address => "localhost",
     :port => 1025
   }
 
-  # Bullet
+  Bullet
   config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true
@@ -84,8 +89,8 @@ Rails.application.configure do
     # Bullet.console = true
     # Bullet.rails_logger = true
     # Bullet.add_footer = true
-end
-# Bullet
+  end
+  Bullet
 
   # ================================================== #
   # Mon code #

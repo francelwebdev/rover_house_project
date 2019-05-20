@@ -26,7 +26,7 @@ Rails.application.configure do
   # config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
-    # Mon code
+  # Mon code
   config.assets.js_compressor = Uglifier.new(harmony: true)
   # Mon code
 
@@ -96,24 +96,27 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-    # ================================================== #
+  # ================================================== #
   # Mon code #
   # ================================================== #
-  
+
+  # Pour la mise en cache fragment avec la gem redis-rails
+  # config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 1.days }
+
   # Pour utiliser le service Cloudinary
   # config.active_storage.service = :cloudinary
 
-# Pour tester l'evoie d'email en production avec le service Mailtrap
-config.action_mailer.default_url_options = { :host => 'rover-house.herokuapp.com' }
+  # Pour tester l'evoie d'email en production avec le service Mailtrap
+  config.action_mailer.default_url_options = { :host => 'rover-house.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
-  :user_name => '10d27f2b75506a',
-  :password => '2565d8802381b9',
-  :address => 'smtp.mailtrap.io',
-  :domain => 'smtp.mailtrap.io',
-  :port => '2525',
-  :authentication => :cram_md5
-}
+  config.action_mailer.smtp_settings = {
+    :user_name => '10d27f2b75506a',
+    :password => '2565d8802381b9',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
 
   # Pour l'envoie d'email en prodduction avec le service postmark.
   # config.action_mailer.default_url_options = { :host => "application-de-reseau-social.herokuapp.com" }

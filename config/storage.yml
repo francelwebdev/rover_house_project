@@ -2,16 +2,9 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-# J'ai commenté ça moi même pour utiliser celui qui est en bas
-# local:
-#   service: Disk
-#   root: <%= Rails.root.join("storage") %>
-# J'ai commenté ça moi même pour utiliser celui qui est en bas
-
-# Mon code
 local:
-  service: PostgreSQL
-# Mon code
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:

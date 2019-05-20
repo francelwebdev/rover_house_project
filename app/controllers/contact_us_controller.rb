@@ -2,6 +2,7 @@ class ContactUsController < ApplicationController
 
   def new
     @contact_us = ContactU.new
+    expires_now
   end
 
   def create
@@ -21,5 +22,5 @@ class ContactUsController < ApplicationController
   def contact_us_message_params
     params.require(:contact_u).permit(:first_name, :last_name, :email, :phone_number, :message)
   end
-  
+
 end

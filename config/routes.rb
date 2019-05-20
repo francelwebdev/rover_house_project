@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get "search", to: "properties#index"
     end
     member do
-      post "validate"
+      post "validate_property"
     end
   end
   resource :profile, only: [:show, :edit, :update]
@@ -28,9 +28,9 @@ Rails.application.routes.draw do
     # resource :profile, only: [:show]
   devise_for :users
   end
-  
+
   get "fradmin", to: redirect("/fr/admin")
-  
+
   resources :contact_owners_or_agencies, only: [:create]
 end
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

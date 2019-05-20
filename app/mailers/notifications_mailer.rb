@@ -23,6 +23,6 @@ class NotificationsMailer < ApplicationMailer
     @expediteur_last_name = message_data.last_name
     @message = message_data.message
     @expediteur_phone_number = message_data.phone_number
-    mail(to: @destinataire_email, from: @expediteur_email, reply_to: @expediteur_email, subject: "Message d'un visiteur pour votre annonce sur ROVER HOUSE")
+    mail(to: @destinataire_email, from: "#{@expediteur_first_name} #{@expediteur_last_name} <#{@expediteur_email}>", reply_to: @expediteur_email, subject: "Message d'un visiteur pour votre annonce sur ROVER HOUSE")
   end
 end

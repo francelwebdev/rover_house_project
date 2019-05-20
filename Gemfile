@@ -5,8 +5,8 @@ ruby '2.6.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
-# Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+# Use mysql as the database for Active Record
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -93,23 +93,25 @@ group :development do
 end
 
 group :production do
-# Production database
-# gem 'mysql2'
-# Production database
+  # Production database
+  # gem 'mysql2'
+  gem 'pg', '>= 0.18', '< 2.0'
+  # Production database
 
-# Serveur de prod
-gem "passenger"
-# Serveur de prod
+  # Serveur de prod
+  gem "passenger"
+  # Serveur de prod
 
-# Email
+  # Email
   gem 'postmark-rails'
-# Email
+  # Email
 
-# Caching
+  # Caching
   gem 'redis-rails'
   gem 'redis-rack-cache'
-# gem 'dalli'
-# Caching
+
+  # gem 'dalli'
+  # Caching
 end
 
 # Form Builders
@@ -212,13 +214,11 @@ gem 'activestorage-cloudinary-service'
 gem 'file_validators'
 gem 'active_storage_drag_and_drop'
 gem 'active_storage_validations'
-gem 'active_storage-postgresql'
 
 # gem 'shrine'
 
 gem 'carrierwave'
 gem 'carrierwave-i18n'
-gem 'carrierwave-postgresql'
 # File Uploading
 
 # Image Processing

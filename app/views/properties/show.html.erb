@@ -99,7 +99,7 @@
                                 <ul class="list-unstyled d-flex justify-content-between">
                                     <% if @property.published? %>
                                     <li>
-                                        <%= button_to "Annonce Validé", validate_property_path, class: "btn btn-success btn-sm" %>
+                                        <%= button_to "Annonce Validé", validate_property_property_path, class: "btn btn-success btn-sm" %>
                                     </li>
                                     <% else %>
                                     <li>
@@ -170,7 +170,7 @@
                                 <hr>
                                 <p class="card-text text-center">Ou envoyer un message en remplissant
                                     le formulaire ci-dessous.</p>
-                                <%= simple_form_for @contact_owner_or_agency, url: contact_owners_or_agencies_path do |f| %>
+                                <%= simple_form_for @contact_owner_or_agency, url: contact_owners_or_agencies_path, remote: true do |f| %>
                                 <div class="form-row">
                                     <div class="col-lg-12 sr-only">
                                         <%= f.input :property_id, as: :hidden, input_html: {value: @property.id} %>

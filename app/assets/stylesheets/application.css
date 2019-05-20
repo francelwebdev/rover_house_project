@@ -11,12 +11,6 @@
  * It is generally better to create a new file per style scope.
  *
  *= require @fortawesome/fontawesome-free/css/all.min.css
- *= require @fortawesome/fontawesome-free/css/brands.min.css
- *= require @fortawesome/fontawesome-free/css/fontawesome.min.css
- *= require @fortawesome/fontawesome-free/css/regular.min.css
- *= require @fortawesome/fontawesome-free/css/solid.min.css
- *= require @fortawesome/fontawesome-free/css/svg-with-js.min.css
- *= require @fortawesome/fontawesome-free/css/v4-shims.min.css
  *= require bootstrap/dist/css/bootstrap.min.css
  *= require owl.carousel/dist/assets/owl.carousel.min.css
  *= require owl.carousel/dist/assets/owl.theme.default.min.css

@@ -10,12 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_165958) do
+ActiveRecord::Schema.define(version: 2019_05_17_232017) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -25,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_165958) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -36,13 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_165958) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_postgresql_files", force: :cascade do |t|
-    t.oid "oid"
-    t.string "key"
-    t.index ["key"], name: "index_active_storage_postgresql_files_on_key", unique: true
-  end
-
-  create_table "profiles", force: :cascade do |t|
+  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.integer "phone_number"
@@ -54,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_165958) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "properties", force: :cascade do |t|
+  create_table "properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "area"
     t.text "description"
     t.datetime "created_at", null: false
@@ -76,12 +67,13 @@ ActiveRecord::Schema.define(version: 2019_05_13_165958) do
     t.boolean "published", default: false
     t.datetime "published_at"
     t.index ["ad_type"], name: "index_properties_on_ad_type"
+    t.index ["city", "price", "area"], name: "index_properties_on_city_and_price_and_area"
     t.index ["country"], name: "index_properties_on_country"
     t.index ["property_type"], name: "index_properties_on_property_type"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -90,8 +82,8 @@ ActiveRecord::Schema.define(version: 2019_05_13_165958) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

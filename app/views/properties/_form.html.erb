@@ -109,7 +109,7 @@
           <%#= link_to 'Annuler', properties_path, class: "btn btn-light btn-block" %>
         </div>
         <div class="col-lg-4">
-          <%= form.submit "Publier l'annonce", class: "btn btn-marron btn-block" %>
+          <%= form.submit "Publier l'annonce", class: "btn btn-marron btn-block", data: {disable_with: "Traitement en cours..."} %>
         </div>
         <% end %>
       </div>

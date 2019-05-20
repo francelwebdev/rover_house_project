@@ -14,7 +14,7 @@ class Property < ApplicationRecord
 
     COUNTRIES = ["Bénin", "Togo", "Gabon", "Cameroun", "Burkina Faso", "Niger", "Côte d’Ivoire"].sort
 
-    belongs_to :user, inverse_of: :properties
+    belongs_to :user, inverse_of: :properties, touch: true
     has_many_attached :photos, dependent: :purge
 
     validates :area, :description, :ad_type, :property_type, :price, :bedroom, :bathroom, :country, :city, presence: true

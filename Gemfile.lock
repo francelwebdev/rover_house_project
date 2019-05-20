@@ -27,9 +27,6 @@ GEM
     active_link_to (1.0.5)
       actionpack
       addressable
-    active_storage-postgresql (0.2.0)
-      pg (~> 1.0)
-      rails (~> 5.2)
     active_storage_drag_and_drop (0.4.0)
       rack (~> 2.0.6)
       rails (~> 5.2)
@@ -122,8 +119,6 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     carrierwave-i18n (0.2.0)
-    carrierwave-postgresql (0.3.0)
-      carrierwave (>= 0.10.0)
     childprocess (1.0.1)
       rake (< 13.0)
     chromedriver-helper (2.1.1)
@@ -261,6 +256,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mysql2 (0.5.2)
     name_of_person (1.1.0)
       activesupport (>= 5.2.0)
     nested_form (0.3.2)
@@ -490,7 +486,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
-  active_storage-postgresql
   active_storage_drag_and_drop
   active_storage_validations
   activestorage-cloudinary-service
@@ -511,7 +506,6 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave
   carrierwave-i18n
-  carrierwave-postgresql
   chromedriver-helper
   cloudinary
   cocoon
@@ -535,6 +529,7 @@ DEPENDENCIES
   meta-tags
   meta_request
   mini_magick
+  mysql2 (>= 0.4.4, < 0.6.0)
   name_of_person
   omniauth-facebook
   omniauth-google-oauth2
